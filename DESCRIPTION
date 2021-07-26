@@ -1,0 +1,15 @@
+Package: spectator
+Title: Interface to the Spectator Earth API
+Version: 0.0.1
+Authors@R: 
+    person(given = "Zivan",
+           family = "Karaman",
+           role = c("aut", "cre"),
+           email = "zivan.karaman@gmail.com",
+           comment = c(ORCID = "0000-0002-8933-4589"))
+Description: What the package does (one paragraph).
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
