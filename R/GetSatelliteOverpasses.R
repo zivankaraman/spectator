@@ -1,15 +1,17 @@
 
 GetSatelliteOverpasses <- 
-function(aoi = NULL, satellites = NULL, days_before = 0, days_after = 7, api_key = Sys.getenv("api_key"))
+function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions = TRUE, api_key = Sys.getenv("api_key"))
 {
-    
+    if (!inherits(aoi, "Spatial")) {
+        stop()
+    }
     days_before = 0
     days_after = 7 
     api_key = Sys.getenv("api_key")
+    bbox <- "19.59,49.90,20.33,50.21"
     
     endpoint <- "https://api.spectator.earth/overpass/"
-
-    bbox <- "19.59,49.90,20.33,50.21"
+    bbox <- paste(as.numeric(sp::bbox(aoi)), collapse = ",")
 
     qry <- list(api_key = api_key, bbox = bbox, days_before = days_before, days_after = days_after)
     
@@ -29,7 +31,6 @@ function(aoi = NULL, satellites = NULL, days_before = 0, days_after = 7, api_key
         qry <- c(qry, satellites = satellites)
     }
 
-    
     resp <- httr::GET(url = endpoint, query = qry)
     if (resp$status_code != 200) {
         stop()
@@ -53,14 +54,19 @@ function(aoi = NULL, satellites = NULL, days_before = 0, days_after = 7, api_key
     }
     spoly <- sp::SpatialPolygons(poly, proj4string = sp::CRS("+proj=longlat +datum=WGS84"))
     spolydf <- sp::SpatialPolygonsDataFrame(spoly, data = df)
-    # get geometry / centroids
-    mat <- t(sapply(overpasses, FUN = function(x) x$geometry$coordinates))
-    pts <- data.frame(long = unlist(mat[, 1]), lat = unlist(mat[, 2]))
-    sp::coordinates(pts) <- ~ long + lat
-    sp::proj4string(pts) <- sp::CRS("+proj=longlat +datum=WGS84")
-    sptsdf <- sp::SpatialPointsDataFrame(pts, data = df)
-   
-    out <- list(footprint = spolydf, centroids = sptsdf)
+    if (acquisitions) {
+        spolydf <- subset(spolydf, acquisition)
+    }
     
+    # get geometry / centroids
+    if (FALSE) {
+        mat <- t(sapply(overpasses, FUN = function(x) x$geometry$coordinates))
+        pts <- data.frame(long = unlist(mat[, 1]), lat = unlist(mat[, 2]))
+        sp::coordinates(pts) <- ~ long + lat
+        sp::proj4string(pts) <- sp::CRS("+proj=longlat +datum=WGS84")
+        sptsdf <- sp::SpatialPointsDataFrame(pts, data = df)
+    }
+    # out <- list(footprint = spolydf, centroids = sptsdf)
+    out <- spolydf
     return(out)
 }
