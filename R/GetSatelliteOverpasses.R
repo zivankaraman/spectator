@@ -1,4 +1,27 @@
 
+#' @title Get satellite overpasses
+#' @description Get satellite overpasses
+#' @param aoi PARAM_DESCRIPTION
+#' @param satellites PARAM_DESCRIPTION. Default: NULL
+#' @param days_before PARAM_DESCRIPTION. Default: 0
+#' @param days_after PARAM_DESCRIPTION. Default: 7
+#' @param acquisitions PARAM_DESCRIPTION. Default: TRUE
+#' @param api_key PARAM_DESCRIPTION. Default: Sys.getenv("api_key")
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso 
+#'  \code{\link[sp]{bbox-methods}}, \code{\link[sp]{c("SpatialPolygons", "polygons")}}, \code{\link[sp]{SpatialPolygons}}, \code{\link[sp]{CRS-class}}, \code{\link[sp]{coordinates}}, \code{\link[sp]{is.projected}}, \code{\link[sp]{SpatialPoints}}
+#'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
+#' @export 
+#' @source \url{http://somewhere.important.com/}
+#' @importFrom sp bbox Polygons Polygon SpatialPolygons CRS SpatialPolygonsDataFrame coordinates proj4string SpatialPointsDataFrame
+#' @importFrom httr GET content
 GetSatelliteOverpasses <- 
 function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions = TRUE, api_key = Sys.getenv("api_key"))
 {
