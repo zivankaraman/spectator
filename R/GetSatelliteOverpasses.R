@@ -78,7 +78,7 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     spoly <- sp::SpatialPolygons(poly, proj4string = sp::CRS("+proj=longlat +datum=WGS84"))
     spolydf <- sp::SpatialPolygonsDataFrame(spoly, data = df)
     if (acquisitions) {
-        spolydf <- subset(spolydf, acquisition)
+        spolydf <- subset(spolydf, acquisition == TRUE)
     }
     
     # get geometry / centroids
