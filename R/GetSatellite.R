@@ -1,4 +1,23 @@
 
+#' @title Get satellite
+#' @description Get satellite
+#' @param id PARAM_DESCRIPTION. Default: 17
+#' @param positions PARAM_DESCRIPTION. Default: TRUE
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso 
+#'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
+#'  \code{\link[geojsonio]{geojson_sf}}
+#' @export 
+#' @source \url{http://somewhere.important.com/}
+#' @importFrom httr GET content
+#' @importFrom geojsonio geojson_sf
 GetSatellite <- 
 function(id = 17, positions = TRUE) 
 {

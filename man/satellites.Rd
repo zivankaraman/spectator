@@ -10,7 +10,7 @@ A data frame with 45 rows and 6 variables:
 \item{\code{id}}{integer identifier}
 \item{\code{name}}{character satellite name}
 \item{\code{norad_id}}{integer satellite catalog number}
-\item{\code{sensors}}{integer number of sensors available on the satellite (SAR or Optical)}
+\item{\code{sensors}}{character type of sensors available on the satellite (SAR or Optical)}
 \item{\code{open}}{logical whether the data produced by the satellite is freely accessible}
 \item{\code{platform}}{character platform name}
 }

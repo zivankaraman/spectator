@@ -1,4 +1,22 @@
 
+#' @title Get all satellites
+#' @description Get all satellites
+#' @param positions PARAM_DESCRIPTION. Default: TRUE
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso 
+#'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
+#'  \code{\link[geojsonio]{geojson_sf}}
+#' @export 
+#' @source \url{http://somewhere.important.com/}
+#' @importFrom httr GET content
+#' @importFrom geojsonio geojson_sf
 GetAllSatellites <- 
 function(positions = TRUE) 
 {
@@ -17,11 +35,15 @@ function(positions = TRUE)
                       open = unlist(prop[4, ]),
                       platform = sapply(prop[5, ], SafeNull),
                       stringsAsFactors = FALSE, row.names = NULL)
+    tab <- tab[order(tab$name), ]
+    row.names(tab) <- NULL
     if (positions) {
         cnt <- httr::content(resp, type = "text", encoding = "UTF-8")
         out <- geojsonio::geojson_sf(cnt)
+        # IDs of features are lost in this operation, must retrieve them by norad_id
+        out$id <- tab$id[match(out$norad_id, tab$norad_id)]
+        out <- out[order(out$name), c("id", "name", "norad_id", "sensors", "open", "platform", "geometry")]
         out$sensors <- tab$sensors
-        out <- out[order(out$name), ]
         row.names(out) <- NULL
     } else {
         out <- tab

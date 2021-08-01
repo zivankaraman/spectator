@@ -13,7 +13,7 @@ GetSatelliteOverpasses(
   days_before = 0,
   days_after = 7,
   acquisitions = TRUE,
-  api_key = Sys.getenv("api_key")
+  api_key = Sys.getenv("spectator_earth_api_key")
 )
 }
 \arguments{
@@ -27,7 +27,7 @@ GetSatelliteOverpasses(
 
 \item{acquisitions}{PARAM_DESCRIPTION. Default: TRUE}
 
-\item{api_key}{PARAM_DESCRIPTION. Default: Sys.getenv("api_key")}
+\item{api_key}{PARAM_DESCRIPTION. Default: Sys.getenv("spectator_earth_api_key")}
 }
 \value{
 OUTPUT_DESCRIPTION

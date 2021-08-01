@@ -6,7 +6,7 @@
 #' @param days_before PARAM_DESCRIPTION. Default: 0
 #' @param days_after PARAM_DESCRIPTION. Default: 7
 #' @param acquisitions PARAM_DESCRIPTION. Default: TRUE
-#' @param api_key PARAM_DESCRIPTION. Default: Sys.getenv("api_key")
+#' @param api_key PARAM_DESCRIPTION. Default: Sys.getenv("spectator_earth_api_key")
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
 #' @examples 
