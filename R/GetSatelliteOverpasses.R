@@ -23,7 +23,7 @@
 #' @importFrom sp bbox Polygons Polygon SpatialPolygons CRS SpatialPolygonsDataFrame coordinates proj4string SpatialPointsDataFrame
 #' @importFrom httr GET content
 GetSatelliteOverpasses <- 
-function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions = TRUE, api_key = Sys.getenv("api_key"))
+function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions = TRUE, api_key = Sys.getenv("spectator_earth_api_key"))
 {
     if (!inherits(aoi, "Spatial")) {
         stop()
@@ -55,10 +55,8 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     }
 
     resp <- httr::GET(url = endpoint, query = qry)
-    if (resp$status_code != 200) {
-        stop()
-    }
-    
+    CheckResponseSatus(resp)
+
     cnt <- httr::content(resp)
     overpasses <- cnt$overpasses
     # get attributes

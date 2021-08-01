@@ -1,39 +1,31 @@
-#' @title Get all satellites
-#' @description Get all satellites
-#' @param satellites PARAM_DESCRIPTION. Default: NULL
-#' @param date PARAM_DESCRIPTION. Default: NULL
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso 
-#'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
-#' @export 
-#' @source \url{http://somewhere.important.com/}
-#' @importFrom httr GET content
+
 GetAllSatellites <- 
-function(satellites = NULL, date = NULL) 
+function(positions = TRUE) 
 {
     endpoint <- "https://api.spectator.earth/satellite/"
     
     resp <- httr::GET(url = endpoint)
-    if (resp$status_code != 200) {
-        stop()
-    }
+    CheckResponseSatus(resp)
 
     cnt <- httr::content(resp)
     features <- cnt$features
     prop <- sapply(features, FUN = function(x) (x$properties))
-    out <- data.frame(id = sapply(features, "[[", "id"),
+    tab <- data.frame(id = sapply(features, "[[", "id"),
                       name = unlist(prop[1, ]),
                       norad_id = unlist(prop[2, ]),
-                      sensors = sapply(prop[3, ], length),
+                      sensors = sapply(prop[3, ], FUN = function(x) x[[1]]$type),
                       open = unlist(prop[4, ]),
                       platform = sapply(prop[5, ], SafeNull),
                       stringsAsFactors = FALSE, row.names = NULL)
+    if (positions) {
+        cnt <- httr::content(resp, type = "text", encoding = "UTF-8")
+        out <- geojsonio::geojson_sf(cnt)
+        out$sensors <- tab$sensors
+        out <- out[order(out$name), ]
+        row.names(out) <- NULL
+    } else {
+        out <- tab
+    }
+    
     return(out)
 }

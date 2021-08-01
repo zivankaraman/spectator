@@ -46,9 +46,7 @@ function(satellites = NULL, date = NULL)
     qry <- list(satellites = satellites, datetime = date)
     
     resp <- httr::GET(url = endpoint, query = qry)
-    if (resp$status_code != 200) {
-        stop()
-    }
+    CheckResponseSatus(resp)
     
     cnt <- httr::content(resp, type = "text", encoding = "UTF-8")
     plan <- geojsonio::geojson_sp(cnt)
