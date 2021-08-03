@@ -7,10 +7,10 @@
 \url{http://somewhere.important.com/}
 }
 \usage{
-GetSatellite(id = 17, positions = TRUE)
+GetSatellite(satellite, positions = TRUE)
 }
 \arguments{
-\item{id}{PARAM_DESCRIPTION. Default: 17}
+\item{satellite}{PARAM_DESCRIPTION}
 
 \item{positions}{PARAM_DESCRIPTION. Default: TRUE}
 }

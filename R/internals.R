@@ -13,9 +13,10 @@ function(x)
 }
 
 
-FindSatellite <-
+FindSatelliteId <-
 function(x)
 {
+    # finds a satellite id from the internal satellite table
     idx <- charmatch(toupper(x), toupper(satellites$name), nomatch = NA_integer_)
     if (is.na(idx)) {
      stop(sprintf("satellite named '%s' not found", x))
@@ -26,9 +27,29 @@ function(x)
     return(satellites$id[idx])    
 }
 
+
+FindSatelliteName <-
+function(x)
+{
+    # allow shorthand spellings, return official full name
+    allowed.satellites <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
+                            "S-1A", "S-1B", "S-2A", "S-2B", "L-8",
+                            "S1A", "S1B", "S2A", "S2B", "L8")
+    names(allowed.satellites) <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
+                                   "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
+                                   "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8")
+    satellite.names <- paste(unique(names(allowed.satellites)[grep(x, allowed.satellites)]), collapse = ",")
+    if (length(satellite.names) == 0)  {
+        stop(sprintf("invalid satellite(s) requested '%s'", paste(as.character(x), collapse = ",")))
+    }
+    return(satellite.names)    
+}
+
+
 CheckResponseSatus <- 
 function(resp)
 {
+    # check if httr request succeeded
     if (resp$status_code != 200) {
         cnt <- httr::content(resp)
         msg <- sprintf("Request '%s' returned status code %d - '%s'",

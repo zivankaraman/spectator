@@ -2,9 +2,9 @@
 
 export(GetAcquisitionPlan)
 export(GetAllSatellites)
+export(GetOverpasses)
 export(GetSatellite)
-export(GetSatelliteOverpasses)
-export(GetSatelliteTrajectory)
+export(GetTrajectory)
 importFrom(geojsonio,geojson_sf)
 importFrom(geojsonio,geojson_sp)
 importFrom(httr,GET)

@@ -1,6 +1,7 @@
 
-#' @title Get satellite overpasses
-#' @description Get satellite overpasses
+
+#' @title Get overpasses
+#' @description Get overpasses
 #' @param aoi PARAM_DESCRIPTION
 #' @param satellites PARAM_DESCRIPTION. Default: NULL
 #' @param days_before PARAM_DESCRIPTION. Default: 0
@@ -22,16 +23,16 @@
 #' @source \url{http://somewhere.important.com/}
 #' @importFrom sp bbox Polygons Polygon SpatialPolygons CRS SpatialPolygonsDataFrame coordinates proj4string SpatialPointsDataFrame
 #' @importFrom httr GET content
-GetSatelliteOverpasses <- 
+GetOverpasses <- 
 function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions = TRUE, api_key = Sys.getenv("spectator_earth_api_key"))
 {
     if (!inherits(aoi, "Spatial")) {
-        stop()
+        stop("aoi argument must be a Spatial* object")
     }
-    days_before = 0
-    days_after = 7 
-    api_key = Sys.getenv("api_key")
-    bbox <- "19.59,49.90,20.33,50.21"
+    # days_before = 0
+    # days_after = 7 
+    # api_key = Sys.getenv("api_key")
+    # bbox <- "19.59,49.90,20.33,50.21"
     
     endpoint <- "https://api.spectator.earth/overpass/"
     bbox <- paste(as.numeric(sp::bbox(aoi)), collapse = ",")
@@ -39,18 +40,19 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     qry <- list(api_key = api_key, bbox = bbox, days_before = days_before, days_after = days_after)
     
     if (!is.null(satellites)) {
-        # allow shorthand spelling
-        allowed.satellites <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
-                                "S-1A", "S-1B", "S-2A", "S-2B", "L-8",
-                                "S1A", "S1B", "S2A", "S2B", "L8")
-        names(allowed.satellites) <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
-                                       "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
-                                       "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8")
-        satellites <- paste(unique(names(allowed.satellites)[grep(satellites, allowed.satellites)]), collapse = ",")
-        if (length(satellites) == 0)  {
-            stop()
-        }
-        satellites <- c("Sentinel-2A,Sentinel-2B")
+        # # allow shorthand spelling
+        # allowed.satellites <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
+        #                         "S-1A", "S-1B", "S-2A", "S-2B", "L-8",
+        #                         "S1A", "S1B", "S2A", "S2B", "L8")
+        # names(allowed.satellites) <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
+        #                                "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
+        #                                "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8")
+        # satellites <- paste(unique(names(allowed.satellites)[grep(satellites, allowed.satellites)]), collapse = ",")
+        # if (length(satellites) == 0)  {
+        #     stop()
+        # }
+        # satellites <- c("Sentinel-2A,Sentinel-2B")
+        satellites <- FindSatelliteName(satellites)
         qry <- c(qry, satellites = satellites)
     }
 
@@ -61,7 +63,8 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     overpasses <- cnt$overpasses
     # get attributes
     df <- data.frame(id = sapply(overpasses, "[[", "id"),
-                     acquisition = sapply(overpasses, "[[", "acquisition"),
+                     # acquisition = sapply(overpasses, "[[", "acquisition"),
+                     acquisition = sapply(overpasses, FUN = function(x) SafeNull(x$acquisition)),
                      date = sapply(overpasses, "[[", "date"),
                      satellite = sapply(overpasses, "[[", "satellite"),
                      stringsAsFactors = FALSE)

@@ -1,7 +1,7 @@
 
 #' @title Get satellite
 #' @description Get satellite
-#' @param id PARAM_DESCRIPTION. Default: 17
+#' @param satellite PARAM_DESCRIPTION
 #' @param positions PARAM_DESCRIPTION. Default: TRUE
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -19,8 +19,9 @@
 #' @importFrom httr GET content
 #' @importFrom geojsonio geojson_sf
 GetSatellite <- 
-function(id = 17, positions = TRUE) 
+function(satellite, positions = TRUE) 
 {
+    id <- FindSatelliteId(satellite)
     endpoint <- sprintf("https://api.spectator.earth/satellite/%d/", id)
     
     resp <- httr::GET(url = endpoint)

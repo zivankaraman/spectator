@@ -1,6 +1,7 @@
 
-#' @title Get satellite trajectory
-#' @description Get satellite trajectory
+
+#' @title Get trajectory
+#' @description Get trajectory
 #' @param satellite PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -17,10 +18,10 @@
 #' @source \url{http://somewhere.important.com/}
 #' @importFrom httr GET content
 #' @importFrom geojsonio geojson_sp
-GetSatelliteTrajectory <- 
+GetTrajectory <- 
 function(satellite)
 {
-    id <- FindSatellite(satellite)
+    id <- FindSatelliteId(satellite)
     endpoint <- sprintf("https://api.spectator.earth/satellite/%d/trajectory/", id)
     
     resp <- httr::GET(url = endpoint)
@@ -28,6 +29,8 @@ function(satellite)
 
     cnt <- httr::content(resp, type = "text", encoding = "UTF-8")
     trajectory <- geojsonio::geojson_sp(cnt)
+    trajectory@data$name <- satellite
+    trajectory@data$id <- id
     
     return(trajectory)
 }

@@ -1,4 +1,5 @@
 
+
 #' @title Get all satellites
 #' @description Get all satellites
 #' @param positions PARAM_DESCRIPTION. Default: TRUE
