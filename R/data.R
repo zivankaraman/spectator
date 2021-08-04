@@ -11,6 +11,11 @@
 #'   \item{\code{platform}}{character platform name}
 #'}
 #' @details The information in this data frame enables the retrieval of some data by satellite name instead of id.
+#' The current list of satellites described in Spectator Earth database can be obtained by 
+#' \code{GetAllSatellites(positions = FALSE)}
+#' 
+#' @seealso 
+#'  \code{\link[spectator]{GetAllSatellites}} 
 #'
 #' @source \url{https://api.spectator.earth/#satellites}
 #'

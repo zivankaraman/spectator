@@ -38,7 +38,9 @@ function(x)
     names(allowed.satellites) <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
                                    "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
                                    "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8")
-    satellite.names <- paste(unique(names(allowed.satellites)[grep(x, allowed.satellites)]), collapse = ",")
+    # satellite.names <- paste(unique(names(allowed.satellites)[grep(x, allowed.satellites)]), collapse = ",")
+    satellite.names <- paste(unique(names(allowed.satellites)[sapply(x, grep, allowed.satellites)]), collapse = ",")
+    
     if (length(satellite.names) == 0)  {
         stop(sprintf("invalid satellite(s) requested '%s'", paste(as.character(x), collapse = ",")))
     }

@@ -7,7 +7,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "zivan.karaman@gmail.com",
            comment = c(ORCID = "0000-0002-8933-4589"))
-Description: What the package does (one paragraph).
+Description: This package provides interface to Spectator Earth API, mainly for 
+    obtaining the acquisition plans and satellite overpasses for Sentinel-2, 
+    Landsat-8 and Sentinel-1 satellites. Current position and trajectory can
+    also be obtained for a much larger set of satellites.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

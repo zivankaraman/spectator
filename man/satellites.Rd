@@ -26,5 +26,10 @@ List all the satellites available in the Spectator Earth database with main attr
 }
 \details{
 The information in this data frame enables the retrieval of some data by satellite name instead of id.
+The current list of satellites described in Spectator Earth database can be obtained by
+\code{GetAllSatellites(positions = FALSE)}
+}
+\seealso{
+\code{\link[spectator]{GetAllSatellites}}
 }
 \keyword{datasets}
