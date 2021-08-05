@@ -13,11 +13,11 @@
 #' }
 #' @seealso 
 #'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
-#'  \code{\link[geojsonio]{geojson_sp}}
+#'  \code{\link[geojsonsf]{geojson_sf}}
 #' @export 
 #' @source \url{http://somewhere.important.com/}
 #' @importFrom httr GET content
-#' @importFrom geojsonio geojson_sp
+#' @importFrom geojsonsf geojson_sf
 GetTrajectory <- 
 function(satellite)
 {
@@ -28,9 +28,9 @@ function(satellite)
     CheckResponseSatus(resp)
 
     cnt <- httr::content(resp, type = "text", encoding = "UTF-8")
-    trajectory <- geojsonio::geojson_sp(cnt)
-    trajectory@data$name <- satellite
-    trajectory@data$id <- id
+    trajectory <- geojsonsf::geojson_sf(cnt)
+    trajectory$name <- satellite
+    trajectory$id <- id
     
     return(trajectory)
 }

@@ -17,14 +17,14 @@ FindSatelliteId <-
 function(x)
 {
     # finds a satellite id from the internal satellite table
-    idx <- charmatch(toupper(x), toupper(satellites$name), nomatch = NA_integer_)
+    idx <- charmatch(toupper(x), toupper(satellites_db$name), nomatch = NA_integer_)
     if (is.na(idx)) {
      stop(sprintf("satellite named '%s' not found", x))
     }
     if (idx == 0) {
      stop(sprintf("satellite name '%s' is ambigous, provide an unambigous name", x))
     }
-    return(satellites$id[idx])    
+    return(satellites_db$id[idx])    
 }
 
 

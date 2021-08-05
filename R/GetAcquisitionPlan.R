@@ -13,11 +13,11 @@
 #' }
 #' @seealso 
 #'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
-#'  \code{\link[geojsonio]{geojson_sp}}
+#'  \code{\link[geojsonsf]{geojson_sf}}
 #' @export 
 #' @source \url{http://somewhere.important.com/}
 #' @importFrom httr GET content
-#' @importFrom geojsonio geojson_sp
+#' @importFrom geojsonsf geojson_sf
 GetAcquisitionPlan <- 
 function(satellites = NULL, date = NULL) 
 {
@@ -40,7 +40,13 @@ function(satellites = NULL, date = NULL)
     CheckResponseSatus(resp)
     
     cnt <- httr::content(resp, type = "text", encoding = "UTF-8")
-    plan <- geojsonio::geojson_sp(cnt)
-
+    plan <- geojsonsf::geojson_sf(cnt)
+    # convert datetime strings to POSIX format
+    if (!is.null(plan$begin_time)) {
+        plan$begin_time <- as.POSIXct(gsub("Z", "", gsub("T", " ", plan$begin_time)), tz = "GMT")
+    }
+    if (!is.null(plan$end_time)) {
+        plan$end_time <- as.POSIXct(gsub("Z", "", gsub("T", " ", plan$end_time)), tz = "GMT")
+    }
     return(plan)
 }

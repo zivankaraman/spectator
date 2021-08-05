@@ -13,11 +13,11 @@
 #' }
 #' @seealso 
 #'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
-#'  \code{\link[geojsonio]{geojson_sf}}
+#'  \code{\link[geojsonsf]{geojson_sf}}
 #' @export 
 #' @source \url{http://somewhere.important.com/}
 #' @importFrom httr GET content
-#' @importFrom geojsonio geojson_sf
+#' @importFrom geojsonsf geojson_sf
 GetSatellite <- 
 function(satellite, positions = TRUE) 
 {
@@ -38,7 +38,7 @@ function(satellite, positions = TRUE)
                       stringsAsFactors = FALSE, row.names = NULL)
     if (positions) {
         cnt <- httr::content(resp, type = "text", encoding = "UTF-8")
-        out <- geojsonio::geojson_sf(cnt)
+        out <- geojsonsf::geojson_sf(cnt)
         out$sensors <- tab$sensors
         out <- out[order(out$name), ]
         row.names(out) <- NULL

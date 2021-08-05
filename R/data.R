@@ -1,5 +1,5 @@
 
-#' @title Satellites
+#' @title Satellites database
 #' @description List all the satellites available in the Spectator Earth database with main attributes
 #' @format A data frame with 45 rows and 6 variables:
 #' \describe{
@@ -10,8 +10,10 @@
 #'   \item{\code{open}}{logical whether the data produced by the satellite is freely accessible}
 #'   \item{\code{platform}}{character platform name}
 #'}
-#' @details The information in this data frame enables the retrieval of some data by satellite name instead of id.
-#' The current list of satellites described in Spectator Earth database can be obtained by 
+#' @details The information in this data frame is a local cache of the list of all the satellites 
+#' available in the Spectator Earth database. It enables the fast retrieval of some data 
+#' by satellite name instead of id.
+#' The current up-to-date list of satellites described in Spectator Earth database can be obtained by 
 #' \code{GetAllSatellites(positions = FALSE)}
 #' 
 #' @seealso 
@@ -19,4 +21,4 @@
 #'
 #' @source \url{https://api.spectator.earth/#satellites}
 #'
-"satellites"
+"satellites_db"

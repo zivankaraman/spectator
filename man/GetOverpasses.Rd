@@ -46,6 +46,7 @@ if(interactive()){
 }
 }
 \seealso{
-\code{\link[sp]{bbox-methods}}, \code{\link[sp]{c("SpatialPolygons", "polygons")}}, \code{\link[sp]{SpatialPolygons}}, \code{\link[sp]{CRS-class}}, \code{\link[sp]{coordinates}}, \code{\link[sp]{is.projected}}, \code{\link[sp]{SpatialPoints}}
+\code{\link[sf]{st_as_sf}}, \code{\link[sf]{st_bbox}}
 \code{\link[httr]{GET}}, \code{\link[httr]{content}}
+\code{\link[sp]{c("SpatialPolygons", "polygons")}}, \code{\link[sp]{SpatialPolygons}}
 }

@@ -13,11 +13,11 @@
 #' }
 #' @seealso 
 #'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
-#'  \code{\link[geojsonio]{geojson_sf}}
+#'  \code{\link[geojsonsf]{geojson_sf}}
 #' @export 
 #' @source \url{http://somewhere.important.com/}
 #' @importFrom httr GET content
-#' @importFrom geojsonio geojson_sf
+#' @importFrom geojsonsf geojson_sf
 GetAllSatellites <- 
 function(positions = TRUE) 
 {
@@ -40,9 +40,11 @@ function(positions = TRUE)
     row.names(tab) <- NULL
     if (positions) {
         cnt <- httr::content(resp, type = "text", encoding = "UTF-8")
-        out <- geojsonio::geojson_sf(cnt)
+        out <- geojsonsf::geojson_sf(cnt)
         # IDs of features are lost in this operation, must retrieve them by norad_id
         out$id <- tab$id[match(out$norad_id, tab$norad_id)]
+        # open is not logical anymore, get it back
+        out$open <- as.logical(as.integer(out$open))
         out <- out[order(out$name), c("id", "name", "norad_id", "sensors", "open", "platform", "geometry")]
         out$sensors <- tab$sensors
         row.names(out) <- NULL

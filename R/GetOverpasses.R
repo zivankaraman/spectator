@@ -17,17 +17,22 @@
 #'  }
 #' }
 #' @seealso 
-#'  \code{\link[sp]{bbox-methods}}, \code{\link[sp]{c("SpatialPolygons", "polygons")}}, \code{\link[sp]{SpatialPolygons}}, \code{\link[sp]{CRS-class}}, \code{\link[sp]{coordinates}}, \code{\link[sp]{is.projected}}, \code{\link[sp]{SpatialPoints}}
+#'  \code{\link[sf]{st_as_sf}}, \code{\link[sf]{st_bbox}}
 #'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
+#'  \code{\link[sp]{c("SpatialPolygons", "polygons")}}, \code{\link[sp]{SpatialPolygons}}
 #' @export 
 #' @source \url{http://somewhere.important.com/}
-#' @importFrom sp bbox Polygons Polygon SpatialPolygons CRS SpatialPolygonsDataFrame coordinates proj4string SpatialPointsDataFrame
+#' @importFrom sf st_as_sf st_bbox
 #' @importFrom httr GET content
+#' @importFrom sp Polygons Polygon SpatialPolygons SpatialPolygonsDataFrame
 GetOverpasses <- 
 function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions = TRUE, api_key = Sys.getenv("spectator_earth_api_key"))
 {
-    if (!inherits(aoi, "Spatial")) {
-        stop("aoi argument must be a Spatial* object")
+    if (inherits(aoi, "Spatial")) {
+        aoi <- sf::st_as_sf(aoi)
+    }
+    if (!inherits(aoi, "sf")) {
+        stop("aoi argument must be a sf (simple feature) object")
     }
     # days_before = 0
     # days_after = 7 
@@ -35,7 +40,7 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     # bbox <- "19.59,49.90,20.33,50.21"
     
     endpoint <- "https://api.spectator.earth/overpass/"
-    bbox <- paste(as.numeric(sp::bbox(aoi)), collapse = ",")
+    bbox <- paste(as.numeric(sf::st_bbox(aoi)), collapse = ",")
 
     qry <- list(api_key = api_key, bbox = bbox, days_before = days_before, days_after = days_after)
     
@@ -76,21 +81,24 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     for (i in 1:length(koords2)) {
         poly[[i]] <- sp::Polygons(list(sp::Polygon(koords2[[i]], hole = FALSE)), ID = df$id[i])
     }
-    spoly <- sp::SpatialPolygons(poly, proj4string = sp::CRS("+proj=longlat +datum=WGS84"))
+    # spoly <- sp::SpatialPolygons(poly, proj4string = sp::CRS("+proj=longlat +datum=WGS84"))
+    spoly <- sp::SpatialPolygons(poly, proj4string = wgs84)
+    
     spolydf <- sp::SpatialPolygonsDataFrame(spoly, data = df)
     if (acquisitions) {
         spolydf <- subset(spolydf, acquisition == TRUE)
     }
     
     # get geometry / centroids
-    if (FALSE) {
-        mat <- t(sapply(overpasses, FUN = function(x) x$geometry$coordinates))
-        pts <- data.frame(long = unlist(mat[, 1]), lat = unlist(mat[, 2]))
-        sp::coordinates(pts) <- ~ long + lat
-        sp::proj4string(pts) <- sp::CRS("+proj=longlat +datum=WGS84")
-        sptsdf <- sp::SpatialPointsDataFrame(pts, data = df)
-    }
+    # mat <- t(sapply(overpasses, FUN = function(x) x$geometry$coordinates))
+    # pts <- data.frame(long = unlist(mat[, 1]), lat = unlist(mat[, 2]))
+    # sp::coordinates(pts) <- ~ long + lat
+    # sp::proj4string(pts) <- sp::CRS("+proj=longlat +datum=WGS84")
+    # sptsdf <- sp::SpatialPointsDataFrame(pts, data = df)
     # out <- list(footprint = spolydf, centroids = sptsdf)
-    out <- spolydf
+    
+    out <- sf::st_as_sf(spolydf)
+    # convert datetime strings to POSIX format
+    out$date <- as.POSIXct(gsub("Z", "", gsub("T", " ", out$date)), tz = "GMT")
     return(out)
 }

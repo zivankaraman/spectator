@@ -16,7 +16,7 @@ xy[, 2] <- xy[, 2] + 2
 text(xy, labels = pos$name, cex = 0.5)
 
 
-sat <- "Sentinel-2A"
+sat <- "SPOT-6"
 traj <- GetTrajectory(satellite = sat)
 pos <- GetSatellite(satellite = sat, positions = TRUE)
 

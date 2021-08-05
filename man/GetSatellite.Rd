@@ -32,5 +32,5 @@ if(interactive()){
 }
 \seealso{
 \code{\link[httr]{GET}}, \code{\link[httr]{content}}
-\code{\link[geojsonio]{geojson_sf}}
+\code{\link[geojsonsf]{geojson_sf}}
 }

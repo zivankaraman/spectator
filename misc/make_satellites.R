@@ -1,3 +1,3 @@
 library(spectator)
-satellites <- GetAllSatellites(positions = FALSE)
-save(satellites, file = "data/satellites.rda")
+satellites_db <- GetAllSatellites(positions = FALSE)
+save(satellites_db, file = "data/satellites_db.rda")
