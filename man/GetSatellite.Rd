@@ -2,26 +2,35 @@
 % Please edit documentation in R/GetSatellite.R
 \name{GetSatellite}
 \alias{GetSatellite}
-\title{Get satellite}
+\title{Gets info for a satellite}
 \source{
-\url{http://somewhere.important.com/}
+\url{https://api.spectator.earth/#satellites}
 }
 \usage{
 GetSatellite(satellite, positions = TRUE)
 }
 \arguments{
-\item{satellite}{PARAM_DESCRIPTION}
+\item{satellite}{character name of the satellite for which to retrieve the trajectory.
+The satellite name is not case sensitive, and can be abbreviated as long as an unambiguous match can be obtained.
+Only one satellite can be queried at a time.}
 
-\item{positions}{PARAM_DESCRIPTION. Default: TRUE}
+\item{positions}{logical indicating if the current position should be included. Default: TRUE}
 }
 \value{
-OUTPUT_DESCRIPTION
+If \code{positions} is \code{FALSE}, a single row data frame with following attributes:
+\describe{
+\item{\code{id}}{integer identifier}
+\item{\code{name}}{character satellite name}
+\item{\code{norad_id}}{integer satellite catalog number}
+\item{\code{sensors}}{character type of sensors available on the satellite (SAR or Optical)}
+\item{\code{open}}{logical whether the data produced by the satellite is freely accessible}
+\item{\code{platform}}{character platform name}
+}
+If \code{positions} is \code{TRUE}, a single row object of class '\code{sf}' with '\code{POINT}' geometry type,
+with the same attributes as above.
 }
 \description{
-Get satellite
-}
-\details{
-DETAILS
+Gets the information about the specified satellite, and possibly its current position.
 }
 \examples{
 \dontrun{
@@ -31,6 +40,5 @@ if(interactive()){
 }
 }
 \seealso{
-\code{\link[httr]{GET}}, \code{\link[httr]{content}}
-\code{\link[geojsonsf]{geojson_sf}}
+\code{\link[spectator]{GetAllSatellites}}
 }

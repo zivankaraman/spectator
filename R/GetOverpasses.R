@@ -1,6 +1,5 @@
 
-
-#' @title Get overpasses
+#' @title Gets overpasses for an area of interest
 #' @description Get overpasses
 #' @param aoi PARAM_DESCRIPTION
 #' @param satellites PARAM_DESCRIPTION. Default: NULL

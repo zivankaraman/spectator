@@ -2,24 +2,32 @@
 % Please edit documentation in R/GetAllSatellites.R
 \name{GetAllSatellites}
 \alias{GetAllSatellites}
-\title{Get all satellites}
+\title{Gets all referenced satellites info}
 \source{
-\url{http://somewhere.important.com/}
+\url{https://api.spectator.earth/#satellites}
 }
 \usage{
 GetAllSatellites(positions = TRUE)
 }
 \arguments{
-\item{positions}{PARAM_DESCRIPTION. Default: TRUE}
+\item{positions}{logical indicating if the current position should be included. Default: TRUE}
 }
 \value{
-OUTPUT_DESCRIPTION
+If \code{positions} is \code{FALSE}, a data frame with following attributes:
+\describe{
+\item{\code{id}}{integer identifier}
+\item{\code{name}}{character satellite name}
+\item{\code{norad_id}}{integer satellite catalog number}
+\item{\code{sensors}}{character type of sensors available on the satellite (SAR or Optical)}
+\item{\code{open}}{logical whether the data produced by the satellite is freely accessible}
+\item{\code{platform}}{character platform name}
+}
+If \code{positions} is \code{TRUE}, object of class '\code{sf}' with '\code{POINT}' geometry type,
+with the same attributes as above.
 }
 \description{
-Get all satellites
-}
-\details{
-DETAILS
+Gets the information about all the satellites known in the Spectator Earth database,
+and possibly their current positions.
 }
 \examples{
 \dontrun{
@@ -29,6 +37,5 @@ if(interactive()){
 }
 }
 \seealso{
-\code{\link[httr]{GET}}, \code{\link[httr]{content}}
-\code{\link[geojsonsf]{geojson_sf}}
+\code{\link[spectator]{GetSatellite}}
 }

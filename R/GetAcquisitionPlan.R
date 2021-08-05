@@ -1,21 +1,34 @@
 
-#' @title Get acquisition plan
-#' @description Get acquisition plan
-#' @param satellites PARAM_DESCRIPTION. Default: NULL
-#' @param date PARAM_DESCRIPTION. Default: NULL
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @title Gets a satellite acquisition plan
+#' @description Retrieves the acquisition plans for the Sentinel-2, Landsat-8 and Sentinel-1 satellites.
+#' @param satellites character vector, if specified only the listed satellites will be retrieved, 
+#' if \code{NULL} (default value) the acquisition plans for all possible satellites will be retrieved. 
+#' For simplicity, the satellites names can be abbreviated to 
+#'  "S-1A", "S-1B", "S-2A", "S-2B", "L-8" or "S1A", "S1B", "S2A", "S2B", "L8". Default: NULL
+#' @param date date or character convertible to date by \code{as.Date},
+#' indicating the day for which the acquisition plans are requested. 
+#' If \code{NULL} (default value), today's date is used. 
+#' If too far in the future, will return empty data set. 
+#' Default: NULL
+#' @return Object of class '\code{sf}' with '\code{POLYGON}' geometry type.
+#' The attributes of the output will vary, depending on the satellite. 
+#' For more information check out acquisition plan file descriptions for 
+#' \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-1/observation-scenario/acquisition-segments}{Sentinel-1}, 
+#' \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/acquisition-plans}{Sentinel-2}, 
+#' \href{https://landsat.usgs.gov/landsat_acq}{Landsat-8}
+#' @details Based on the KML files provided by ESA (Sentinel-1, Sentinel-2) 
+#' and USGS (Landsat-8) in order to determine if the overpassing satellite will acquire image.
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
-#'  \code{\link[geojsonsf]{geojson_sf}}
+# @seealso 
+#  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
+#  \code{\link[geojsonsf]{geojson_sf}}
 #' @export 
-#' @source \url{http://somewhere.important.com/}
+#' @source \url{https://api.spectator.earth/#acquisition-plan}
 #' @importFrom httr GET content
 #' @importFrom geojsonsf geojson_sf
 GetAcquisitionPlan <- 

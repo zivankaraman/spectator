@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetOverpasses.R
 \name{GetOverpasses}
 \alias{GetOverpasses}
-\title{Get overpasses}
+\title{Gets overpasses for an area of interest}
 \source{
 \url{http://somewhere.important.com/}
 }

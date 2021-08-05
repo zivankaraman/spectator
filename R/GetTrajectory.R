@@ -1,21 +1,22 @@
 
-
-#' @title Get trajectory
-#' @description Get trajectory
-#' @param satellite PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @title Gets a satellite trajectory
+#' @description Gets the current trajectory for the specified satellite.
+#' @param satellite character name of the satellite for which to retrieve the trajectory. 
+#' The satellite name is not case sensitive, and can be abbreviated as long as an unambiguous match can be obtained.
+#' Only one satellite can be queried at a time.
+#' @return Object of class '\code{sf}' with '\code{LINESTRING}' geometry type
+# @details DETAILS
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
-#'  \code{\link[geojsonsf]{geojson_sf}}
+# @seealso 
+#  \code{\link[httr]{GET}}, \code{\link[htt]{content}}
+#  \code{\link[geojsonsf]{geojson_sf}}
 #' @export 
-#' @source \url{http://somewhere.important.com/}
+#' @source \url{https://api.spectator.earth/#trajectories}
 #' @importFrom httr GET content
 #' @importFrom geojsonsf geojson_sf
 GetTrajectory <- 
