@@ -4,7 +4,7 @@
 \alias{GetOverpasses}
 \title{Gets overpasses for an area of interest}
 \source{
-\url{http://somewhere.important.com/}
+\url{https://api.spectator.earth/#satellite-overpasses}
 }
 \usage{
 GetOverpasses(
@@ -17,26 +17,43 @@ GetOverpasses(
 )
 }
 \arguments{
-\item{aoi}{PARAM_DESCRIPTION}
+\item{aoi}{'\code{sf}' (or '\code{Spatial*}') object defining the area of interest.
+Can be of any geometry as only the bounding box is used.}
 
-\item{satellites}{PARAM_DESCRIPTION. Default: NULL}
+\item{satellites}{character vector, if specified only the listed satellites will be retrieved,
+if \code{NULL} (default value) the acquisition plans for all possible satellites will be retrieved.
+For simplicity, the satellites names can be abbreviated to
+"S-1A", "S-1B", "S-2A", "S-2B", "L-8" or "S1A", "S1B", "S2A", "S2B", "L8". Default: NULL}
 
-\item{days_before}{PARAM_DESCRIPTION. Default: 0}
+\item{days_before}{integer indicating the number of days before the current date for which
+overpasses should be computed. Default: 0}
 
-\item{days_after}{PARAM_DESCRIPTION. Default: 7}
+\item{days_after}{integer indicating the number of days after the current date for which
+overpasses should be computed. Default: 7}
 
-\item{acquisitions}{PARAM_DESCRIPTION. Default: TRUE}
+\item{acquisitions}{logical indicating if only the overpasses when the data acquisition
+will take place should be reported. Default: TRUE}
 
-\item{api_key}{PARAM_DESCRIPTION. Default: Sys.getenv("spectator_earth_api_key")}
+\item{api_key}{character containing your API key. Default: Sys.getenv("spectator_earth_api_key")}
 }
 \value{
-OUTPUT_DESCRIPTION
+Object of class '\code{sf}' with '\code{POLYGON}' geometry type and attributes
+\describe{
+\item{\code{id}}{integer identifier}
+\item{\code{acquisitions}}{logical whether the overpass collects the data}
+\item{\code{date}}{POSIXct timestamp of the overpass (UTC - to be checked)}
+\item{\code{satellite}}{character satellite name}
+}
 }
 \description{
-Get overpasses
+Retrieves the footprint polygons of past and/or (near)future overpasses
+of specified satellites over an area of interest.
 }
 \details{
-DETAILS
+This function requires an API key that is automatically generated for every registered account at
+\url{https://app.spectator.earth}. You can find it under 'Your profile' (bottom left button).
+By default, the API key is retrieved from the environment variable \code{spectator_earth_api_key},
+but you can choose any other way of providing it (it is recommended \strong{NOT} to include it in your scripts).
 }
 \examples{
 \dontrun{
@@ -44,9 +61,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[sf]{st_as_sf}}, \code{\link[sf]{st_bbox}}
-\code{\link[httr]{GET}}, \code{\link[httr]{content}}
-\code{\link[sp]{c("SpatialPolygons", "polygons")}}, \code{\link[sp]{SpatialPolygons}}
 }
