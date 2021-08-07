@@ -33,9 +33,15 @@ For more information check out acquisition plan file descriptions for
 Retrieves the acquisition plans for the Sentinel-2, Landsat-8 and Sentinel-1 satellites.
 }
 \details{
-Based on the KML files provided by ESA (Sentinel-1, Sentinel-2)
-and USGS (Landsat-8) in order to determine if the overpassing satellite will acquire image.
+For Sentinels the acquisition plans usually have a range of 10-15 days, while for Landsat-8 it is 2-4 days.
+The time range that you can view is limited to 24 hours due to a large number of polygons.
 }
+\section{Data source}{
+
+Based on the files provided by ESA (Sentinel-1, Sentinel-2)
+and USGS (Landsat-8), more information available on the above mentioned web pages.
+}
+
 \examples{
 \dontrun{
 if(interactive()){
