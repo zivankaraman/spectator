@@ -35,7 +35,17 @@ Gets the information about the specified satellite, and possibly its current pos
 \examples{
 \dontrun{
 if(interactive()){
- #EXAMPLE1
+ library(sf)
+ # get trajectory and current position for a selected satellite
+ sat <- "SPOT-7"
+ traj <- GetTrajectory(satellite = sat)
+ pos <- GetSatellite(satellite = sat, positions = TRUE)
+ # do some nice graphs
+ library(maps)
+ map("world", fill = TRUE, col = "lightgrey")
+ plot(st_geometry(traj), lwd = 2, col = "red", add = TRUE)
+ plot(st_geometry(pos), pch = 15, col = "green", cex = 1.5, add = TRUE)
+ title(main = sprintf("current \%s trajectory & position", sat))
  }
 }
 }

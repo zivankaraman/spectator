@@ -18,7 +18,21 @@
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  library(sf)
+#'  # get all satellites withe their positions
+#'  pos <- GetAllSatellites(positions = TRUE)
+#'  # do some nice graphs
+#'  library(maps)
+#'  map("world", fill = TRUE, col = "lightgrey")
+#'  # show open data satellites in green
+#'  plot(st_geometry(subset(pos, open == TRUE)), add = TRUE, col = "green", pch = 15)
+#'  # show others in red
+#'  plot(st_geometry(subset(pos, open == FALSE)), add = TRUE, col = "red", pch = 16)
+#'  # add labels
+#'  xy <- st_coordinates(pos)
+#'  # shift labels up to be able to read them
+#'  xy[, 2] <- xy[, 2] + 2 
+#'  text(xy, labels = pos$name, cex = 0.5)
 #'  }
 #' }
 #' @seealso 

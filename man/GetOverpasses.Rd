@@ -58,7 +58,21 @@ but you can choose any other way of providing it (it is recommended \strong{NOT}
 \examples{
 \dontrun{
 if(interactive()){
- #EXAMPLE1
+ library(sf)
+ # get the Luxembourg country shape as area of interest
+ url <- "https://download.data.public.lu/resources/limites-administratives-du-grand-duche-de-luxembourg/20180806-153458/communes4326.geojson"
+ boundary <- read_sf(url)
+ # look for Sentinel-2 A and B, use shorthand notation, default time frame
+ pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = TRUE)
+ # do some nice graphs
+ library(maps)
+ days <- range(as.Date(pass$date))
+ satellites <- sort(unique(pass$satellite))
+ map(database = "world", region = c("Belgium", "Netherlands", "Germany", "Luxembourg", "France", "Switzerland"), col = "lightgrey", fill = TRUE)
+ plot(sf::st_geometry(boundary), add = TRUE, col = "red", border = FALSE)
+ plot(sf::st_geometry(pass), add = TRUE)
+ title(main = sprintf("\%s overpasses for period \%s", paste(satellites, collapse = "/"), 
+                      paste(days, collapse = ":")))
  }
 }
 }
