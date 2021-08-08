@@ -60,11 +60,7 @@ but you can choose any other way of providing it (it is recommended \strong{NOT}
 if(interactive()){
  library(sf)
  # get the Luxembourg country shape as area of interest
- # URL is very long, so it is split across several lines :-)
- URL <- paste0("https://download.data.public.lu/resources/", 
-        "limites-administratives-du-grand-duche-de-luxembourg", 
-        "/20180806-153458/communes4326.geojson")
- boundary <- read_sf(URL)
+ boundary <- read_sf(system.file("extdata", "luxembourg.geojson", package = "spectator"))
  # look for Sentinel-2 A and B, use shorthand notation, default time frame
  pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = TRUE)
  # do some nice graphs
