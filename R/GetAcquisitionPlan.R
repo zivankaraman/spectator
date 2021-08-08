@@ -27,7 +27,8 @@
 #'  library(sf)
 #'  # get plans for all eligible satellites for today
 #'  plans <- GetAcquisitionPlan()
-#'  # explore the content of the data frame, you'll see that the available attributes vary with the satellite
+#'  # explore the content of the data frame, 
+#'  # -> you'll see that the available attributes vary with the satellite
 #'  # focus on Sentinel 2
 #'  sat <- c("Sentinel-2A", "Sentinel-2B")
 #'  # day after tomorrow

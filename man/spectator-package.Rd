@@ -38,18 +38,6 @@ You can choose any other way of providing it, but keep in mind that for security
 it is \strong{NOT} recommended to hard-code (include it as clear text) it in your scripts.
 }
 
-\section{Project resources}{
-
-\describe{
-\item{\strong{Project homepage}}{
-The project homepage can be found here \href{https://github.com/zivankaraman/spectator}{here}.
-}
-\item{\strong{Issues}}{
-For bug reports and feature requests please use the \href{https://github.com/zivankaraman/spectator}{tracker}.
-}
-}
-}
-
 \author{
 Zivan Karaman \href{mailto:zivan.karaman@gmail.com}{zivan.karaman@gmail.com}
 }

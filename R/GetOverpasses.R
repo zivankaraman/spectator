@@ -32,15 +32,19 @@
 #' if(interactive()){
 #'  library(sf)
 #'  # get the Luxembourg country shape as area of interest
-#'  url <- "https://download.data.public.lu/resources/limites-administratives-du-grand-duche-de-luxembourg/20180806-153458/communes4326.geojson"
-#'  boundary <- read_sf(url)
+#'  # URL is very long, so it is split across several lines :-)
+#'  URL <- paste0("https://download.data.public.lu/resources/", 
+#'         "limites-administratives-du-grand-duche-de-luxembourg", 
+#'         "/20180806-153458/communes4326.geojson")
+#'  boundary <- read_sf(URL)
 #'  # look for Sentinel-2 A and B, use shorthand notation, default time frame
 #'  pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = TRUE)
 #'  # do some nice graphs
 #'  library(maps)
 #'  days <- range(as.Date(pass$date))
 #'  satellites <- sort(unique(pass$satellite))
-#'  map(database = "world", region = c("Belgium", "Netherlands", "Germany", "Luxembourg", "France", "Switzerland"), col = "lightgrey", fill = TRUE)
+#'  map(database = "world", region = c("Belgium", "Netherlands", "Germany", "Luxembourg",
+#'      "France", "Switzerland"), col = "lightgrey", fill = TRUE)
 #'  plot(sf::st_geometry(boundary), add = TRUE, col = "red", border = FALSE)
 #'  plot(sf::st_geometry(pass), add = TRUE)
 #'  title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse = "/"), 
@@ -115,7 +119,7 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     
     spolydf <- sp::SpatialPolygonsDataFrame(spoly, data = df)
     if (acquisitions) {
-        spolydf <- subset(spolydf, acquisition == TRUE)
+        spolydf <- subset(spolydf, spolydf$acquisition == TRUE)
     }
     
     # get geometry / centroids

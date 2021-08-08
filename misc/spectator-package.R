@@ -48,6 +48,16 @@
 # For bug reports and feature requests please use the tracker:
 # \url{https://github.com/zivankaraman/spectator}.
 #'
+#' @section Project resources:
+#' \describe{
+#'   \item{**Project homepage**}{
+#'     The project homepage can be found here [here](https://github.com/zivankaraman/spectator).
+#'   }
+#'   \item{**Issues**}{
+#'     For bug reports and feature requests please use the [tracker](https://github.com/zivankaraman/spectator).
+#'   }
+#' }
+#' 
 #'    
 #' 
 ## @keywords internal
