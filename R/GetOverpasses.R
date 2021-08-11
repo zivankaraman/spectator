@@ -95,6 +95,8 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
 
     cnt <- httr::content(resp)
     overpasses <- cnt$overpasses
+    # saveRDS(overpasses, "misc/overpasses.rds")
+    
     # get attributes
     df <- data.frame(id = sapply(overpasses, "[[", "id"),
                      # acquisition = sapply(overpasses, "[[", "acquisition"),

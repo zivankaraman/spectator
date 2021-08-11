@@ -63,7 +63,9 @@ function(aoi, satellites = NULL, from = NULL, date_to = NULL, api_key = Sys.gete
     catalogue$begin_position_date <- as.POSIXct(gsub("Z$", "", gsub("T", " ", catalogue$begin_position_date)), tz = "UTC")
     catalogue$end_position_date <- as.POSIXct(gsub("Z$", "", gsub("T", " ", catalogue$end_position_date)), tz = "UTC")
     
-    # geometry <- sapply(results, FUN = function(x) SafeNull(x$geometry$coordinates))
+    geometry <- sapply(results, FUN = function(x) SafeNull(x$geometry$coordinates))
+    saveRDS(catalogue, "misc/catalogue.rds")
+    saveRDS(geometry, "misc/geometry.rds")
     
     return(catalogue)
 }
