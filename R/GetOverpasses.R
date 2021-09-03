@@ -51,9 +51,8 @@
 #  \code{\link[sf]{st_as_sf}}, \code{\link[sf]{st_bbox}}
 #' @export 
 #' @source \url{https://api.spectator.earth/#satellite-overpasses}
-#' @importFrom sf st_as_sf st_bbox
+#' @importFrom sf st_as_sf st_bbox st_polygon st_sfc st_sf
 #' @importFrom httr GET content
-#' @importFrom sp Polygons Polygon SpatialPolygons SpatialPolygonsDataFrame
 GetOverpasses <- 
 function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions = TRUE, api_key = Sys.getenv("spectator_earth_api_key"))
 {
@@ -61,7 +60,7 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
         aoi <- sf::st_as_sf(aoi)
     }
     if (!inherits(aoi, "sf")) {
-        stop("aoi argument must be a sf (simple feature) object")
+        stop("aoi argument must be a 'Spatial*' or 'sf' (simple feature) object")
     }
     # days_before = 0
     # days_after = 7 
@@ -105,21 +104,25 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
                      satellite = sapply(overpasses, "[[", "satellite"),
                      stringsAsFactors = FALSE)
     row.names(df) <- df$id
-    # get footprint / polygons
-    koords <- sapply(overpasses, FUN = function(x) x$footprint$coordinates)
-    koords2 <- lapply(koords, FUN = function(x)  t(sapply(x, unlist)))
-    poly <- vector(mode = "list", length = length(koords2))
-    for (i in 1:length(koords2)) {
-        poly[[i]] <- sp::Polygons(list(sp::Polygon(koords2[[i]], hole = FALSE)), ID = df$id[i])
-    }
-    # spoly <- sp::SpatialPolygons(poly, proj4string = sp::CRS("+proj=longlat +datum=WGS84"))
-    spoly <- sp::SpatialPolygons(poly, proj4string = wgs84)
+    # convert datetime strings to POSIX format
+    df$date <- as.POSIXct(gsub("Z", "", gsub("T", " ", df$date)), tz = "GMT")
     
-    spolydf <- sp::SpatialPolygonsDataFrame(spoly, data = df)
-    if (acquisitions) {
-        spolydf <- subset(spolydf, spolydf$acquisition == TRUE)
-    }
-    
+    # # get footprint / polygons
+    # koords <- sapply(overpasses, FUN = function(x) x$footprint$coordinates)
+    # koords2 <- lapply(koords, FUN = function(x)  t(sapply(x, unlist)))
+    # poly <- vector(mode = "list", length = length(koords2))
+    # for (i in 1:length(koords2)) {
+    #     poly[[i]] <- sp::Polygons(list(sp::Polygon(koords2[[i]], hole = FALSE)), ID = df$id[i])
+    # }
+    # # spoly <- sp::SpatialPolygons(poly, proj4string = sp::CRS("+proj=longlat +datum=WGS84"))
+    # spoly <- sp::SpatialPolygons(poly, proj4string = wgs84)
+    # 
+    # spolydf <- sp::SpatialPolygonsDataFrame(spoly, data = df)
+    # if (acquisitions) {
+    #     spolydf <- subset(spolydf, spolydf$acquisition == TRUE)
+    # }
+    # out <- sf::st_as_sf(spolydf)
+
     # get geometry / centroids
     # mat <- t(sapply(overpasses, FUN = function(x) x$geometry$coordinates))
     # pts <- data.frame(long = unlist(mat[, 1]), lat = unlist(mat[, 2]))
@@ -128,8 +131,16 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     # sptsdf <- sp::SpatialPointsDataFrame(pts, data = df)
     # out <- list(footprint = spolydf, centroids = sptsdf)
     
-    out <- sf::st_as_sf(spolydf)
-    # convert datetime strings to POSIX format
-    out$date <- as.POSIXct(gsub("Z", "", gsub("T", " ", out$date)), tz = "GMT")
+    # get footprint / polygons
+    koords <- lapply(overpasses, FUN = function(x) list(matrix(unlist(x$footprint$coordinates), ncol = 2, byrow = TRUE)))
+    poly <- lapply(koords, sf::st_polygon)
+    geom <- sf::st_sfc(poly, crs = 4326)
+    out <- sf::st_sf(cbind(df, geom))
+    
+    # get data acquisition overpasses only? 
+    if (acquisitions) {
+        out <- subset(out, out$acquisition == TRUE)
+    }
+    
     return(out)
 }
