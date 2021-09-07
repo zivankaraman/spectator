@@ -16,7 +16,10 @@ this functionality from R.
 
 The main functions allow to retrieve the acquisition plans for Sentinel-1, Sentinel-2
 and Landsat-8 satellites and to get the past or (near)future overpasses over
-an area of interest for these satellites.
+an area of interest for these satellites. It is also possible to search the archive
+for available images over the area of interest for a given (past) period, get the URL
+links to download the whole image tiles, or alternatively to download the image for
+just the area of interest based on selected spectral bands.
 
 One can also get a current position and trajectory for a much larger set of satellites.
 

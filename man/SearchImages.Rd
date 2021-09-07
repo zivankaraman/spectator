@@ -17,7 +17,8 @@ SearchImages(
 )
 }
 \arguments{
-\item{aoi}{PARAM_DESCRIPTION}
+\item{aoi}{'\code{sf}' (or '\code{Spatial*}') object defining the area of interest.
+Can be of any geometry as only the bounding box is used.}
 
 \item{satellites}{PARAM_DESCRIPTION, Default: NULL}
 
@@ -27,7 +28,7 @@ SearchImages(
 
 \item{footprint}{PARAM_DESCRIPTION, Default: FALSE}
 
-\item{api_key}{PARAM_DESCRIPTION, Default: Sys.getenv("spectator_earth_api_key")}
+\item{api_key}{character containing your API key. Default: Sys.getenv("spectator_earth_api_key")}
 }
 \value{
 OUTPUT_DESCRIPTION

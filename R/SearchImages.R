@@ -1,12 +1,13 @@
 
 #' @title FUNCTION_TITLE
 #' @description FUNCTION_DESCRIPTION
-#' @param aoi PARAM_DESCRIPTION
+#' @param aoi '\code{sf}' (or '\code{Spatial*}') object defining the area of interest.
+#'  Can be of any geometry as only the bounding box is used.
 #' @param satellites PARAM_DESCRIPTION, Default: NULL
 #' @param from PARAM_DESCRIPTION, Default: NULL
 #' @param date_to PARAM_DESCRIPTION, Default: NULL
 #' @param footprint PARAM_DESCRIPTION, Default: FALSE
-#' @param api_key PARAM_DESCRIPTION, Default: Sys.getenv("spectator_earth_api_key")
+#' @param api_key character containing your API key. Default: Sys.getenv("spectator_earth_api_key")
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
 #' @examples 

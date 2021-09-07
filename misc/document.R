@@ -18,3 +18,10 @@ devtools::install(pkg = ".", dependencies = FALSE)
 
 # build pdf manual
 devtools::build_manual()
+
+
+
+ans <- sinew::makeOxyFile(input = "R/GetHighResolutionImage.R", overwrite = FALSE, verbose = TRUE, print = TRUE)
+ans <- sinew::makeOxyFile(input = "R/GetImageryFilesList.R", overwrite = FALSE, verbose = TRUE, print = TRUE)
+
+
