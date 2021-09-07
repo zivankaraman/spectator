@@ -2,15 +2,15 @@
 % Please edit documentation in R/SearchImages.R
 \name{SearchImages}
 \alias{SearchImages}
-\title{FUNCTION_TITLE}
+\title{Search Spectator database for available images}
 \source{
-\url{http://somewhere.important.com/}
+\url{https://api.spectator.earth/#searching-for-images}
 }
 \usage{
 SearchImages(
   aoi,
   satellites = NULL,
-  from = NULL,
+  date_from = NULL,
   date_to = NULL,
   footprint = FALSE,
   api_key = Sys.getenv("spectator_earth_api_key")
@@ -20,24 +20,28 @@ SearchImages(
 \item{aoi}{'\code{sf}' (or '\code{Spatial*}') object defining the area of interest.
 Can be of any geometry as only the bounding box is used.}
 
-\item{satellites}{PARAM_DESCRIPTION, Default: NULL}
+\item{satellites}{character vector, if specified only the listed satellites will be retrieved,
+if \code{NULL} (default value) the acquisition plans for all possible satellites will be retrieved.
+For simplicity, the satellites names can be abbreviated to
+"S-1A", "S-1B", "S-2A", "S-2B", "L-8" or "S1A", "S1B", "S2A", "S2B", "L8". Default: NULL}
 
-\item{from}{PARAM_DESCRIPTION, Default: NULL}
+\item{date_from}{date or character convertible to date by \code{as.Date}, indicating the earliest image date. Default: NULL}
 
-\item{date_to}{PARAM_DESCRIPTION, Default: NULL}
+\item{date_to}{date or character convertible to date by \code{as.Date}, indicating the latest image date. Default: NULL}
 
-\item{footprint}{PARAM_DESCRIPTION, Default: FALSE}
+\item{footprint}{logical indicating if the polygons describing the image tiles should be returned. Default: FALSE}
 
-\item{api_key}{character containing your API key. Default: Sys.getenv("spectator_earth_api_key")}
+\item{api_key}{character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}}
 }
 \value{
-OUTPUT_DESCRIPTION
+Either a data frame (if '\code{footprint}' is '\code{FALSE}') or
+an object of class '\code{sf}' with '\code{POLYGON}' geometry type (if '\code{footprint}' is '\code{TRUE}').
 }
 \description{
-FUNCTION_DESCRIPTION
+Returns the list of available images for an area of interest, specified time interval and selected satellites.
 }
 \details{
-DETAILS
+The image file name is returned invisibly.
 }
 \examples{
 \dontrun{
@@ -45,8 +49,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[sf]{st_as_sf}},\code{\link[sf]{st_bbox}},\code{\link[sf]{st}},\code{\link[sf]{sfc}},\code{\link[sf]{sf}}
-\code{\link[httr]{GET}},\code{\link[httr]{content}}
 }

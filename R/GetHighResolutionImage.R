@@ -1,14 +1,17 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param aoi PARAM_DESCRIPTION
-#' @param id PARAM_DESCRIPTION
-#' @param bands PARAM_DESCRIPTION
-#' @param width PARAM_DESCRIPTION
-#' @param height PARAM_DESCRIPTION
-#' @param file PARAM_DESCRIPTION, Default: 'image.jpg'
-#' @param api_key PARAM_DESCRIPTION, Default: Sys.getenv("spectator_earth_api_key")
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @title Get image limited to an area of interest
+#' @description Provides you with a high resolution image for the area within the acquisition boundaries, 
+#' if you're not interested in downloading the whole image.
+#' @param aoi '\code{sf}' (or '\code{Spatial*}') object defining the area of interest.
+#'  Can be of any geometry as only the bounding box is used.
+#' @param id integer, \code{id} of the image from the \code{\link[spectator]{SearchImages}} result
+#' @param bands integer vector of length 1 or 3 indicating the spectral bands to use for creating the image 
+#' (typically the bands corresponding to Red, Green and Blue)
+#' @param width integer indicating the width of the image (in pixels)
+#' @param height integer indicating the height of the image (in pixels)
+#' @param file character indicating the name of the image file to create. Default: 'image.jpg'
+#' @param api_key character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}
+#' @return The name of the image file is returned invisbly.
+#' @details As a side effect, the image file is written to the provided path.
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
@@ -16,10 +19,9 @@
 #'  }
 #' }
 #' @seealso 
-#'  \code{\link[sf]{st_as_sf}},\code{\link[sf]{st_bbox}}
-#'  \code{\link[httr]{GET}},\code{\link[httr]{content}}
+#'  \code{\link[spectator]{SearchImages}}
 #' @export 
-#' @source \url{http://somewhere.important.com/}
+#' @source \url{https://api.spectator.earth/#high-resolution-image}
 #' @importFrom sf st_as_sf st_bbox
 #' @importFrom httr GET content
 GetHighResolutionImage <- 
@@ -58,7 +60,7 @@ function(aoi, id, bands, width, height, file = "image.jpg", api_key = Sys.getenv
     CheckResponseSatus(resp)
     cnt <- httr::content(resp)
     writeBin(cnt, con = file)    
-    return()
+    invisible(file)
 }
 
 

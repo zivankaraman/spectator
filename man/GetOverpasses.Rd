@@ -34,7 +34,7 @@ overpasses should be computed. Default: 7}
 \item{acquisitions}{logical indicating if only the overpasses when the data acquisition
 will take place should be reported. Default: TRUE}
 
-\item{api_key}{character containing your API key. Default: Sys.getenv("spectator_earth_api_key")}
+\item{api_key}{character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}}
 }
 \value{
 Object of class '\code{sf}' with '\code{POLYGON}' geometry type and attributes

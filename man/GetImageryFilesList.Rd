@@ -2,28 +2,39 @@
 % Please edit documentation in R/GetImageryFilesList.R
 \name{GetImageryFilesList}
 \alias{GetImageryFilesList}
-\title{FUNCTION_TITLE}
+\title{List of downloadable files}
 \source{
-\url{http://somewhere.important.com/}
+\url{https://api.spectator.earth/#imagery-files}
 }
 \usage{
 GetImageryFilesList(id, api_key = Sys.getenv("spectator_earth_api_key"))
 }
 \arguments{
-\item{id}{PARAM_DESCRIPTION}
+\item{id}{integer indicating the image id (from \code{SearchImages})}
 
-\item{api_key}{PARAM_DESCRIPTION, Default: Sys.getenv("spectator_earth_api_key")}
+\item{api_key}{character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}}
 }
 \value{
-OUTPUT_DESCRIPTION
+A data frame with attributes
+\describe{
+\item{\code{name}}{character, name of the file}
+\item{\code{path}}{character, path (relative) to download the file}
+\item{\code{size}}{integer, size of the file (in bytes)}
+}
 }
 \description{
-FUNCTION_DESCRIPTION
+List of files that can be downloaded directly (separate files for every spectral band)
+for the given image.
 }
 \details{
-DETAILS
+Besides the raw images (\code{jp2} files) as single bands, various auxiliary files are also available.
+To download the files, all the paths should be prepended with
+\code{https://api.spectator.earth/imagery/{id}/files/}.
+The raw image files are quite big, if the area of interest is relatively small it might be better to use
+\code{\link[spectator]{GetHighResolutionImage}}.
 }
 \examples{
+ 
 \dontrun{
 if(interactive()){
  #EXAMPLE1
@@ -31,5 +42,5 @@ if(interactive()){
 }
 }
 \seealso{
-\code{\link[httr]{GET}},\code{\link[httr]{content}}
+\code{\link[spectator]{SearchImages}}, \code{\link[spectator]{GetHighResolutionImage}}
 }

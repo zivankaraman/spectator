@@ -2,9 +2,9 @@
 % Please edit documentation in R/GetHighResolutionImage.R
 \name{GetHighResolutionImage}
 \alias{GetHighResolutionImage}
-\title{FUNCTION_TITLE}
+\title{Get image limited to an area of interest}
 \source{
-\url{http://somewhere.important.com/}
+\url{https://api.spectator.earth/#high-resolution-image}
 }
 \usage{
 GetHighResolutionImage(
@@ -18,28 +18,31 @@ GetHighResolutionImage(
 )
 }
 \arguments{
-\item{aoi}{PARAM_DESCRIPTION}
+\item{aoi}{'\code{sf}' (or '\code{Spatial*}') object defining the area of interest.
+Can be of any geometry as only the bounding box is used.}
 
-\item{id}{PARAM_DESCRIPTION}
+\item{id}{integer, \code{id} of the image from the \code{\link[spectator]{SearchImages}} result}
 
-\item{bands}{PARAM_DESCRIPTION}
+\item{bands}{integer vector of length 1 or 3 indicating the spectral bands to use for creating the image
+(typically the bands corresponding to Red, Green and Blue)}
 
-\item{width}{PARAM_DESCRIPTION}
+\item{width}{integer indicating the width of the image (in pixels)}
 
-\item{height}{PARAM_DESCRIPTION}
+\item{height}{integer indicating the height of the image (in pixels)}
 
-\item{file}{PARAM_DESCRIPTION, Default: 'image.jpg'}
+\item{file}{character indicating the name of the image file to create. Default: 'image.jpg'}
 
-\item{api_key}{PARAM_DESCRIPTION, Default: Sys.getenv("spectator_earth_api_key")}
+\item{api_key}{character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}}
 }
 \value{
-OUTPUT_DESCRIPTION
+The name of the image file is returned invisbly.
 }
 \description{
-FUNCTION_DESCRIPTION
+Provides you with a high resolution image for the area within the acquisition boundaries,
+if you're not interested in downloading the whole image.
 }
 \details{
-DETAILS
+As a side effect, the image file is written to the provided path.
 }
 \examples{
 \dontrun{
@@ -49,6 +52,5 @@ if(interactive()){
 }
 }
 \seealso{
-\code{\link[sf]{st_as_sf}},\code{\link[sf]{st_bbox}}
-\code{\link[httr]{GET}},\code{\link[httr]{content}}
+\code{\link[spectator]{SearchImages}}
 }

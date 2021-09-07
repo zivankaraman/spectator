@@ -14,7 +14,7 @@
 #'  overpasses should be computed. Default: 7
 #' @param acquisitions logical indicating if only the overpasses when the data acquisition
 #'  will take place should be reported. Default: TRUE
-#' @param api_key character containing your API key. Default: Sys.getenv("spectator_earth_api_key")
+#' @param api_key character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}
 #' @return Object of class '\code{sf}' with '\code{POLYGON}' geometry type and attributes 
 #' \describe{
 #'   \item{\code{id}}{integer identifier}
