@@ -35,7 +35,7 @@ Can be of any geometry as only the bounding box is used.}
 \item{api_key}{character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}}
 }
 \value{
-The name of the image file is returned invisbly.
+The name of the image file is returned invisibly.
 }
 \description{
 Provides you with a high resolution image for the area within the acquisition boundaries,

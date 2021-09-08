@@ -10,7 +10,7 @@
 #' @param height integer indicating the height of the image (in pixels)
 #' @param file character indicating the name of the image file to create. Default: 'image.jpg'
 #' @param api_key character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}
-#' @return The name of the image file is returned invisbly.
+#' @return The name of the image file is returned invisibly.
 #' @details As a side effect, the image file is written to the provided path.
 #' @examples 
 #' \dontrun{

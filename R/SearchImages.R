@@ -12,7 +12,11 @@
 #' @param api_key character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}
 #' @return Either a data frame (if '\code{footprint}' is '\code{FALSE}') or 
 #' an object of class '\code{sf}' with '\code{POLYGON}' geometry type (if '\code{footprint}' is '\code{TRUE}'). 
-#' @details The image file name is returned invisibly.
+#' @details The data frame contains some useful attributes: \code{id} which enables to download images 
+#' using the functions \code{\link[spectator]{GetImageryFilesList}} or 
+#' \code{\link[spectator]{GetHighResolutionImage}}, 
+#'  \code{cloud_cover_percentage} (for the whole image tile), \code{satellite} (name), 
+#'  \code{begin_position_date} and \code{end_position_date} indicaing wxhen the image was taken.
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
@@ -47,12 +51,12 @@ function(aoi, satellites = NULL, date_from = NULL, date_to = NULL, footprint = F
     bbox <- paste(as.numeric(sf::st_bbox(aoi)), collapse = ",")
     qry <- list(api_key = api_key, bbox = bbox)
 
-    if (!is.null(from)) {
+    if (!is.null(date_from)) {
         date_from <- sprintf("%s", as.Date(date_from))
         qry <- c(qry, date_from = date_from)
     }
-    if (!is.null(to)) {
-        date_to <- sprintf("%s", as.Date(to))
+    if (!is.null(date_to)) {
+        date_to <- sprintf("%s", as.Date(date_to))
         qry <- c(qry, date_to = date_to)
     }
     

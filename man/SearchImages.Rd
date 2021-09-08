@@ -41,7 +41,11 @@ an object of class '\code{sf}' with '\code{POLYGON}' geometry type (if '\code{fo
 Returns the list of available images for an area of interest, specified time interval and selected satellites.
 }
 \details{
-The image file name is returned invisibly.
+The data frame contains some useful attributes: \code{id} which enables to download images
+using the functions \code{\link[spectator]{GetImageryFilesList}} or
+\code{\link[spectator]{GetHighResolutionImage}},
+\code{cloud_cover_percentage} (for the whole image tile), \code{satellite} (name),
+\code{begin_position_date} and \code{end_position_date} indicaing wxhen the image was taken.
 }
 \examples{
 \dontrun{
