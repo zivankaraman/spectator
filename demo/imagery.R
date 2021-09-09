@@ -26,10 +26,13 @@ img <- GetHighResolutionImage(aoi = boundary, id = best_id, bands = c(4, 3, 2),
                               api_key = my_key)
 
 
-# if (length(grep("windows", sessionInfo()$running, ignore.case = TRUE)) > 0) {
-#     shell.exec(img)
-# }
-system2("open", img)
+if (length(grep("linux", sessionInfo()$platform, ignore.case = TRUE)) > 0) {
+    cmd <- "xdg-open"
+} else {
+    cmd <- "open"
+}
+
+system2(command = cmd, args = img)
 
 
 # download the whole band 4 image tile for the image with minimal cloud coverage
