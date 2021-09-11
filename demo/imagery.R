@@ -1,12 +1,22 @@
 # examples for satellite imagery
 # works only for Sentinel-2, Landsat-8 and Sentinel-1 satellites
+# this functionality requires an api_key, will try to use default value Sys.getenv("spectator_earth_api_key"),
+# if not set, will prompt the user to enter it
+
+# first check that we have the api_key
+my_key <- Sys.getenv("spectator_earth_api_key")
+if (my_key == "") {
+    my_key <- readline("This demo requires a Spectator Earth api_key, please enter your API key here: ")
+}
+if (my_key == "") {
+    stop("This demon can't run without an api_key, aborting")
+}
 
 library(sf)
 
 # get the New York City Central Park shape as area of interest
-boundary <- sf::read_sf(system.file("extdata", "centralpark.geojson", package = "spectator"))
-
-my_key <- Sys.getenv("spectator_earth_api_key")
+dsn <- system.file("extdata", "centralpark.geojson", package = "spectator")
+boundary <- read_sf(dsn, as_tibble = FALSE)
 
 # search for May 2021 Sentinel 2 images 
 catalog <- SearchImages(aoi = boundary, satellites = "S2", 

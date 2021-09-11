@@ -1,12 +1,13 @@
 # examples for satellite imagery
 # works only for Sentinel-2, Landsat-8 and Sentinel-1 satellites
 
+my_key <- Sys.getenv("spectator_earth_api_key")
+
 library(sf)
 
 # get the New York City Central Park shape as area of interest
-boundary <- sf::read_sf(system.file("extdata", "centralpark.geojson", package = "spectator"))
-
-my_key <- Sys.getenv("spectator_earth_api_key")
+dsn <- system.file("extdata", "centralpark.geojson", package = "spectator")
+boundary <- read_sf(dsn, as_tibble = FALSE)
 
 # search for May 2021 Sentinel 2 images 
 catalog <- SearchImages(aoi = boundary, satellites = "S2", 

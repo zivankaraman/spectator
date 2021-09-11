@@ -16,7 +16,8 @@ if (key == "") {
 library(sf)
 
 # get the Luxembourg country shape as area of interest
-boundary <- read_sf(system.file("extdata", "luxembourg.geojson", package = "spectator"))
+dsn <- system.file("extdata", "luxembourg.geojson", package = "spectator")
+boundary <- read_sf(dsn, as_tibble = FALSE)
 
 # look for Sentinel-2 A and B, use shorthand notation, default time frame
 pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = TRUE, api_key = key)
