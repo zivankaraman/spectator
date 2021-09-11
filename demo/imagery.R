@@ -25,13 +25,12 @@ img <- GetHighResolutionImage(aoi = boundary, id = best_id, bands = c(4, 3, 2),
                               file = tempfile(pattern = "img", fileext = ".jpg"), 
                               api_key = my_key)
 
-
+# view the image file with default application
 if (length(grep("linux", sessionInfo()$platform, ignore.case = TRUE)) > 0) {
     cmd <- "xdg-open"
 } else {
     cmd <- "open"
 }
-
 system2(command = cmd, args = img)
 
 
