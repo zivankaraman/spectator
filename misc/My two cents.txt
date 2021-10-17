@@ -1,0 +1,1 @@
+It would be extremely useful to be able to get via API high resolution image for an area of interest as GeoTIFF with any set of available bands (all if required).
