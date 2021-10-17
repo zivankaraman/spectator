@@ -23,5 +23,5 @@ devtools::build_manual()
 
 ans <- sinew::makeOxyFile(input = "R/GetHighResolutionImage.R", overwrite = FALSE, verbose = TRUE, print = TRUE)
 ans <- sinew::makeOxyFile(input = "R/GetImageryFilesList.R", overwrite = FALSE, verbose = TRUE, print = TRUE)
-
+ans <- sinew::makeOxyFile(input = "R/SearchImages.R", overwrite = FALSE, verbose = TRUE, print = TRUE)
 
