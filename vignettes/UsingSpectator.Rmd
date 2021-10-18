@@ -1,8 +1,14 @@
 ---
 title: "Using spectator - worked examples"
 # output: html_notebook
-output: rmarkdown::html_vignette
+output: 
+    html_document:
+        df_print: paged
+        toc: true
+        toc_float: true
+        theme: journal
 # output: pdf_document
+# rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using spectator - worked examples}
   %\VignetteEngine{knitr::rmarkdown}
@@ -13,11 +19,13 @@ vignette: >
 knitr::opts_chunk$set(
     fig.width = 7, 
     fig.height = 5,
+    out.width = "100%",
     fig.align = "center",
     collapse = TRUE,
     comment = "#>"
 )
 knitr::opts_knit$set(global.device = TRUE)
+options(width = 999)
 ```
 ## Introduction
 
@@ -46,7 +54,7 @@ head(pos)
 
 do some nice graphs
 
-```{r}
+```{r label = "plot satellites"}
 library(sf)
 library(maps)
 maps::map("world", fill = TRUE, col = "lightgrey")
@@ -54,21 +62,20 @@ maps::map("world", fill = TRUE, col = "lightgrey")
 
 show open data satellites in green
 show others in red
-```{r}
+```{r label = "satellite positions"}
 plot(sf::st_geometry(subset(pos, open == TRUE)), add = TRUE, col = "green", pch = 15)
 plot(sf::st_geometry(subset(pos, open == FALSE)), add = TRUE, col = "red", pch = 16)
 ```
 
-
 add labels
 shift labels up to be able to read them
-```{r}
+```{r label = "satellite names"}
 xy <- sf::st_coordinates(pos)
 xy[, 2] <- xy[, 2] + 3 
 text(xy, labels = pos$name, cex = 0.5)
 
 ```
-```{r, include=FALSE}
+```{r label = "turn off global device", include = FALSE}
 knitr::opts_knit$set(global.device = FALSE)
 ```
 
@@ -77,7 +84,7 @@ knitr::opts_knit$set(global.device = FALSE)
 get trajectory and current position for a selected satellite
 
 
-```{r}
+```{r label = "get trajectories"}
 sat <- "SPOT-7"
 traj <- GetTrajectory(satellite = sat)
 pos <- GetSatellite(satellite = sat, positions = TRUE)
@@ -86,7 +93,7 @@ pos <- GetSatellite(satellite = sat, positions = TRUE)
 
 
  do some nice graphs
-```{r}
+```{r label = "plot trajectories"}
 map("world", fill = TRUE, col = "lightgrey")
 plot(sf::st_geometry(traj), lwd = 2, col = "red", add = TRUE)
 plot(sf::st_geometry(pos), pch = 15, col = "green", cex = 1.5, add = TRUE)
@@ -101,16 +108,16 @@ works only for Sentinel-2, Landsat-8 and Sentinel-1 satellites
 
 get plans for all eligible satellites for today
 
-```{r}
+```{r label = "acquisition plans"}
 plans <- GetAcquisitionPlan()
-head(plans)
+head(plans, n = 20L)
 ```
 
 explore the content of the data frame, you'll see that the available attributes vary with the satellite
 
 focus on Sentinel 2
 day after tomorrow
-```{r}
+```{r label = "acquisition plans Sentinel 2"}
 sat <- c("Sentinel-2A", "Sentinel-2B")
 day <- Sys.Date()  + 2
 plan <- GetAcquisitionPlan(satellites = sat, date = day)
@@ -129,30 +136,30 @@ title(main = sprintf("%s acquisition plan for %s", paste(sat, collapse = "/"), d
 ## Satellite overpasses
 
 get the Luxembourg country shape as area of interest
-```{r}
-dsn <- system.file("extdata", "luxembourg.geojson", package = "spectator")
-boundary <- sf::read_sf(dsn, as_tibble = FALSE)
+```{r label = "Luxembourg boundary"}
+roi <- system.file("extdata", "luxembourg.geojson", package = "spectator")
+boundary <- sf::read_sf(roi, as_tibble = FALSE)
 
 ```
 
 first check that we have the api_key
 need api key; so get it first, all set it in code
-```{r}
+```{r label = "API key"}
 my_key <- Sys.getenv("spectator_earth_api_key")
 ```
 
 look for Sentinel-2 A and B, use shorthand notation, default time frame
-```{r}
+```{r label = "get Sentinel 2 overpasses"}
 pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = TRUE, api_key = my_key)
 ```
 
 do some nice graphs
-```{r}
+```{r label = "plot Sentinel 2 overpasses"}
 library(maps)
 days <- range(as.Date(pass$date))
 satellites <- sort(unique(pass$satellite))
-maps::map(database = "world", region = c("Belgium", "Netherlands", "Germany", "Luxembourg", "France", "Switzerland"), 
-          col = "lightgrey", fill = TRUE)
+maps::map(database = "world", region = c("Belgium", "Netherlands", "Germany", "Luxembourg",
+            "France", "Switzerland"), col = "lightgrey", fill = TRUE)
 plot(sf::st_geometry(boundary), add = TRUE, col = "red", border = FALSE)
 plot(sf::st_geometry(pass), add = TRUE)
 title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse = "/"), 
@@ -161,17 +168,19 @@ title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse =
 ```
 
 look for Sentinel-1 A and B, use shorthand notation, last week  
-```{r}
-pass <- GetOverpasses(boundary, satellites = "S-1", days_before = 7, days_after = 0, acquisitions = TRUE)
+```{r label = "get Sentinel 1 overpasses"}
+pass <- GetOverpasses(boundary, satellites = "S-1",
+                      days_before = 7, days_after = 0, acquisitions = TRUE)
+head(pass)
 ```
 
 
 do some nice graphs
-```{r}
+```{r label = "plot Sentinel 1 overpasses"}
 days <- range(as.Date(pass$date))
 satellites <- sort(unique(pass$satellite))
-maps::map(database = "world", region = c("Belgium", "Netherlands", "Germany", "Luxembourg", "France", "Switzerland"), 
-          col = "lightgrey", fill = TRUE)
+maps::map(database = "world", region = c("Belgium", "Netherlands", "Germany", "Luxembourg",
+            "France", "Switzerland"), col = "lightgrey", fill = TRUE)
 plot(sf::st_geometry(boundary), add = TRUE, col = "red", border = FALSE)
 plot(sf::st_geometry(pass), add = TRUE)
 title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse = "/"), 
@@ -182,19 +191,19 @@ title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse =
 
 first check that we have the api_key
 need api key; so get it first, all set it in code
-```{r}
+```{r label = "API key 2"}
 my_key <- Sys.getenv("spectator_earth_api_key")
 ```
 
 get the New York City Central Park shape as area of interest
-```{r}
-dsn <- system.file("extdata", "centralpark.geojson", package = "spectator")
-boundary <- sf::read_sf(dsn, as_tibble = FALSE)
+```{r label = "Central Park boundary"}
+roi <- system.file("extdata", "centralpark.geojson", package = "spectator")
+boundary <- sf::read_sf(roi, as_tibble = FALSE)
 ```
 
 
 search for May 2021 Sentinel 2 images 
-```{r}
+```{r label = "serch Central Park images"}
 catalog <- SearchImages(aoi = boundary, satellites = "S2", 
                         date_from = "2021-05-01", date_to = "2021-05-30", 
                         footprint = FALSE, api_key = my_key)
@@ -205,23 +214,23 @@ head(catalog)
 ## Imagery files
 get the id of the image with minimal cloud coverage
 
-```{r}
+```{r label = "minimal cloud coverage"}
 best_id <- catalog[order(catalog$cloud_cover_percentage), ][1, "id"]
 ```
 
 list all downloadable files for the image with minimal cloud coverage
-```{r}
+```{r label = "list imagery files"}
 images <- GetImageryFilesList(best_id, api_key = my_key)
 head(images)
 ```
 
 download the whole band 4 image tile for the image with minimal cloud coverage
-```{r include=FALSE}
+```{r label = "file size", include=FALSE}
 size <- as.integer(subset(images, path == "B04.jp2", "size"))
 ```
 
 if you want to download this big file (`r prettyNum(size, big.mark = " ")` bytes) use the code below
-```{r eval = FALSE}
+```{r label = "download the big file", eval = FALSE}
 from <- paste0(catalog[order(catalog$cloud_cover_percentage), ][1, "download_url"], "B04.jp2")
 to <- "B04.jp2"
 library(httr)
@@ -235,17 +244,22 @@ get the high resolution image of the Central Park
 sentinel 2 bands (https://en.wikipedia.org/wiki/Sentinel-2#Spectral_bands).
 
 
-```{r}
+```{r label = "high resolution image", eval = FALSE}
 img <- GetHighResolutionImage(aoi = boundary, id = best_id, bands = c(4, 3, 2), 
                               width = 1024, height = 1024,
                               file = tempfile(pattern = "img", fileext = ".jpg"), 
                               api_key = my_key)
 ```
+```{r include = FALSE}
+fichier <- "C:/GitHub/spectator/misc/CentralPark.jpg"
+```
+
 text above image  
-![something meaningful](`r img`){width=95%}  
+
+![something meaningful](`r fichier`){width=100%}
 text below image
 <br>
 <br>
 <br>
-_Compiled on `r Sys.time()`._
+_Produced on `r Sys.time()`._
 
