@@ -6,7 +6,7 @@ output:
         df_print: paged
         toc: true
         toc_float: true
-        theme: journal
+        theme: flatly
 # output: pdf_document
 # rmarkdown::html_vignette
 vignette: >
@@ -49,7 +49,7 @@ library(spectator)
 get all satellites withe their positions
 ```{r label = "get satellites"}
 pos <- GetAllSatellites(positions = TRUE)
-head(pos)
+head(pos, n = 20L)
 ```
 
 do some nice graphs
@@ -207,9 +207,8 @@ search for May 2021 Sentinel 2 images
 catalog <- SearchImages(aoi = boundary, satellites = "S2", 
                         date_from = "2021-05-01", date_to = "2021-05-30", 
                         footprint = FALSE, api_key = my_key)
-head(catalog)
+head(catalog, n = 20L)
 ```
-
 
 ## Imagery files
 get the id of the image with minimal cloud coverage
@@ -221,14 +220,13 @@ best_id <- catalog[order(catalog$cloud_cover_percentage), ][1, "id"]
 list all downloadable files for the image with minimal cloud coverage
 ```{r label = "list imagery files"}
 images <- GetImageryFilesList(best_id, api_key = my_key)
-head(images)
+head(images, n = 20L)
 ```
-
-download the whole band 4 image tile for the image with minimal cloud coverage
-```{r label = "file size", include=FALSE}
+```{r label = "file size", include = FALSE}
 size <- as.integer(subset(images, path == "B04.jp2", "size"))
 ```
 
+download the whole band 4 image tile for the image with minimal cloud coverage
 if you want to download this big file (`r prettyNum(size, big.mark = " ")` bytes) use the code below
 ```{r label = "download the big file", eval = FALSE}
 from <- paste0(catalog[order(catalog$cloud_cover_percentage), ][1, "download_url"], "B04.jp2")
@@ -250,16 +248,16 @@ img <- GetHighResolutionImage(aoi = boundary, id = best_id, bands = c(4, 3, 2),
                               file = tempfile(pattern = "img", fileext = ".jpg"), 
                               api_key = my_key)
 ```
-```{r include = FALSE}
-fichier <- "C:/GitHub/spectator/misc/CentralPark.jpg"
+```{r label = "high resolution image file name", include = FALSE}
+fichier <- normalizePath("data/CentralPark.jpg")
 ```
 
 text above image  
 
-![something meaningful](`r fichier`){width=100%}
+![Central Park image](`r fichier`){width=100%}
 text below image
 <br>
 <br>
 <br>
-_Produced on `r Sys.time()`._
+_Compiled on `r Sys.time()`._
 
