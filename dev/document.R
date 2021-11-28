@@ -19,9 +19,12 @@ devtools::install(pkg = ".", dependencies = FALSE)
 # build pdf manual
 devtools::build_manual()
 
-
+# build vignettes
+devtools::build_vignettes(dependencies = FALSE, quiet = FALSE)
 
 ans <- sinew::makeOxyFile(input = "R/GetHighResolutionImage.R", overwrite = FALSE, verbose = TRUE, print = TRUE)
 ans <- sinew::makeOxyFile(input = "R/GetImageryFilesList.R", overwrite = FALSE, verbose = TRUE, print = TRUE)
 ans <- sinew::makeOxyFile(input = "R/SearchImages.R", overwrite = FALSE, verbose = TRUE, print = TRUE)
+
+knitr::purl("inst/doc/UsingSpectator.Rmd", output = "inst/doc/UsingSpectator.R", documentation = 1L)
 

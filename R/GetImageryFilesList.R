@@ -19,6 +19,7 @@
 #' \dontrun{
 #' if(interactive()){
 #'  library(sf)
+#'  my_key <- Sys.getenv("spectator_earth_api_key")
 #'  # get the New York City Central Park shape as area of interest
 #'  dsn <- system.file("extdata", "centralpark.geojson", package = "spectator")
 #'  boundary <- sf::read_sf(dsn, as_tibble = FALSE)

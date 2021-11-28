@@ -1,0 +1,23 @@
+{
+    "id": 20,
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+                -17.942715704326737,
+                -8.743314911249568
+         ]
+    },
+    "properties": {
+        "name": "SPOT-7",
+        "norad_id": 40053,
+        "sensors": [
+            {
+                "type": "OPTICAL",
+                "avg_footprint_width": "2.32"
+            }
+        ],
+        "open": false,
+        "platform": null
+    }
+}

@@ -2,21 +2,35 @@ Package: spectator
 Title: Interface to the Spectator Earth API
 Version: 0.0.1
 Authors@R: 
-    person(given = "Zivan",
-           family = "Karaman",
-           role = c("aut", "cre"),
-           email = "zivan.karaman@gmail.com",
+    person("Zivan", "Karaman", , "zivan.karaman@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-8933-4589"))
-Description: Provides interface to Spectator Earth API, mainly for 
-    obtaining the acquisition plans and satellite overpasses for Sentinel-2, 
-    Landsat-8 and Sentinel-1 satellites. Current position and trajectory can
-    also be obtained for a much larger set of satellites.
-License: GPL (>= 3)
+Description: Provides interface to Spectator Earth API, mainly for
+    obtaining the acquisition plans and satellite overpasses for
+    Sentinel-1, Sentinel-2 and Landsat-8 satellites. Current position and
+    trajectory can also be obtained for a much larger set of satellites.
+    It is also possible to search the archive for available images over
+    the area of interest for a given (past) period, get the URL links to
+    download the whole image tiles, or alternatively to download the image
+    for just the area of interest based on selected spectral bands.
+License: GPL-3
+Depends: 
+    R (>= 3.5.0)
+Imports: 
+    geojsonsf,
+    httr,
+    sf
+Suggests: 
+    calendar,
+    calendR,
+    httptest,
+    knitr,
+    lubridate,
+    lutz,
+    maps,
+    rmarkdown
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 3.5.0)
-Imports: geojsonsf, httr, sf
-Suggests: maps
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-VignetteBuilder: knitr

@@ -1,0 +1,517 @@
+[
+    {
+        "name": "B01.jp2",
+        "path": "B01.jp2",
+        "size": 3207245
+    },
+    {
+        "name": "B02.jp2",
+        "path": "B02.jp2",
+        "size": 92509539
+    },
+    {
+        "name": "B03.jp2",
+        "path": "B03.jp2",
+        "size": 97063884
+    },
+    {
+        "name": "B04.jp2",
+        "path": "B04.jp2",
+        "size": 98386739
+    },
+    {
+        "name": "B05.jp2",
+        "path": "B05.jp2",
+        "size": 28083414
+    },
+    {
+        "name": "B06.jp2",
+        "path": "B06.jp2",
+        "size": 31496749
+    },
+    {
+        "name": "B07.jp2",
+        "path": "B07.jp2",
+        "size": 32228879
+    },
+    {
+        "name": "B08.jp2",
+        "path": "B08.jp2",
+        "size": 118060960
+    },
+    {
+        "name": "B09.jp2",
+        "path": "B09.jp2",
+        "size": 3580391
+    },
+    {
+        "name": "B10.jp2",
+        "path": "B10.jp2",
+        "size": 1303521
+    },
+    {
+        "name": "B11.jp2",
+        "path": "B11.jp2",
+        "size": 28066019
+    },
+    {
+        "name": "B12.jp2",
+        "path": "B12.jp2",
+        "size": 27158860
+    },
+    {
+        "name": "B8A.jp2",
+        "path": "B8A.jp2",
+        "size": 32326430
+    },
+    {
+        "name": "TCI.jp2",
+        "path": "TCI.jp2",
+        "size": 135363674
+    },
+    {
+        "name": "metadata.xml",
+        "path": "metadata.xml",
+        "size": 381871
+    },
+    {
+        "name": "preview.jp2",
+        "path": "preview.jp2",
+        "size": 166963
+    },
+    {
+        "name": "preview.jpg",
+        "path": "preview.jpg",
+        "size": 109848
+    },
+    {
+        "name": "productInfo.json",
+        "path": "productInfo.json",
+        "size": 1035
+    },
+    {
+        "name": "tileInfo.json",
+        "path": "tileInfo.json",
+        "size": 1520
+    },
+    {
+        "name": "B01.jp2",
+        "path": "preview/B01.jp2",
+        "size": 735362
+    },
+    {
+        "name": "B02.jp2",
+        "path": "preview/B02.jp2",
+        "size": 456634
+    },
+    {
+        "name": "B03.jp2",
+        "path": "preview/B03.jp2",
+        "size": 462367
+    },
+    {
+        "name": "B04.jp2",
+        "path": "preview/B04.jp2",
+        "size": 487702
+    },
+    {
+        "name": "B05.jp2",
+        "path": "preview/B05.jp2",
+        "size": 486743
+    },
+    {
+        "name": "B06.jp2",
+        "path": "preview/B06.jp2",
+        "size": 537024
+    },
+    {
+        "name": "B07.jp2",
+        "path": "preview/B07.jp2",
+        "size": 549473
+    },
+    {
+        "name": "B08.jp2",
+        "path": "preview/B08.jp2",
+        "size": 551403
+    },
+    {
+        "name": "B09.jp2",
+        "path": "preview/B09.jp2",
+        "size": 823495
+    },
+    {
+        "name": "B10.jp2",
+        "path": "preview/B10.jp2",
+        "size": 244990
+    },
+    {
+        "name": "B11.jp2",
+        "path": "preview/B11.jp2",
+        "size": 517310
+    },
+    {
+        "name": "B12.jp2",
+        "path": "preview/B12.jp2",
+        "size": 497310
+    },
+    {
+        "name": "B8A.jp2",
+        "path": "preview/B8A.jp2",
+        "size": 555552
+    },
+    {
+        "name": "ECMWFT",
+        "path": "auxiliary/ECMWFT",
+        "size": 810
+    },
+    {
+        "name": "FORMAT_CORRECTNESS.xml",
+        "path": "qi/FORMAT_CORRECTNESS.xml",
+        "size": 28500
+    },
+    {
+        "name": "GENERAL_QUALITY.xml",
+        "path": "qi/GENERAL_QUALITY.xml",
+        "size": 3981
+    },
+    {
+        "name": "GEOMETRIC_QUALITY.xml",
+        "path": "qi/GEOMETRIC_QUALITY.xml",
+        "size": 4787
+    },
+    {
+        "name": "MSK_CLOUDS_B00.gml",
+        "path": "qi/MSK_CLOUDS_B00.gml",
+        "size": 26051
+    },
+    {
+        "name": "MSK_DEFECT_B01.gml",
+        "path": "qi/MSK_DEFECT_B01.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B02.gml",
+        "path": "qi/MSK_DEFECT_B02.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B03.gml",
+        "path": "qi/MSK_DEFECT_B03.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B04.gml",
+        "path": "qi/MSK_DEFECT_B04.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B05.gml",
+        "path": "qi/MSK_DEFECT_B05.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B06.gml",
+        "path": "qi/MSK_DEFECT_B06.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B07.gml",
+        "path": "qi/MSK_DEFECT_B07.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B08.gml",
+        "path": "qi/MSK_DEFECT_B08.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B09.gml",
+        "path": "qi/MSK_DEFECT_B09.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B10.gml",
+        "path": "qi/MSK_DEFECT_B10.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B11.gml",
+        "path": "qi/MSK_DEFECT_B11.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DEFECT_B12.gml",
+        "path": "qi/MSK_DEFECT_B12.gml",
+        "size": 1460
+    },
+    {
+        "name": "MSK_DEFECT_B8A.gml",
+        "path": "qi/MSK_DEFECT_B8A.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_DETFOO_B01.gml",
+        "path": "qi/MSK_DETFOO_B01.gml",
+        "size": 99309
+    },
+    {
+        "name": "MSK_DETFOO_B02.gml",
+        "path": "qi/MSK_DETFOO_B02.gml",
+        "size": 557476
+    },
+    {
+        "name": "MSK_DETFOO_B03.gml",
+        "path": "qi/MSK_DETFOO_B03.gml",
+        "size": 566486
+    },
+    {
+        "name": "MSK_DETFOO_B04.gml",
+        "path": "qi/MSK_DETFOO_B04.gml",
+        "size": 564973
+    },
+    {
+        "name": "MSK_DETFOO_B05.gml",
+        "path": "qi/MSK_DETFOO_B05.gml",
+        "size": 289675
+    },
+    {
+        "name": "MSK_DETFOO_B06.gml",
+        "path": "qi/MSK_DETFOO_B06.gml",
+        "size": 289981
+    },
+    {
+        "name": "MSK_DETFOO_B07.gml",
+        "path": "qi/MSK_DETFOO_B07.gml",
+        "size": 291035
+    },
+    {
+        "name": "MSK_DETFOO_B08.gml",
+        "path": "qi/MSK_DETFOO_B08.gml",
+        "size": 553702
+    },
+    {
+        "name": "MSK_DETFOO_B09.gml",
+        "path": "qi/MSK_DETFOO_B09.gml",
+        "size": 99275
+    },
+    {
+        "name": "MSK_DETFOO_B10.gml",
+        "path": "qi/MSK_DETFOO_B10.gml",
+        "size": 99173
+    },
+    {
+        "name": "MSK_DETFOO_B11.gml",
+        "path": "qi/MSK_DETFOO_B11.gml",
+        "size": 288876
+    },
+    {
+        "name": "MSK_DETFOO_B12.gml",
+        "path": "qi/MSK_DETFOO_B12.gml",
+        "size": 289828
+    },
+    {
+        "name": "MSK_DETFOO_B8A.gml",
+        "path": "qi/MSK_DETFOO_B8A.gml",
+        "size": 291154
+    },
+    {
+        "name": "MSK_NODATA_B01.gml",
+        "path": "qi/MSK_NODATA_B01.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B02.gml",
+        "path": "qi/MSK_NODATA_B02.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B03.gml",
+        "path": "qi/MSK_NODATA_B03.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B04.gml",
+        "path": "qi/MSK_NODATA_B04.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B05.gml",
+        "path": "qi/MSK_NODATA_B05.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B06.gml",
+        "path": "qi/MSK_NODATA_B06.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B07.gml",
+        "path": "qi/MSK_NODATA_B07.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B08.gml",
+        "path": "qi/MSK_NODATA_B08.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B09.gml",
+        "path": "qi/MSK_NODATA_B09.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B10.gml",
+        "path": "qi/MSK_NODATA_B10.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B11.gml",
+        "path": "qi/MSK_NODATA_B11.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B12.gml",
+        "path": "qi/MSK_NODATA_B12.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_NODATA_B8A.gml",
+        "path": "qi/MSK_NODATA_B8A.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B01.gml",
+        "path": "qi/MSK_SATURA_B01.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B02.gml",
+        "path": "qi/MSK_SATURA_B02.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B03.gml",
+        "path": "qi/MSK_SATURA_B03.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B04.gml",
+        "path": "qi/MSK_SATURA_B04.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B05.gml",
+        "path": "qi/MSK_SATURA_B05.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B06.gml",
+        "path": "qi/MSK_SATURA_B06.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B07.gml",
+        "path": "qi/MSK_SATURA_B07.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B08.gml",
+        "path": "qi/MSK_SATURA_B08.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B09.gml",
+        "path": "qi/MSK_SATURA_B09.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B10.gml",
+        "path": "qi/MSK_SATURA_B10.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B11.gml",
+        "path": "qi/MSK_SATURA_B11.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B12.gml",
+        "path": "qi/MSK_SATURA_B12.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_SATURA_B8A.gml",
+        "path": "qi/MSK_SATURA_B8A.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B01.gml",
+        "path": "qi/MSK_TECQUA_B01.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B02.gml",
+        "path": "qi/MSK_TECQUA_B02.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B03.gml",
+        "path": "qi/MSK_TECQUA_B03.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B04.gml",
+        "path": "qi/MSK_TECQUA_B04.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B05.gml",
+        "path": "qi/MSK_TECQUA_B05.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B06.gml",
+        "path": "qi/MSK_TECQUA_B06.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B07.gml",
+        "path": "qi/MSK_TECQUA_B07.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B08.gml",
+        "path": "qi/MSK_TECQUA_B08.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B09.gml",
+        "path": "qi/MSK_TECQUA_B09.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B10.gml",
+        "path": "qi/MSK_TECQUA_B10.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B11.gml",
+        "path": "qi/MSK_TECQUA_B11.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B12.gml",
+        "path": "qi/MSK_TECQUA_B12.gml",
+        "size": 428
+    },
+    {
+        "name": "MSK_TECQUA_B8A.gml",
+        "path": "qi/MSK_TECQUA_B8A.gml",
+        "size": 428
+    },
+    {
+        "name": "SENSOR_QUALITY.xml",
+        "path": "qi/SENSOR_QUALITY.xml",
+        "size": 4873
+    }
+]

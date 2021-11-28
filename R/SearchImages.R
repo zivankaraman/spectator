@@ -16,11 +16,12 @@
 #' using the functions \code{\link[spectator]{GetImageryFilesList}} or 
 #' \code{\link[spectator]{GetHighResolutionImage}}, 
 #'  \code{cloud_cover_percentage} (for the whole image tile), \code{satellite} (name), 
-#'  \code{begin_position_date} and \code{end_position_date} indicaing wxhen the image was taken.
+#'  \code{begin_position_date} and \code{end_position_date} indicating when the image was taken.
 #' @examples 
 #' \dontrun{
-#' if(interactive()){
+#' if(interactive()){ 
 #'  library(sf)
+#'  my_key <- Sys.getenv("spectator_earth_api_key")
 #'  # get the New York City Central Park shape as area of interest
 #'  dsn <- system.file("extdata", "centralpark.geojson", package = "spectator")
 #'  boundary <- sf::read_sf(dsn, as_tibble = FALSE)

@@ -1,0 +1,1011 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": 36,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    25.47162078733311,
+                    8.331400099608974
+                ]
+            },
+            "properties": {
+                "name": "ALOS-2",
+                "norad_id": 39766,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 25,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    43.22324109206748,
+                    31.634289037063933
+                ]
+            },
+            "properties": {
+                "name": "Aqua",
+                "norad_id": 27424,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "18.64"
+                    }
+                ],
+                "open": true,
+                "platform": null
+            }
+        },
+        {
+            "id": 65,
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "CartoSat 2B",
+                "norad_id": 36795,
+                "sensors": [
+                    {
+                        "type": "UNKNOWN",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 66,
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "CartoSat 2C",
+                "norad_id": 41599,
+                "sensors": [
+                    {
+                        "type": "UNKNOWN",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 67,
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "CartoSat 2D",
+                "norad_id": 41948,
+                "sensors": [
+                    {
+                        "type": "UNKNOWN",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 68,
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "CartoSat 2E",
+                "norad_id": 42767,
+                "sensors": [
+                    {
+                        "type": "UNKNOWN",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 69,
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "CartoSat 2F",
+                "norad_id": 43111,
+                "sensors": [
+                    {
+                        "type": "UNKNOWN",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 63,
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "CartoSat 2 (IRS P7, CartoSat 2AT)",
+                "norad_id": 29710,
+                "sensors": [
+                    {
+                        "type": "UNKNOWN",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 38,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -14.99341109769,
+                    -61.677368147345426
+                ]
+            },
+            "properties": {
+                "name": "CBERS-4",
+                "norad_id": 40336,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": true,
+                "platform": null
+            }
+        },
+        {
+            "id": 81,
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "Coriolis (Windsat)",
+                "norad_id": 27640,
+                "sensors": [
+                    {
+                        "type": "UNKNOWN",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 13,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.11015411511927,
+                    48.376573299649664
+                ]
+            },
+            "properties": {
+                "name": "COSMO-SkyMed-1",
+                "norad_id": 31598,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 14,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    101.82485119889502,
+                    -48.57554478319955
+                ]
+            },
+            "properties": {
+                "name": "COSMO-SkyMed-2",
+                "norad_id": 32376,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 15,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -62.30135436456121,
+                    -40.52569493318459
+                ]
+            },
+            "properties": {
+                "name": "COSMO-SkyMed-3",
+                "norad_id": 33412,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 16,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    113.48456933594062,
+                    18.115084728497514
+                ]
+            },
+            "properties": {
+                "name": "COSMO-SkyMed-4",
+                "norad_id": 37216,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 90,
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "Deimos 2 ",
+                "norad_id": 40013,
+                "sensors": [
+                    {
+                        "type": "UNKNOWN",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 92,
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "DMC 3-1 (Disaster Monitoring Constellation)",
+                "norad_id": 40715,
+                "sensors": [
+                    {
+                        "type": "UNKNOWN",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 94,
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+                "name": "DMC 3-3 (Disaster Monitoring Constellation)",
+                "norad_id": 40717,
+                "sensors": [
+                    {
+                        "type": "UNKNOWN",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 17,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    43.52789257463742,
+                    77.64933857864968
+                ]
+            },
+            "properties": {
+                "name": "GeoEye-1",
+                "norad_id": 33331,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 23,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -95.15791547886168,
+                    -28.108511425332548
+                ]
+            },
+            "properties": {
+                "name": "Jason-2",
+                "norad_id": 33105,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 24,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    89.497853826888,
+                    -40.754075626403186
+                ]
+            },
+            "properties": {
+                "name": "Jason-3",
+                "norad_id": 41240,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 10,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    99.33802814831628,
+                    80.65293025946099
+                ]
+            },
+            "properties": {
+                "name": "Landsat-7",
+                "norad_id": 25682,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": true,
+                "platform": null
+            }
+        },
+        {
+            "id": 5,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    175.069674118388,
+                    16.852665640199834
+                ]
+            },
+            "properties": {
+                "name": "Landsat-8",
+                "norad_id": 39084,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": true,
+                "platform": "Landsat-8"
+            }
+        },
+        {
+            "id": 613,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    179.01182916614616,
+                    -10.614451799077692
+                ]
+            },
+            "properties": {
+                "name": "Landsat-9",
+                "norad_id": 49260,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": true,
+                "platform": null
+            }
+        },
+        {
+            "id": 28,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    154.52182982620369,
+                    -12.933089123607017
+                ]
+            },
+            "properties": {
+                "name": "Megha-Tropiques",
+                "norad_id": 37838,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 27,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    95.03899921502703,
+                    81.08881530167575
+                ]
+            },
+            "properties": {
+                "name": "Oceansat-2",
+                "norad_id": 35931,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 26,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -23.82436717749769,
+                    -82.03049796049575
+                ]
+            },
+            "properties": {
+                "name": "PAZ",
+                "norad_id": 43215,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 7,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -150.4588110822841,
+                    -72.39829081504843
+                ]
+            },
+            "properties": {
+                "name": "Pleiades-1A",
+                "norad_id": 38012,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 6,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    31.35171396245832,
+                    73.34710160557512
+                ]
+            },
+            "properties": {
+                "name": "Pleiades-1B",
+                "norad_id": 39019,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 18,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    121.81987313708173,
+                    -41.40896633166177
+                ]
+            },
+            "properties": {
+                "name": "Radarsat-2",
+                "norad_id": 32382,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 30,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -60.92726938345766,
+                    -35.453452722360126
+                ]
+            },
+            "properties": {
+                "name": "SARAL",
+                "norad_id": 39086,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 29,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    153.9699668052858,
+                    -24.959949920533592
+                ]
+            },
+            "properties": {
+                "name": "SCATSat-1",
+                "norad_id": 41790,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 1,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -62.205971105563336,
+                    20.421639687942818
+                ]
+            },
+            "properties": {
+                "name": "Sentinel-1A",
+                "norad_id": 39634,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": true,
+                "platform": "Sentinel-1A"
+            }
+        },
+        {
+            "id": 9,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.25309298811102,
+                    -18.16085670339259
+                ]
+            },
+            "properties": {
+                "name": "Sentinel-1B",
+                "norad_id": 41456,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": true,
+                "platform": "Sentinel-1B"
+            }
+        },
+        {
+            "id": 2,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    174.60195906444457,
+                    40.178429872898946
+                ]
+            },
+            "properties": {
+                "name": "Sentinel-2A",
+                "norad_id": 40697,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": true,
+                "platform": "Sentinel-2A"
+            }
+        },
+        {
+            "id": 8,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -5.518386390500294,
+                    -40.56041662708936
+                ]
+            },
+            "properties": {
+                "name": "Sentinel-2B",
+                "norad_id": 42063,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": true,
+                "platform": "Sentinel-2B"
+            }
+        },
+        {
+            "id": 3,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    153.97806953269782,
+                    66.4363396197779
+                ]
+            },
+            "properties": {
+                "name": "Sentinel-3A",
+                "norad_id": 41335,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "10.16"
+                    },
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "11.20"
+                    }
+                ],
+                "open": true,
+                "platform": "Sentinel-3A"
+            }
+        },
+        {
+            "id": 37,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -10.253255419471074,
+                    -28.226984767493825
+                ]
+            },
+            "properties": {
+                "name": "Sentinel-3B",
+                "norad_id": 43437,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "10.16"
+                    },
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "11.20"
+                    }
+                ],
+                "open": true,
+                "platform": null
+            }
+        },
+        {
+            "id": 22,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    155.12979369172066,
+                    -80.61764310112252
+                ]
+            },
+            "properties": {
+                "name": "Sentinel-5P",
+                "norad_id": 42969,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "0.02"
+                    }
+                ],
+                "open": true,
+                "platform": null
+            }
+        },
+        {
+            "id": 19,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -8.628929949460307,
+                    -22.035110616267026
+                ]
+            },
+            "properties": {
+                "name": "SPOT-6",
+                "norad_id": 38755,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 20,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    171.34133905991996,
+                    22.225624279626725
+                ]
+            },
+            "properties": {
+                "name": "SPOT-7",
+                "norad_id": 40053,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 12,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -63.98668747137031,
+                    9.464042748493076
+                ]
+            },
+            "properties": {
+                "name": "TanDEM-X",
+                "norad_id": 36605,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 35,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.597461037588109,
+                    25.524030047027885
+                ]
+            },
+            "properties": {
+                "name": "Terra",
+                "norad_id": 25994,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "18.64"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 11,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -63.9897916809198,
+                    9.446220033803014
+                ]
+            },
+            "properties": {
+                "name": "TerraSAR-X",
+                "norad_id": 31698,
+                "sensors": [
+                    {
+                        "type": "SAR",
+                        "avg_footprint_width": "3.20"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 42,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.57731712724822,
+                    -79.99123180692257
+                ]
+            },
+            "properties": {
+                "name": "VIIRS",
+                "norad_id": 37849,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": true,
+                "platform": null
+            }
+        },
+        {
+            "id": 4,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -17.612817978772824,
+                    -67.17265185562304
+                ]
+            },
+            "properties": {
+                "name": "WorldView-3",
+                "norad_id": 40115,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        },
+        {
+            "id": 21,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -90.25767597090879,
+                    45.09564055776786
+                ]
+            },
+            "properties": {
+                "name": "WorldView-4",
+                "norad_id": 41848,
+                "sensors": [
+                    {
+                        "type": "OPTICAL",
+                        "avg_footprint_width": "2.32"
+                    }
+                ],
+                "open": false,
+                "platform": null
+            }
+        }
+    ]
+}

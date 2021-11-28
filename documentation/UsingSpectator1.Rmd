@@ -1,14 +1,12 @@
 ---
-title: "Using spectator - worked examples"
+title: "UsingSpectator"
 output:
-  html_document:
+  rmarkdown::html_vignette:
     df_print: paged
     toc: yes
-    toc_float: yes
-    theme: flatly
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Worked examples of using spectator}
+  %\VignetteIndexEntry{Your Vignette Title}
   %\VignetteEncoding{UTF-8}    
 params:
   extra1: 'style="background-color: #ECF0F1; padding: 1px; display: inline-block;"'
@@ -32,6 +30,8 @@ library(httptest)
 httptest::start_vignette("UsingSpectator")
 ```
 
+
+
 # Introduction
 
 The spectator package for R was developed to allow access to 
@@ -54,12 +54,12 @@ library(spectator)
 
 We can get the list of all the satellites referenced in the [Spectator Earth](https://spectator.earth/) database and their current positions.
 
+
 ```{r label = "get satellites"}
 pos <- GetAllSatellites(positions = TRUE)
 head(pos, n = 20L)
 ```
-
-We can now plot the current positions of all the satellites on the world map.
+We can now plot the current positions of the satellites on the world map.
 
 ```{r label = "plot satellites", out.extra = params$extra1}
 library(sf)
@@ -80,24 +80,25 @@ We can also add satellite names as labels. In order to be able to read them, we 
 xy <- sf::st_coordinates(pos)
 xy[, 2] <- xy[, 2] + 3 
 text(xy, labels = pos$name, cex = 0.5)
-```
 
+```
 ```{r label = "turn off global device", include = FALSE}
 knitr::opts_knit$set(global.device = FALSE)
 ```
 
 # Trajectories
 
-It is possible to get the current trajectory and the current position for a selected satellite (here SPOT-7).
+get trajectory and current position for a selected satellite
+
 
 ```{r label = "get trajectories"}
-sat <- "SPOT-7"
+sat <- "SPOT-6"
 traj <- GetTrajectory(satellite = sat)
 pos1 <- GetSatellite(satellite = sat, positions = TRUE)
 ```
 
-These can be plotted on the world map, trajectory in red and the current position in red.
 
+ do some nice graphs
 ```{r label = "plot trajectories", out.extra = params$extra1}
 maps::map("world", fill = TRUE, col = "lightgrey", mar = c(0.5, 0.5, 3, 0.5))
 plot(sf::st_geometry(traj), lwd = 2, col = "red", add = TRUE)
@@ -107,20 +108,20 @@ title(main = sprintf("current %s trajectory & position", sat))
 
 # Acquisition plans
 
-This functionality works only for Sentinel-1, Sentinel-2 and Landsat-8 satellites
+examples for acquisition plans
+works only for Sentinel-1, Sentinel-2 and Landsat-8 satellites
 
-To begin with, we shall retrieve the acquisition plans for all eligible satellites for today (default value).
-We shall limit the dataset to the first 100 records, because of the size of the full dataset (> 1000 rows).
+get plans for all eligible satellites for today
 
 ```{r label = "acquisition plans"}
-plans <- head(GetAcquisitionPlan(), n = 100L)
-plans
+plans <- GetAcquisitionPlan()
+head(plans, n = 20L)
 ```
 
 explore the content of the data frame, you'll see that the available attributes vary with the satellite
-<br><br>
-We can now focus on Sentinel 2 satellites, and look for the acquisition plans for the day after tomorrow.
 
+focus on Sentinel 2
+day after tomorrow
 ```{r label = "acquisition plans Sentinel 2"}
 sat <- c("Sentinel-2A", "Sentinel-2B")
 day <- Sys.Date()  + 2
@@ -128,8 +129,8 @@ plan <- GetAcquisitionPlan(satellites = sat, date = day)
 head(plan)
 ```
 
-The acquisition plans can also be plotted on the world map.
 
+do some nice graphs
 ```{r label = "plot acquisition plans", out.extra = params$extra1}
 library(maps)
 maps::map("world", fill = TRUE, col = "lightgrey", mar = c(0.5, 0.5, 3, 0.5))
@@ -154,7 +155,6 @@ my_key <- Sys.getenv("spectator_earth_api_key")
 look for Sentinel-2 A and B, use shorthand notation, default time frame
 ```{r label = "get Sentinel 2 overpasses"}
 pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = TRUE, api_key = my_key)
-head(pass)
 ```
 
 do some nice graphs
@@ -168,6 +168,7 @@ plot(sf::st_geometry(boundary), add = TRUE, col = "red", border = FALSE)
 plot(sf::st_geometry(pass), add = TRUE)
 title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse = "/"), 
                      paste(days, collapse = ":")))
+
 ```
 
 look for Sentinel-1 A and B, use shorthand notation, last week  
@@ -177,9 +178,9 @@ pass <- GetOverpasses(boundary, satellites = "S-1",
 head(pass)
 ```
 
-do some nice graphs
 
-```{r label = "plot Sentinel 1 overpasses", , out.extra = params$extra1}
+do some nice graphs
+```{r label = "plot Sentinel 1 overpasses", out.extra = params$extra1}
 days <- range(as.Date(pass$date))
 satellites <- sort(unique(pass$satellite))
 maps::map(database = "world", region = c("Belgium", "Netherlands", "Germany", "Luxembourg",
@@ -192,14 +193,14 @@ title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse =
 
 # Plot overpasses calendar
 
-Let's try to get as much information as we can (past and future overpasses) about Sentinel-2A and Sentinel-2B overpasses of Luxembourg.
+Let's try to get as much information as we can about Sentinel-2A and Sentinel-2B overpasses of Luxembourg.
 
 ```{r label = "get Sentinel 2 overpasses max time frame"}
 pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = FALSE, api_key = my_key,
                       days_before = 99, days_after = 99)
 ```
 
-As the acquisitions take place only in the middle of the day, we shall keep only the overpasses between 06:00 and 18:00.
+As the acquisitions take place only in the middle of the day, so we shall keep only the overpasses between 06:00 and 18:00.
 
 ```{r}
 # we need these packages
@@ -213,7 +214,7 @@ pass$acquisition <- localtime > 6 & localtime < 18
 pass <- subset(pass, acquisition == TRUE)
 ```
 
-We can now plot the nice calendar using the **calendR** package.
+We can now plot the nice calendar using the calendR package.
 
 ```{r}
 # we need this package
@@ -245,7 +246,8 @@ calendR::calendR(start_date = first_date, end_date = last_date,
 
 # Show overpasses in a calendar app
 
-We can also export the overpasses calendar as a calendar file (iCal or ICS file), which can be imported in any calendar management application. You could thus take the overpasses calender with you in the calendar app of you smartphone, for example. We shall use the **calendar** package to generate the iCal file.
+We can also export the overpasses calendar as a calendar file (iCal or ICS file), which can be imported in any calendar management application. You could thus take the overpasses calender with you in the calendar app of you smartphone, for example. We shall use the calendar package to generate the iCal file.
+
 
 ```{r}
 # we need this package
@@ -332,13 +334,13 @@ writeBin(httr::content(resp), con = to)
 
 We can also get a get the high resolution images of the AOI (here Central Park) using the image id from the catalog. We shall use once again the id that corresponds to the with the minimal cloud coverage. One can request one or three bands, to get the monochrome or color (RGB) image. The Sentinel 2 RGB bands are 4, 3, and 2, respectively (source: https://en.wikipedia.org/wiki/Sentinel-2#Spectral_bands).
 
+
 ```{r label = "high resolution image", eval = FALSE}
 img <- GetHighResolutionImage(aoi = boundary, id = best_id, bands = c(4, 3, 2), 
                               width = 1024, height = 1024,
                               file = tempfile(pattern = "img", fileext = ".jpg"), 
                               api_key = my_key)
 ```
-
 ```{r label = "high resolution image file name", include = FALSE}
 fichier <- normalizePath("data/CentralPark.jpg")
 ```
@@ -351,6 +353,7 @@ Sentinel-2 image of Central Park, New York City on May 12, 2021.
 <br>
 <br>
 _Compiled on `r Sys.time()`._
+
 
 ```{r label = "httptest_end", include = FALSE}
 httptest::end_vignette()
