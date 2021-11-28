@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
     collapse = TRUE,
     comment = "#>"
 )
-knitr::opts_knit$set(global.device = TRUE)
+knitr::opts_knit$set(global.device = FALSE)
 options(width = 999)
 ```
 
@@ -31,6 +31,7 @@ options(width = 999)
 library(httptest)
 httptest::start_vignette("UsingSpectator")
 ```
+<br>
 
 # Introduction
 
@@ -42,6 +43,7 @@ The main functions allow to retrieve the acquisition plans for Sentinel-1, Senti
 One can also get a current position and trajectory for a much larger set of satellites.
 
 Other functions might be added in subsequent releases of the package.
+<br><br>
 
 # API key
 Some of the functions (mainly those specific to Sentinel and Landsat satellites) require to pass an API key as a parameter to the function (because the underlying API endpoint requires it). The API key is automatically generated for every registered user at https://app.spectator.earth. You can find it under 'Your profile' (bottom left button) and copy it to clipboard. The functions in the spectator package by default retrieve the API key from the environment variable "spectator_earth_api_key". You can choose any other way of providing it, but keep in mind that for security reasons it is NOT recommended to hard-code (include it as clear text) it in your scripts.
@@ -49,34 +51,28 @@ Some of the functions (mainly those specific to Sentinel and Landsat satellites)
 ```{r label = "setup", include = FALSE}
 library(spectator)
 ```
+<br>
 
 # Satellites
 
 We can get the list of all the satellites referenced in the [Spectator Earth](https://spectator.earth/) database and their current positions.
 
-```{r label = "get satellites"}
+```{r label = "get satellites", out.extra = params$extra1}
 pos <- GetAllSatellites(positions = TRUE)
 head(pos, n = 20L)
 ```
 
 We can now plot the current positions of all the satellites on the world map.
-
-```{r label = "plot satellites", out.extra = params$extra1}
-library(sf)
-library(maps)
-maps::map("world", fill = TRUE, col = "lightgrey", mar = rep(0.5, 4))
-```
-
 We shall show the open data satellites in green, and all the others in red.
-
-```{r label = "satellite positions", out.extra = params$extra1}
-plot(sf::st_geometry(subset(pos, open == TRUE)), add = TRUE, col = "green", pch = 15)
-plot(sf::st_geometry(subset(pos, open == FALSE)), add = TRUE, col = "red", pch = 16)
-```
-
 We can also add satellite names as labels. In order to be able to read them, we will shift labels up a little bit.
 
-```{r label = "satellite names", out.extra = params$extra1}
+```{r label = "plot satellite positions", out.extra = params$extra1}
+# we need these packages
+library(sf)
+library(maps)
+maps::map("world", fill = TRUE, col = "lightgrey", mar = rep(0.0, 4L))
+plot(sf::st_geometry(subset(pos, open == TRUE)), add = TRUE, col = "green", pch = 15)
+plot(sf::st_geometry(subset(pos, open == FALSE)), add = TRUE, col = "red", pch = 16)
 xy <- sf::st_coordinates(pos)
 xy[, 2] <- xy[, 2] + 3 
 text(xy, labels = pos$name, cex = 0.5)
@@ -85,6 +81,7 @@ text(xy, labels = pos$name, cex = 0.5)
 ```{r label = "turn off global device", include = FALSE}
 knitr::opts_knit$set(global.device = FALSE)
 ```
+<br>
 
 # Trajectories
 
@@ -104,6 +101,7 @@ plot(sf::st_geometry(traj), lwd = 2, col = "red", add = TRUE)
 plot(sf::st_geometry(pos1), pch = 15, col = "green", cex = 1.5, add = TRUE)
 title(main = sprintf("current %s trajectory & position", sat))
 ```
+<br><br>
 
 # Acquisition plans
 
@@ -132,10 +130,11 @@ The acquisition plans can also be plotted on the world map.
 
 ```{r label = "plot acquisition plans", out.extra = params$extra1}
 library(maps)
-maps::map("world", fill = TRUE, col = "lightgrey", mar = c(0.5, 0.5, 3, 0.5))
+maps::map("world", fill = TRUE, col = "lightgrey", mar = c(0.5, 0.5, 4, 0.5))
 plot(sf::st_geometry(plan), border = "red", add = TRUE)
-title(main = sprintf("%s acquisition plan for %s", paste(sat, collapse = "/"), day))
+title(main = sprintf("%s acquisition plan for %s", paste(sat, collapse = "/"), day), line = 1L)
 ```
+<br><br>
 
 # Satellite overpasses
 
@@ -167,7 +166,7 @@ maps::map(database = "world", region = c("Belgium", "Netherlands", "Germany", "L
 plot(sf::st_geometry(boundary), add = TRUE, col = "red", border = FALSE)
 plot(sf::st_geometry(pass), add = TRUE)
 title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse = "/"), 
-                     paste(days, collapse = ":")))
+                     paste(days, collapse = ":")), line = 1L)
 ```
 
 look for Sentinel-1 A and B, use shorthand notation, last week  
@@ -187,8 +186,9 @@ maps::map(database = "world", region = c("Belgium", "Netherlands", "Germany", "L
 plot(sf::st_geometry(boundary), add = TRUE, col = "red", border = FALSE)
 plot(sf::st_geometry(pass), add = TRUE)
 title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse = "/"), 
-                     paste(days, collapse = ":")))
+                     paste(days, collapse = ":")), line = 1L)
 ```
+<br><br>
 
 # Plot overpasses calendar
 
@@ -242,6 +242,7 @@ calendR::calendR(start_date = first_date, end_date = last_date,
                  start = "M",               # Start the weeks on Monday
                  legend.pos = "right")
 ```
+<br>
 
 # Show overpasses in a calendar app
 
@@ -273,6 +274,7 @@ fichier <- normalizePath("data/Calendar.jpg")
 We can now import this file in our preferred calendar management application, here Google calendar.
 ![Google calendar](`r fichier`){width=100%}
 A screen shot of Google calendar showing the Sentinel-2A and Sentinel-2B overpasses of Luxembourg.
+<br><br>
 
 # Searching for images
 
@@ -299,6 +301,7 @@ catalog <- SearchImages(aoi = boundary, satellites = "S2",
                         footprint = FALSE, api_key = my_key)
 head(catalog, n = 20L)
 ```
+<br>
 
 # Imagery files
 To access the imagery files we have to use their ids. We shall concentrate on the image with minimal cloud coverage and get the corresponding id.
@@ -327,6 +330,7 @@ library(httr)
 resp <- httr::GET(url = from, query = list(api_key = my_key))
 writeBin(httr::content(resp), con = to)
 ```
+<br>
 
 # High resolution images
 
