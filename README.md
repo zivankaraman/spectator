@@ -9,4 +9,4 @@ Current position and trajectory can also be obtained for a much larger set of sa
 # License
 This package is released under [GPLv3](https://opensource.org/licenses/gpl-3.0.html).
 # Usage
-A number of worked examples can be found here [here](https://github.com/zivankaraman/spectator/blob/main/documentation/UsingSpectator.html).
+A number of worked examples can be found here [here](https://github.com/zivankaraman/spectator/blob/main/documentation/UsingSpectator.html){:target="_blank" rel="noopener"}.
