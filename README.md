@@ -7,4 +7,6 @@ the area of interest for a given (past) period, get the URL links to download th
 download the image for just the area of interest based on selected spectral bands. 
 Current position and trajectory can also be obtained for a much larger set of satellites.
 # License
-This package is released under [GPLv3](https://opensource.org/licenses/gpl-3.0.html)
+This package is released under [GPLv3](https://opensource.org/licenses/gpl-3.0.html).
+# Usage
+A number of worked examples can be found here [here](https://github.com/zivankaraman/spectator/blob/main/documentation/UsingSpectator.html).
