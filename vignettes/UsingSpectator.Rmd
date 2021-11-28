@@ -105,7 +105,14 @@ title(main = sprintf("current %s trajectory & position", sat))
 
 # Acquisition plans
 
-This functionality works only for Sentinel-1, Sentinel-2 and Landsat-8 satellites
+This functionality is available only for Sentinel-1, Sentinel-2 and Landsat-8 satellites.
+It is based on the files provided by ESA (Sentinel-1, Sentinel-2) and USGS (Landsat-8), 
+For Sentinels the acquisition plans usually have a range of 10-15 days, while for Landsat-8 it is 2-4 days.
+The time range that you can view is limited to 24 hours due to a large number of polygons.
+More information is available from the ESA and USGS web pages for
+[Sentinel-1](https://sentinel.esa.int/web/sentinel/missions/sentinel-1/observation-scenario/acquisition-segments), 
+[Sentinel-2](https://sentinel.esa.int/web/sentinel/missions/sentinel-2/acquisition-plans), and
+[Landsat-8](https://landsat.usgs.gov/landsat_acq).  
 
 To begin with, we shall retrieve the acquisition plans for all eligible satellites for today (default value).
 We shall limit the dataset to the first 100 records, because of the size of the full dataset (> 1000 rows).
@@ -115,7 +122,8 @@ plans <- head(GetAcquisitionPlan(), n = 100L)
 plans
 ```
 
-explore the content of the data frame, you'll see that the available attributes vary with the satellite
+You can explore the content of the data frame, you'll see that the attributes of the output will vary, depending on the satellite. 
+For more information check out acquisition plan file descriptions at the above mentioned web pages.
 <br><br>
 We can now focus on Sentinel 2 satellites, and look for the acquisition plans for the day after tomorrow.
 
@@ -138,25 +146,30 @@ title(main = sprintf("%s acquisition plan for %s", paste(sat, collapse = "/"), d
 
 # Satellite overpasses
 
-get the Luxembourg country shape as area of interest
+It is possible to get past and planned overpasses over an area/region of interest.
+We shall use the Luxembourg country shape as area of interest in our examples.
+
 ```{r label = "Luxembourg boundary"}
 roi <- system.file("extdata", "luxembourg.geojson", package = "spectator")
 boundary <- sf::read_sf(roi, as_tibble = FALSE)
 ```
 
-first check that we have the api_key
-need api key; so get it first, all set it in code
+This functionality requires a valid API key. So we shall first get the API key from an environment variable or set it in any other suitable way.
+
 ```{r label = "API key"}
 my_key <- Sys.getenv("spectator_earth_api_key")
 ```
 
-look for Sentinel-2 A and B, use shorthand notation, default time frame
+We shall now look for Sentinel-2A and Sentinel-2B overpasses of Luxembourg for the following week (default time frame).
+We can use the use shorthand notation to specify satellites of interest (see the help page for the `GetOverpasses` function).
+
 ```{r label = "get Sentinel 2 overpasses"}
-pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = TRUE, api_key = my_key)
+pass <- GetOverpasses(boundary, satellites = "S2", acquisitions = FALSE, api_key = my_key)
 head(pass)
 ```
 
-do some nice graphs
+The footprints of the overpasses can be plotted, here we use only the neighboring countries and show the region of interest in red.
+
 ```{r label = "plot Sentinel 2 overpasses", out.extra = params$extra1}
 library(maps)
 days <- range(as.Date(pass$date))
@@ -169,14 +182,16 @@ title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse =
                      paste(days, collapse = ":")), line = 1L)
 ```
 
-look for Sentinel-1 A and B, use shorthand notation, last week  
+We shall now look for Sentinel-1A and Sentinel-2B overpasses of Luxembourg for the previous week.
+We can use the use shorthand notation to specify satellites of interest (see the help page for the `GetOverpasses` function).
+
 ```{r label = "get Sentinel 1 overpasses"}
 pass <- GetOverpasses(boundary, satellites = "S-1",
                       days_before = 7, days_after = 0, acquisitions = TRUE)
 head(pass)
 ```
 
-do some nice graphs
+Again, we shall plot the footprints of the overpasses can be plotted, here we use only the neighboring countries and show the region of interest in red.
 
 ```{r label = "plot Sentinel 1 overpasses", , out.extra = params$extra1}
 days <- range(as.Date(pass$date))
@@ -201,7 +216,7 @@ pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = FALSE, api_ke
 
 As the acquisitions take place only in the middle of the day, we shall keep only the overpasses between 06:00 and 18:00.
 
-```{r}
+```{r label = "middle of the day overpasses only"}
 # we need these packages
 library(sf)
 library(lutz)
@@ -213,9 +228,9 @@ pass$acquisition <- localtime > 6 & localtime < 18
 pass <- subset(pass, acquisition == TRUE)
 ```
 
-We can now plot the nice calendar using the **calendR** package.
+We can now plot the nice calendar using the `calendR` package.
 
-```{r}
+```{r label = "plot calendar"}
 # we need this package
 library(calendR)
 
@@ -246,9 +261,9 @@ calendR::calendR(start_date = first_date, end_date = last_date,
 
 # Show overpasses in a calendar app
 
-We can also export the overpasses calendar as a calendar file (iCal or ICS file), which can be imported in any calendar management application. You could thus take the overpasses calender with you in the calendar app of you smartphone, for example. We shall use the **calendar** package to generate the iCal file.
+We can also export the overpasses calendar as a calendar file (iCal or ICS file), which can be imported in any calendar management application. You could thus take the overpasses calender with you in the calendar app of you smartphone, for example. We shall use the `calendar` package to generate the iCal file.
 
-```{r}
+```{r label = "export calendar"}
 # we need this package
 library(calendar)
 
