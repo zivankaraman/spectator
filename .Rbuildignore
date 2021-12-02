@@ -4,5 +4,7 @@
 ^\.Rproj\.user$
 ^dev$
 ^documentation$
+^externaldoc$
+^vignettes2$
 ^misc$
 ^Meta$
