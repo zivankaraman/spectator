@@ -1,7 +1,7 @@
 # Prepare for CRAN ----
 
 # Update dependencies in DESCRIPTION
-attachment::att_amend_desc(dir.v = "documentation", dir.t = "inst/examples/")
+attachment::att_amend_desc(dir.v = "vignettes", dir.t = "inst/examples/")
 
 # Run tests and examples
 devtools::test()

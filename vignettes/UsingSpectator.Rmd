@@ -35,8 +35,8 @@ httptest::start_vignette("UsingSpectator")
 
 # Introduction
 
-The spectator package for R was developed to allow access to 
-[Spectator Earth](https://spectator.earth/) API from R. Spectator Earth offers a Web app providing Earth Observation imagery, mainly from open data satellites like the Sentinel and the Landsat family. These features are also exposed through an API, and the goal of the spectator package is to provide easy access to this functionality from R.
+The `spectator` package for R was developed to allow access to 
+[Spectator Earth](https://spectator.earth/) API from R. Spectator Earth offers a Web app providing Earth Observation imagery, mainly from open data satellites like the Sentinel and the Landsat family. These features are also exposed through an API, and the goal of the `spectator` package is to provide easy access to this functionality from R.
 
 The main functions allow to retrieve the acquisition plans for Sentinel-1, Sentinel-2 and Landsat-8 satellites and to get the past or (near)future overpasses over an area of interest for these satellites. It is also possible to search the archive for available images over the area of interest for a given (past) period, get the URL links to download the whole image tiles, or alternatively to download the image for just the area of interest based on selected spectral bands.
 
@@ -46,7 +46,7 @@ Other functions might be added in subsequent releases of the package.
 <br><br>
 
 # API key
-Some of the functions (mainly those specific to Sentinel and Landsat satellites) require to pass an API key as a parameter to the function (because the underlying API endpoint requires it). The API key is automatically generated for every registered user at https://app.spectator.earth. You can find it under 'Your profile' (bottom left button) and copy it to clipboard. The functions in the spectator package by default retrieve the API key from the environment variable "spectator_earth_api_key". You can choose any other way of providing it, but keep in mind that for security reasons it is NOT recommended to hard-code (include it as clear text) it in your scripts.
+Some of the functions (mainly those specific to Sentinel and Landsat satellites) require to pass an API key as a parameter to the function (because the underlying API endpoint requires it). The API key is automatically generated for every registered user at https://app.spectator.earth. You can find it under 'Your profile' (bottom left button) and copy it to the clipboard. The functions in the `spectator` package by default retrieve the API key from the environment variable "`spectator_earth_api_key`" You can choose any other way of providing it, but keep in mind that for security reasons it is **NOT** recommended to hard-code (include it as clear text) it in your scripts.
 
 ```{r label = "setup", include = FALSE}
 library(spectator)
@@ -85,7 +85,7 @@ knitr::opts_knit$set(global.device = FALSE)
 
 # Trajectories
 
-It is possible to get the current trajectory and the current position for a selected satellite (here SPOT-7).
+It is possible to get the current trajectory and the current position for a selected satellite (here *SPOT-7*).
 
 ```{r label = "get trajectories"}
 sat <- "SPOT-7"
@@ -93,7 +93,7 @@ traj <- GetTrajectory(satellite = sat)
 pos1 <- GetSatellite(satellite = sat, positions = TRUE)
 ```
 
-These can be plotted on the world map, trajectory in red and the current position in red.
+These can be plotted on the world map, trajectory in red and the current position in green.
 
 ```{r label = "plot trajectories", out.extra = params$extra1}
 maps::map("world", fill = TRUE, col = "lightgrey", mar = c(0.5, 0.5, 3, 0.5))
@@ -123,13 +123,13 @@ plans
 ```
 
 You can explore the content of the data frame, you'll see that the attributes of the output will vary, depending on the satellite. 
-For more information check out acquisition plan file descriptions at the above mentioned web pages.
+For more information check out acquisition plan file descriptions at the above-mentioned web pages.
 <br><br>
 We can now focus on Sentinel 2 satellites, and look for the acquisition plans for the day after tomorrow.
 
 ```{r label = "acquisition plans Sentinel 2"}
 sat <- c("Sentinel-2A", "Sentinel-2B")
-day <- Sys.Date()  + 2
+day <- "2021-11-30"
 plan <- GetAcquisitionPlan(satellites = sat, date = day)
 head(plan)
 ```
@@ -161,7 +161,7 @@ my_key <- Sys.getenv("spectator_earth_api_key")
 ```
 
 We shall now look for Sentinel-2A and Sentinel-2B overpasses of Luxembourg for the following week (default time frame).
-We can use the use shorthand notation to specify satellites of interest (see the help page for the `GetOverpasses` function).
+We can use the shorthand notation to specify satellites of interest (see the help page for the `GetOverpasses` function).
 
 ```{r label = "get Sentinel 2 overpasses"}
 pass <- GetOverpasses(boundary, satellites = "S2", acquisitions = FALSE, api_key = my_key)
@@ -191,7 +191,7 @@ pass <- GetOverpasses(boundary, satellites = "S-1",
 head(pass)
 ```
 
-Again, we shall plot the footprints of the overpasses can be plotted, here we use only the neighboring countries and show the region of interest in red.
+Again, we can plot the footprints of the overpasses, using only the neighboring countries and showing the region of interest in red.
 
 ```{r label = "plot Sentinel 1 overpasses", , out.extra = params$extra1}
 days <- range(as.Date(pass$date))
@@ -261,7 +261,7 @@ calendR::calendR(start_date = first_date, end_date = last_date,
 
 # Show overpasses in a calendar app
 
-We can also export the overpasses calendar as a calendar file (iCal or ICS file), which can be imported in any calendar management application. You could thus take the overpasses calender with you in the calendar app of you smartphone, for example. We shall use the `calendar` package to generate the iCal file.
+We can also export the overpasses calendar as a calendar file (iCal or ICS file), which can be imported in any calendar management application. You could thus take the overpasses calendar with you in the calendar app of your smartphone, for example. We shall use the `calendar` package to generate the iCal file.
 
 ```{r label = "export calendar"}
 # we need this package
@@ -288,7 +288,7 @@ fichier <- normalizePath("data/Calendar.jpg")
 
 We can now import this file in our preferred calendar management application, here Google calendar.
 ![Google calendar](`r fichier`){width=100%}
-A screen shot of Google calendar showing the Sentinel-2A and Sentinel-2B overpasses of Luxembourg.
+<div align="center">*A screen shot of Google calendar showing the Sentinel-2A and Sentinel-2B overpasses of Luxembourg.*</div>
 <br><br>
 
 # Searching for images
@@ -308,7 +308,7 @@ roi <- system.file("extdata", "centralpark.geojson", package = "spectator")
 boundary <- sf::read_sf(roi, as_tibble = FALSE)
 ```
 
-Now we shall look for all Sentinel 2 images (both Sentinel-2A and Sentinel-2B) captured in May 2021.
+Now we shall look for all Sentinel 2 images (both Sentinel-2A and Sentinel-2B) captured in May 2021. We shall use again the shorthand notation to specify satellites of interest (see the help page for the `GetOverpasses` function).
 
 ```{r label = "serch Central Park images"}
 catalog <- SearchImages(aoi = boundary, satellites = "S2", 
@@ -347,9 +347,9 @@ writeBin(httr::content(resp), con = to)
 ```
 <br>
 
-# High resolution images
+# High-resolution images
 
-We can also get a get the high resolution images of the AOI (here Central Park) using the image id from the catalog. We shall use once again the id that corresponds to the with the minimal cloud coverage. One can request one or three bands, to get the monochrome or color (RGB) image. The Sentinel 2 RGB bands are 4, 3, and 2, respectively (source: https://en.wikipedia.org/wiki/Sentinel-2#Spectral_bands).
+We can also get a get the high-resolution images of the AOI (here Central Park) using the image id from the catalog. We shall use once again the id that corresponds to the with the minimal cloud coverage. One can request one or three bands, to get the monochrome or color (RGB) image. The Sentinel-2 RGB bands are 4, 3, and 2, respectively (source: https://en.wikipedia.org/wiki/Sentinel-2#Spectral_bands).
 
 ```{r label = "high resolution image", eval = FALSE}
 img <- GetHighResolutionImage(aoi = boundary, id = best_id, bands = c(4, 3, 2), 
@@ -362,14 +362,15 @@ img <- GetHighResolutionImage(aoi = boundary, id = best_id, bands = c(4, 3, 2),
 fichier <- normalizePath("data/CentralPark.jpg")
 ```
 
-High resolution image
+High-resolution image
 ![Central Park image](`r fichier`){width=100%}
-Sentinel-2 image of Central Park, New York City on May 12, 2021.
+<div align="center">*Sentinel-2 image of Central Park, New York City on May 12, 2021.*</div>
 <br>
 <br>
 <br>
 <br>
-_Compiled on `r Sys.time()`._
+<!-- _Compiled on `r Sys.time()`._ -->
+_Compiled on 2021-11-28 20:21:48._
 
 ```{r label = "httptest_end", include = FALSE}
 httptest::end_vignette()
