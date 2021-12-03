@@ -5,12 +5,12 @@
 #' @author Zivan Karaman <zivan.karaman@gmail.com>
 # @seealso \link{ca630}, \code{\link{sp1}, \link{sp2}, \link{sp3}, \link{sp4}, \link{sp5}}
 #' 
-#' @title Package providing interface to 'Spectator Earth' API 
+#' @title Package providing interface to the 'Spectator Earth' API 
 #' 
 #' @description
 #'
 #' The \code{spectator} package for R was developed to allow access to
-#' '[Spectator Earth]'(https://spectator.earth/) API from R.
+#' '[Spectator Earth](https://spectator.earth/)' API from R.
 #' Spectator Earth offers a Web app providing Earth Observation imagery,
 #' mainly from open data satellites like the Sentinel and the Landsat family.
 #' These features are also exposed through an [API](https://api.spectator.earth/),

@@ -24,7 +24,6 @@ knitr::opts_chunk$set(
     comment = "#>"
 )
 knitr::opts_knit$set(global.device = FALSE)
-old.opt <- options(width = 132)
 ```
 
 ```{r label = "httptest_start", include = FALSE}
@@ -375,8 +374,3 @@ _Compiled on 2021-11-28 20:21:48._
 ```{r label = "httptest_end", include = FALSE}
 httptest::end_vignette()
 ```
-
-```{r label = "wrap up", include = FALSE}
-options(old.opt)
-```
-
