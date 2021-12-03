@@ -22,7 +22,6 @@
 #'  Based on the files provided by ESA (Sentinel-1, Sentinel-2) 
 #'  and USGS (Landsat-8), more information available on the above mentioned web pages.
 #' @examples 
-#' \dontrun{
 #' if(interactive()){
 #'  library(sf)
 #'  # get plans for all eligible satellites for today
@@ -40,7 +39,6 @@
 #'  plot(st_geometry(plan), border = "red", add = TRUE)
 #'  title(main = sprintf("%s acquisition plan for %s", paste(sat, collapse = "/"), day))
 #'  }
-#' }
 # @seealso 
 #  \code{\link[httr]{GET}}, \code{\link[httr]{content}}
 #  \code{\link[geojsonsf]{geojson_sf}}

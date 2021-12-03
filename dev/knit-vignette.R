@@ -1,1 +1,6 @@
-rmarkdown::render(input = "C:/GitHub/spectator/vignettes/UsingSpectator.Rmd", output_file = "UsingSpectator.html")
+rmarkdown::render(input = "C:/GitHub/spectator/vignettes2/UsingSpectator.Rmd", output_file = "UsingSpectator.html")
+file.rename("vignettes", "vignettes1")
+file.rename("vignettes2", "vignettes")
+devtools::build()
+file.rename("vignettes", "vignettes2")
+file.rename("vignettes1", "vignettes")

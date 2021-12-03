@@ -7,7 +7,6 @@
 #' @return Object of class '\code{sf}' with '\code{LINESTRING}' geometry type
 # @details DETAILS
 #' @examples 
-#' \dontrun{
 #' if(interactive()){
 #'  library(sf)
 #'  # get trajectory and current position for a selected satellite
@@ -21,7 +20,6 @@
 #'  plot(st_geometry(pos), pch = 15, col = "green", cex = 1.5, add = TRUE)
 #'  title(main = sprintf("current %s trajectory & position", sat))
 #'  }
-#' }
 # @seealso 
 #  \code{\link[httr]{GET}}, \code{\link[htt]{content}}
 #  \code{\link[geojsonsf]{geojson_sf}}

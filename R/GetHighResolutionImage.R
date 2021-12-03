@@ -13,7 +13,6 @@
 #' @return The name of the image file is returned invisibly.
 #' @details As a side effect, the image file is written to the provided path.
 #' @examples 
-#' \dontrun{
 #' if(interactive()){
 #'  library(sf)
 #'  my_key <- Sys.getenv("spectator_earth_api_key")
@@ -32,7 +31,6 @@
 #'      file = tempfile(pattern = "img", fileext = ".jpg"), 
 #'      api_key = my_key)
 #'  }
-#' }
 #' @seealso 
 #'  \code{\link[spectator]{SearchImages}}
 #' @export 

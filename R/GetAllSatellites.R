@@ -16,7 +16,6 @@
 #' with the same attributes as above.
 # @details DETAILS
 #' @examples 
-#' \dontrun{
 #' if(interactive()){
 #'  library(sf)
 #'  # get all satellites withe their positions
@@ -34,7 +33,6 @@
 #'  xy[, 2] <- xy[, 2] + 2 
 #'  text(xy, labels = pos$name, cex = 0.5)
 #'  }
-#' }
 #' @seealso 
 #'  \code{\link[spectator]{GetSatellite}} 
 #' @export 

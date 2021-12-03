@@ -5,6 +5,7 @@
 ^dev$
 ^documentation$
 ^externaldoc$
+^vignettes1$
 ^vignettes2$
 ^misc$
 ^Meta$

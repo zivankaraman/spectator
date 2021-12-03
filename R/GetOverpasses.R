@@ -28,7 +28,6 @@
 #'  By default, the API key is retrieved from the environment variable \code{spectator_earth_api_key},
 #'  but you can choose any other way of providing it (it is recommended **NOT** to include it in your scripts). 
 #' @examples 
-#' \dontrun{
 #' if(interactive()){
 #'  library(sf)
 #'  # get the Luxembourg country shape as area of interest
@@ -46,7 +45,6 @@
 #'  title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse = "/"), 
 #'                       paste(days, collapse = ":")))
 #'  }
-#' }
 # @seealso 
 #  \code{\link[sf]{st_as_sf}}, \code{\link[sf]{st_bbox}}
 #' @export 

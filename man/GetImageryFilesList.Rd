@@ -35,7 +35,6 @@ The raw image files are quite big, if the area of interest is relatively small i
 }
 \examples{
  
-\dontrun{
 if(interactive()){
  library(sf)
  my_key <- Sys.getenv("spectator_earth_api_key")
@@ -51,7 +50,6 @@ if(interactive()){
  # list all downloadable files for the image with minimal cloud coverage
  images <- GetImageryFilesList(best_id, api_key = my_key)
  }
-}
 }
 \seealso{
 \code{\link[spectator]{SearchImages}}, \code{\link[spectator]{GetHighResolutionImage}}

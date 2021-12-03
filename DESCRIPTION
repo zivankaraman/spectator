@@ -1,11 +1,11 @@
 Package: spectator
-Title: Interface to the Spectator Earth API
+Title: Interface to the 'Spectator Earth' API
 Version: 0.1.0
 Authors@R: 
     person("Zivan", "Karaman", , "zivan.karaman@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-8933-4589"))
-Description: Provides interface to Spectator Earth API, mainly for
-    obtaining the acquisition plans and satellite overpasses for
+Description: Provides interface to the 'Spectator Earth' API <https://api.spectator.earth/>, 
+    mainly for obtaining the acquisition plans and satellite overpasses for
     Sentinel-1, Sentinel-2 and Landsat-8 satellites. Current position and
     trajectory can also be obtained for a much larger set of satellites.
     It is also possible to search the archive for available images over

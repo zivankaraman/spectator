@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
     comment = "#>"
 )
 knitr::opts_knit$set(global.device = FALSE)
-options(width = 999)
+old.opt <- options(width = 132)
 ```
 
 ```{r label = "httptest_start", include = FALSE}
@@ -35,8 +35,8 @@ httptest::start_vignette("UsingSpectator")
 
 # Introduction
 
-The `spectator` package for R was developed to allow access to 
-[Spectator Earth](https://spectator.earth/) API from R. Spectator Earth offers a Web app providing Earth Observation imagery, mainly from open data satellites like the Sentinel and the Landsat family. These features are also exposed through an API, and the goal of the `spectator` package is to provide easy access to this functionality from R.
+The `spectator` package for R was developed to allow access to the
+'[Spectator Earth](https://spectator.earth/)' API from R. Spectator Earth offers a Web app providing Earth Observation imagery, mainly from open data satellites like the Sentinel and the Landsat family. These features are also exposed through an API, and the goal of the `spectator` package is to provide easy access to this functionality from R.
 
 The main functions allow to retrieve the acquisition plans for Sentinel-1, Sentinel-2 and Landsat-8 satellites and to get the past or (near)future overpasses over an area of interest for these satellites. It is also possible to search the archive for available images over the area of interest for a given (past) period, get the URL links to download the whole image tiles, or alternatively to download the image for just the area of interest based on selected spectral bands.
 
@@ -46,7 +46,7 @@ Other functions might be added in subsequent releases of the package.
 <br><br>
 
 # API key
-Some of the functions (mainly those specific to Sentinel and Landsat satellites) require to pass an API key as a parameter to the function (because the underlying API endpoint requires it). The API key is automatically generated for every registered user at https://app.spectator.earth. You can find it under 'Your profile' (bottom left button) and copy it to the clipboard. The functions in the `spectator` package by default retrieve the API key from the environment variable "`spectator_earth_api_key`" You can choose any other way of providing it, but keep in mind that for security reasons it is **NOT** recommended to hard-code (include it as clear text) it in your scripts.
+Some of the functions (mainly those specific to Sentinel and Landsat satellites) require to pass an API key as a parameter to the function (because the underlying API endpoint requires it). The API key is automatically generated for every registered user at https://app.spectator.earth. You can find it under 'Your profile' (bottom left button) and copy it to the clipboard. The functions in the `spectator` package by default retrieve the API key from the environment variable "`spectator_earth_api_key`". You can choose any other way of providing it, but keep in mind that for security reasons it is **NOT** recommended to hard-code (include it as clear text) it in your scripts.
 
 ```{r label = "setup", include = FALSE}
 library(spectator)
@@ -375,3 +375,8 @@ _Compiled on 2021-11-28 20:21:48._
 ```{r label = "httptest_end", include = FALSE}
 httptest::end_vignette()
 ```
+
+```{r label = "wrap up", include = FALSE}
+options(old.opt)
+```
+

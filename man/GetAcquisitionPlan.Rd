@@ -43,7 +43,6 @@ and USGS (Landsat-8), more information available on the above mentioned web page
 }
 
 \examples{
-\dontrun{
 if(interactive()){
  library(sf)
  # get plans for all eligible satellites for today
@@ -61,5 +60,4 @@ if(interactive()){
  plot(st_geometry(plan), border = "red", add = TRUE)
  title(main = sprintf("\%s acquisition plan for \%s", paste(sat, collapse = "/"), day))
  }
-}
 }

@@ -56,7 +56,6 @@ By default, the API key is retrieved from the environment variable \code{spectat
 but you can choose any other way of providing it (it is recommended \strong{NOT} to include it in your scripts).
 }
 \examples{
-\dontrun{
 if(interactive()){
  library(sf)
  # get the Luxembourg country shape as area of interest
@@ -74,5 +73,4 @@ if(interactive()){
  title(main = sprintf("\%s overpasses for period \%s", paste(satellites, collapse = "/"), 
                       paste(days, collapse = ":")))
  }
-}
 }

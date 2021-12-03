@@ -33,7 +33,6 @@ with the same attributes as above.
 Gets the information about the specified satellite, and possibly its current position.
 }
 \examples{
-\dontrun{
 if(interactive()){
  library(sf)
  # get trajectory and current position for a selected satellite
@@ -47,7 +46,6 @@ if(interactive()){
  plot(st_geometry(pos), pch = 15, col = "green", cex = 1.5, add = TRUE)
  title(main = sprintf("current \%s trajectory & position", sat))
  }
-}
 }
 \seealso{
 \code{\link[spectator]{GetAllSatellites}}

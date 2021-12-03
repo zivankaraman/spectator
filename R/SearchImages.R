@@ -18,7 +18,6 @@
 #'  \code{cloud_cover_percentage} (for the whole image tile), \code{satellite} (name), 
 #'  \code{begin_position_date} and \code{end_position_date} indicating when the image was taken.
 #' @examples 
-#' \dontrun{
 #' if(interactive()){ 
 #'  library(sf)
 #'  my_key <- Sys.getenv("spectator_earth_api_key")
@@ -30,7 +29,6 @@
 #'      date_from = "2021-05-01", date_to = "2021-05-30", 
 #'      footprint = FALSE, api_key = my_key)
 #'  }
-#' }
 # @seealso 
 #  \code{\link[sf]{st_as_sf}},\code{\link[sf]{st_bbox}},\code{\link[sf]{st}},\code{\link[sf]{sfc}},\code{\link[sf]{sf}}
 #  \code{\link[httr]{GET}},\code{\link[httr]{content}}

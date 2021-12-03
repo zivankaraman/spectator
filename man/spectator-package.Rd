@@ -4,10 +4,10 @@
 \name{spectator-package}
 \alias{spectator-package}
 \alias{spectator}
-\title{Package providing interface to Spectator Earth API}
+\title{Package providing interface to 'Spectator Earth' API}
 \description{
 The \code{spectator} package for R was developed to allow access to
-\href{https://spectator.earth/}{Spectator Earth} API from R.
+'\link{Spectator Earth}'(https://spectator.earth/) API from R.
 Spectator Earth offers a Web app providing Earth Observation imagery,
 mainly from open data satellites like the Sentinel and the Landsat family.
 These features are also exposed through an \href{https://api.spectator.earth/}{API},

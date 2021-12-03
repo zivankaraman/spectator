@@ -48,7 +48,6 @@ using the functions \code{\link[spectator]{GetImageryFilesList}} or
 \code{begin_position_date} and \code{end_position_date} indicating when the image was taken.
 }
 \examples{
-\dontrun{
 if(interactive()){ 
  library(sf)
  my_key <- Sys.getenv("spectator_earth_api_key")
@@ -60,5 +59,4 @@ if(interactive()){
      date_from = "2021-05-01", date_to = "2021-05-30", 
      footprint = FALSE, api_key = my_key)
  }
-}
 }

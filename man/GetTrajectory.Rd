@@ -21,7 +21,6 @@ Object of class '\code{sf}' with '\code{LINESTRING}' geometry type
 Gets the current trajectory for the specified satellite.
 }
 \examples{
-\dontrun{
 if(interactive()){
  library(sf)
  # get trajectory and current position for a selected satellite
@@ -35,5 +34,4 @@ if(interactive()){
  plot(st_geometry(pos), pch = 15, col = "green", cex = 1.5, add = TRUE)
  title(main = sprintf("current \%s trajectory & position", sat))
  }
-}
 }

@@ -30,7 +30,6 @@ Gets the information about all the satellites known in the Spectator Earth datab
 and possibly their current positions.
 }
 \examples{
-\dontrun{
 if(interactive()){
  library(sf)
  # get all satellites withe their positions
@@ -48,7 +47,6 @@ if(interactive()){
  xy[, 2] <- xy[, 2] + 2 
  text(xy, labels = pos$name, cex = 0.5)
  }
-}
 }
 \seealso{
 \code{\link[spectator]{GetSatellite}}
