@@ -139,6 +139,6 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     if (acquisitions) {
         out <- subset(out, out$acquisition == TRUE)
     }
-    
+    row.names(out) <- NULL
     return(out)
 }
