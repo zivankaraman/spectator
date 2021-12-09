@@ -14,7 +14,7 @@ This package is released under [GPLv3](https://opensource.org/licenses/gpl-3.0.h
 ## Installation
 
 You can install the release version of `spectator` from
-[CRAN](https://CRAN.R-project.org) with:
+[CRAN](https://cran.r-project.org/web/packages/spectator/index.html) with:
 
 ``` r
 install.packages("spectator")
