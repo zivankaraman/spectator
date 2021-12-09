@@ -137,7 +137,12 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     
     # get data acquisition overpasses only? 
     if (acquisitions) {
-        out <- subset(out, out$acquisition == TRUE)
+        out1 <- subset(out, acquisition == TRUE)
+        out2 <- subset(out, is.na(acquisition))
+        rbind(out1, out2)
+        out3 <- rbind(subset(out, acquisition == TRUE), subset(out, is.na(acquisition)))
+        out4 <- subset(out, (acquisition == TRUE) | is.na(acquisition))
+        out <- subset(out, (acquisition == TRUE) | is.na(acquisition))
     }
     row.names(out) <- NULL
     return(out)
