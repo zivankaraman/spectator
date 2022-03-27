@@ -13,7 +13,7 @@ GetAcquisitionPlan(satellites = NULL, date = NULL)
 \item{satellites}{character vector, if specified only the listed satellites will be retrieved,
 if \code{NULL} (default value) the acquisition plans for all possible satellites will be retrieved.
 For simplicity, the satellites names can be abbreviated to
-"S-1A", "S-1B", "S-2A", "S-2B", "L-8" or "S1A", "S1B", "S2A", "S2B", "L8". Default: NULL}
+"S-1A", "S-1B", "S-2A", "S-2B", "L-8", "L-9" or "S1A", "S1B", "S2A", "S2B", "L8", "L9". Default: NULL}
 
 \item{date}{date or character convertible to date by \code{as.Date},
 indicating the day for which the acquisition plans are requested.
@@ -27,10 +27,10 @@ The attributes of the output will vary, depending on the satellite.
 For more information check out acquisition plan file descriptions for
 \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-1/observation-scenario/acquisition-segments}{Sentinel-1},
 \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/acquisition-plans}{Sentinel-2},
-\href{https://landsat.usgs.gov/landsat_acq}{Landsat-8}
+\href{https://landsat.usgs.gov/landsat_acq}{Landsat-8, Landsat-9}
 }
 \description{
-Retrieves the acquisition plans for the Sentinel-2, Landsat-8 and Sentinel-1 satellites.
+Retrieves the acquisition plans for the Sentinel 1 & 2 and Landsat 8 & 9 satellites.
 }
 \details{
 For Sentinels the acquisition plans usually have a range of 10-15 days, while for Landsat-8 it is 2-4 days.

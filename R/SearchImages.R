@@ -5,7 +5,7 @@
 #' @param satellites character vector, if specified only the listed satellites will be retrieved,
 #'  if \code{NULL} (default value) the acquisition plans for all possible satellites will be retrieved.
 #'  For simplicity, the satellites names can be abbreviated to
-#'  "S-1A", "S-1B", "S-2A", "S-2B", "L-8" or "S1A", "S1B", "S2A", "S2B", "L8". Default: NULL
+#'  "S-1A", "S-1B", "S-2A", "S-2B", "L-8", "L-9" or "S1A", "S1B", "S2A", "S2B", "L8", "L9". Default: NULL
 #' @param date_from date or character convertible to date by \code{as.Date}, indicating the earliest image date. Default: NULL
 #' @param date_to date or character convertible to date by \code{as.Date}, indicating the latest image date. Default: NULL
 #' @param footprint logical indicating if the polygons describing the image tiles should be returned. Default: FALSE

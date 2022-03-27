@@ -32,12 +32,12 @@ FindSatelliteName <-
 function(x)
 {
     # allow shorthand spellings, return official full name
-    allowed.satellites <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
-                            "S-1A", "S-1B", "S-2A", "S-2B", "L-8",
-                            "S1A", "S1B", "S2A", "S2B", "L8")
-    names(allowed.satellites) <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
-                                   "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
-                                   "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8")
+    allowed.satellites <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8", "Landsat-9",
+                            "S-1A", "S-1B", "S-2A", "S-2B", "L-8", "L-9",
+                            "S1A", "S1B", "S2A", "S2B", "L8", "L9")
+    names(allowed.satellites) <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8", "Landsat-9",
+                                   "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8", "Landsat-9",
+                                   "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8", "Landsat-9")
     # satellite.names <- paste(unique(names(allowed.satellites)[grep(x, allowed.satellites)]), collapse = ",")
     satellite.names <- paste(unique(names(allowed.satellites)[sapply(x, grep, allowed.satellites)]), collapse = ",")
     

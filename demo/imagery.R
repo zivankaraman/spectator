@@ -27,7 +27,7 @@ catalog <- SearchImages(aoi = boundary, satellites = "S2",
 best_id <- catalog[order(catalog$cloud_cover_percentage), ][1, "id"]
 
 # list all downloadable files for the image with minimal cloud coverage
-images <- GetImageryFilesList(best_id, api_key = my_key)
+images <- GetImageryFilesList(best_id, all = FALSE, api_key = my_key)
 
 # get the high resolution image of the Central Park
 img <- GetHighResolutionImage(aoi = boundary, id = best_id, bands = c(4, 3, 2), 

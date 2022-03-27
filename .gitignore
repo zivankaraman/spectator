@@ -44,6 +44,9 @@ documentation/*
 # external documentation
 externaldoc/*
 
+# HelpDesk
+HelpDesk/*
+
 # /doc/
 # /Meta/
 # inst/doc
