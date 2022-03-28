@@ -32,7 +32,7 @@ rhub::check_on_solaris()
 # _win devel
 devtools::check_win_devel()
 
-1# Update NEWS
+# Update NEWS
 # Bump version manually and add list of changes
 
 # Add comments for CRAN
