@@ -3,6 +3,8 @@ rmarkdown::render(input = "C:/GitHub/spectator/vignettes2/UsingSpectator.Rmd", o
 # rename vignettes folders to build
 file.rename("vignettes", "vignettes1")
 file.rename("vignettes2", "vignettes")
+# remove previous spectator_latest.tar.gz
+if (file.exists("spectator_latest.tar.gz")) file.remove("spectator_latest.tar.gz")
 # build with real vignette
 tgz <- devtools::build()
 # extract updated vignette files for doc
