@@ -1,6 +1,6 @@
-spectator_0.1.1: 2022-03-28
-- added support for Landsat-9
-- few minor improvements
+Changes in version 0.1.1 (2022-03-28)
+    - added support for Landsat-9
+    - few minor improvements
 
-spectator_0.1.0: 2021-12-03
-- initial release on CRAN
+Changes in version 0.1.0 (2021-12-03)
+    - initial release on CRAN
