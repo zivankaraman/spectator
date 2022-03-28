@@ -34,7 +34,7 @@ setwd(oldwd)
 detach("package:spectator", unload = TRUE)
 install.packages(tgz, repos = NULL, type = "source")
 # copy package archive to latest
-file.copy(from = tgz, to = "spectator_latest.tar.gz", overwrite = TRUE)
+file.copy(from = tgz, to = "../spectator_latest.tar.gz", overwrite = TRUE)
 
 # check on rhub
 chk <- rhub::check_for_cran(tgz, show_status = FALSE)
