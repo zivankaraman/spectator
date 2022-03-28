@@ -11,7 +11,7 @@
 #'   \item{\code{size}}{integer, size of the file (in bytes)}
 #'}
 #' @details Besides the raw images (\code{jp2} files) as single bands, various auxiliary files are also available.
-#'  These include image thumbnails, metadata, etc. By default, only the full-sized images are returend by the function.  
+#'  These include image thumbnails, metadata, etc. By default, only the full-sized images are returned by the function.  
 #'  To download the files, all the paths should be prepended with 
 #'  \code{https://api.spectator.earth/imagery/{id}/files/}.
 #'  The raw image files are quite big, if the area of interest is relatively small it might be better to use 

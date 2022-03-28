@@ -104,9 +104,9 @@ title(main = sprintf("current %s trajectory & position", sat))
 
 # Acquisition plans
 
-This functionality is available only for Sentinel-1, Sentinel-2 and Landsat-8 satellites.
-It is based on the files provided by ESA (Sentinel-1, Sentinel-2) and USGS (Landsat-8), 
-For Sentinels the acquisition plans usually have a range of 10-15 days, while for Landsat-8 it is 2-4 days.
+This functionality is available only for Sentinel-1, Sentinel-2, Landsat-8 and Landsat-9 satellites.
+It is based on the files provided by ESA (Sentinel-1, Sentinel-2) and USGS (Landsat-8, Landsat-9), 
+For Sentinels the acquisition plans usually have a range of 10-15 days, while for Landsat-8 and Landsat-9 it is 2-4 days.
 The time range that you can view is limited to 24 hours due to a large number of polygons.
 More information is available from the ESA and USGS web pages for
 [Sentinel-1](https://sentinel.esa.int/web/sentinel/missions/sentinel-1/observation-scenario/acquisition-segments), 
@@ -293,7 +293,7 @@ We can now import this file in our preferred calendar management application, he
 # Searching for images
 
 We can query the archived images catalog to find available images for an area of interest (AOI).
-It can be done for images captured by Sentinel-1, Sentinel-2 and Landsat-8 satellites.
+It can be done for images captured by Sentinel-1, Sentinel-2, Landsat-8 and Landsat-9 satellites.
 This functionality requires a valid API key. So we shall first get the API key from an environment variable or set it in any other suitable way.
 
 ```{r label = "API key 2"}
@@ -333,6 +333,10 @@ head(images, n = 20L)
 ```{r label = "file size", include = FALSE}
 size <- as.integer(subset(images, path == "B04.jp2", "size"))
 ```
+
+It should be noted that by default the function `GetImageryFilesList` lists only the full-sized images, 
+not the other various auxiliary files such as image thumbnails, metadata, etc. 
+You should set the argument `all` to `TRUE` to include them in the output.
 
 We could now download the whole band 4 image tile for the image with the minimal cloud coverage using the code below.
 *Warning*: this is a very **BIG** file (`r prettyNum(size, big.mark = " ")` bytes), so think twice before you start the download!

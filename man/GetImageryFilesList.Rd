@@ -34,7 +34,7 @@ for the given image.
 }
 \details{
 Besides the raw images (\code{jp2} files) as single bands, various auxiliary files are also available.
-These include image thumbnails, metadata, etc. By default, only the full-sized images are returend by the function.
+These include image thumbnails, metadata, etc. By default, only the full-sized images are returned by the function.
 To download the files, all the paths should be prepended with
 \code{https://api.spectator.earth/imagery/{id}/files/}.
 The raw image files are quite big, if the area of interest is relatively small it might be better to use
@@ -55,7 +55,7 @@ if(interactive()){
  # get the id of the image with minimal cloud coverage
  best_id <- catalog[order(catalog$cloud_cover_percentage), ][1, "id"]
  # list all downloadable files for the image with minimal cloud coverage
- images <- GetImageryFilesList(best_id, api_key = my_key)
+ images <- GetImageryFilesList(best_id, all = FALSE, api_key = my_key)
  }
 }
 \seealso{

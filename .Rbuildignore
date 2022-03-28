@@ -5,6 +5,7 @@
 ^dev$
 ^documentation$
 ^externaldoc$
+^HelpDesk$
 ^vignettes1$
 ^vignettes2$
 ^misc$

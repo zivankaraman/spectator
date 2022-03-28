@@ -22,7 +22,7 @@ This package is released under
 ## Installation
 
 You can install the release version of `spectator` from
-[CRAN](https://cran.r-project.org/web/packages/spectator/index.html)
+[CRAN](https://cran.r-project.org/package=spectator)
 with:
 
 ``` r
