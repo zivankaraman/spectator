@@ -1,4 +1,3 @@
-
 #' @title Gets all referenced satellites info
 #' @description Gets the information about all the satellites known in the Spectator Earth database, 
 #' and possibly their current positions.

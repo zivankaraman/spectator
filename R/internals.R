@@ -1,4 +1,3 @@
-
 SafeNull <-
 function(x)
 {
@@ -11,7 +10,6 @@ function(x)
     # [1] "abc"
     ifelse(is.null(x), NA, x)
 }
-
 
 FindSatelliteId <-
 function(x)
@@ -26,7 +24,6 @@ function(x)
     }
     return(spectator::satellites_db$id[idx])
 }
-
 
 FindSatelliteName <-
 function(x)
@@ -46,7 +43,6 @@ function(x)
     }
     return(satellite.names)    
 }
-
 
 CheckResponseSatus <- 
 function(resp)

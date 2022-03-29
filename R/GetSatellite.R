@@ -1,4 +1,3 @@
-
 #' @title Gets info for a satellite
 #' @description Gets the information about the specified satellite, and possibly its current position.
 #' @param satellite character name of the satellite for which to retrieve the trajectory. 

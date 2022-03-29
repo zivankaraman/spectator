@@ -1,4 +1,3 @@
-
 #' @title Gets a satellite acquisition plan
 #' @description Retrieves the acquisition plans for the Sentinel 1 & 2 and Landsat 8 & 9 satellites.
 #' @param satellites character vector, if specified only the listed satellites will be retrieved, 
@@ -59,9 +58,6 @@ function(satellites = NULL, date = NULL)
         satellites <- FindSatelliteName(satellites)
     }
     
-    # date <- sprintf("%sT12:00:00", Sys.Date() + 1)
-    # satellites <- c("Sentinel-2A,Sentinel-1B,Landsat-8")
-
     qry <- list(satellites = satellites, datetime = date)
     
     resp <- httr::GET(url = endpoint, query = qry)

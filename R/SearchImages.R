@@ -47,12 +47,6 @@ function(aoi, satellites = NULL, date_from = NULL, date_to = NULL, footprint = F
         stop("aoi argument must be a 'Spatial*' or 'sf' (simple feature) object")
     }
 
-    # aoi <- sf::read_sf(system.file("extdata", "luxembourg.geojson", package = "spectator"))
-    # from <- "2020-10-01"
-    # to <- "2020-12-31"
-    # satellites <- c("Sentinel-2A,Sentinel-1B,Landsat-8")
-    # satellites <- c("Sentinel-2A,Sentinel-2B")
-    
     endpoint <- "https://api.spectator.earth/imagery/"
     bbox <- paste(as.numeric(sf::st_bbox(aoi)), collapse = ",")
     qry <- list(api_key = api_key, bbox = bbox)
@@ -82,7 +76,6 @@ function(aoi, satellites = NULL, date_from = NULL, date_to = NULL, footprint = F
         results <- c(results, cnt$results)
     }
     
-    # saveRDS(results, "misc/results.rds")
     catalogue <- data.frame(id = sapply(results, FUN = function(x) SafeNull(x$id)),
                     uuid = sapply(results, FUN = function(x) SafeNull(x$uuid)),
                     identifier = sapply(results, FUN = function(x) SafeNull(x$identifier)),
@@ -103,8 +96,6 @@ function(aoi, satellites = NULL, date_from = NULL, date_to = NULL, footprint = F
     
     if (footprint) {
         geometry <- sapply(results, FUN = function(x) SafeNull(x$geometry$coordinates))
-        # saveRDS(catalogue, "misc/catalogue.rds")
-        # saveRDS(geometry, "misc/geometry.rds")
         koords <- lapply(geometry, FUN = function(x) list(matrix(unlist(x), ncol = 2, byrow = TRUE)))
         poly <- lapply(koords, sf::st_polygon)
         geom <- sf::st_sfc(poly, crs = 4326)
@@ -115,6 +106,3 @@ function(aoi, satellites = NULL, date_from = NULL, date_to = NULL, footprint = F
     
     return(out)
 }
-
-
-
