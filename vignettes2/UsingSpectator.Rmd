@@ -37,7 +37,7 @@ httptest::start_vignette("UsingSpectator")
 The `spectator` package for R was developed to allow access to the
 '[Spectator Earth](https://spectator.earth/)' API from R. Spectator Earth offers a Web app providing Earth Observation imagery, mainly from open data satellites like the Sentinel and the Landsat family. These features are also exposed through an API, and the goal of the `spectator` package is to provide easy access to this functionality from R.
 
-The main functions allow to retrieve the acquisition plans for Sentinel-1, Sentinel-2 and Landsat-8 satellites and to get the past or (near)future overpasses over an area of interest for these satellites. It is also possible to search the archive for available images over the area of interest for a given (past) period, get the URL links to download the whole image tiles, or alternatively to download the image for just the area of interest based on selected spectral bands.
+The main functions allow to retrieve the acquisition plans for Sentinel-1, Sentinel-2, Landsat-8 and Landsat-9 satellites and to get the past or (near)future overpasses over an area of interest for these satellites. It is also possible to search the archive for available images over the area of interest for a given (past) period, get the URL links to download the whole image tiles, or alternatively to download the image for just the area of interest based on selected spectral bands.
 
 One can also get a current position and trajectory for a much larger set of satellites.
 
@@ -104,14 +104,14 @@ title(main = sprintf("current %s trajectory & position", sat))
 
 # Acquisition plans
 
-This functionality is available only for Sentinel-1, Sentinel-2 and Landsat-8 satellites.
-It is based on the files provided by ESA (Sentinel-1, Sentinel-2) and USGS (Landsat-8), 
-For Sentinels the acquisition plans usually have a range of 10-15 days, while for Landsat-8 it is 2-4 days.
+This functionality is available only for Sentinel-1, Sentinel-2, Landsat-8 and Landsat-9 satellites.
+It is based on the files provided by ESA (Sentinel-1, Sentinel-2) and USGS (Landsat-8, Landsat-9), 
+For Sentinels the acquisition plans usually have a range of 10-15 days, while for Landsat-8 and Landsat-9 it is 2-4 days.
 The time range that you can view is limited to 24 hours due to a large number of polygons.
 More information is available from the ESA and USGS web pages for
 [Sentinel-1](https://sentinel.esa.int/web/sentinel/missions/sentinel-1/observation-scenario/acquisition-segments), 
 [Sentinel-2](https://sentinel.esa.int/web/sentinel/missions/sentinel-2/acquisition-plans), and
-[Landsat-8](https://landsat.usgs.gov/landsat_acq).  
+[Landsat-8 and Landsat-9](https://landsat.usgs.gov/landsat_acq).  
 
 To begin with, we shall retrieve the acquisition plans for all eligible satellites for today (default value).
 We shall limit the dataset to the first 100 records, because of the size of the full dataset (> 1000 rows).
@@ -293,7 +293,7 @@ We can now import this file in our preferred calendar management application, he
 # Searching for images
 
 We can query the archived images catalog to find available images for an area of interest (AOI).
-It can be done for images captured by Sentinel-1, Sentinel-2 and Landsat-8 satellites.
+It can be done for images captured by Sentinel-1, Sentinel-2, Landsat-8 and Landsat-9 satellites.
 This functionality requires a valid API key. So we shall first get the API key from an environment variable or set it in any other suitable way.
 
 ```{r label = "API key 2"}
@@ -333,6 +333,10 @@ head(images, n = 20L)
 ```{r label = "file size", include = FALSE}
 size <- as.integer(subset(images, path == "B04.jp2", "size"))
 ```
+
+It should be noted that by default the function `GetImageryFilesList` lists only the full-sized images, 
+not the other various auxiliary files such as image thumbnails, metadata, etc. 
+You should set the argument `all` to `TRUE` to include them in the output.
 
 We could now download the whole band 4 image tile for the image with the minimal cloud coverage using the code below.
 *Warning*: this is a very **BIG** file (`r prettyNum(size, big.mark = " ")` bytes), so think twice before you start the download!

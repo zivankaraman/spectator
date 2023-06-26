@@ -3,6 +3,8 @@ rmarkdown::render(input = "C:/GitHub/spectator/vignettes2/UsingSpectator.Rmd", o
 # rename vignettes folders to build
 file.rename("vignettes", "vignettes1")
 file.rename("vignettes2", "vignettes")
+# remove previous spectator_latest.tar.gz
+if (file.exists("spectator_latest.tar.gz")) file.remove("spectator_latest.tar.gz")
 # build with real vignette
 tgz <- devtools::build()
 # extract updated vignette files for doc
@@ -32,7 +34,7 @@ setwd(oldwd)
 detach("package:spectator", unload = TRUE)
 install.packages(tgz, repos = NULL, type = "source")
 # copy package archive to latest
-file.copy(from = tgz, to = "spectator_latest.tar.gz", overwrite = TRUE)
+file.copy(from = tgz, to = "../spectator_latest.tar.gz", overwrite = TRUE)
 
 # check on rhub
 chk <- rhub::check_for_cran(tgz, show_status = FALSE)

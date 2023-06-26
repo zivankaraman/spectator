@@ -1,4 +1,3 @@
-
 #' @title Gets overpasses for an area of interest
 #' @description Retrieves the footprint polygons of past and/or (near)future overpasses
 #'  of specified satellites over an area of interest.
@@ -7,7 +6,7 @@
 #' @param satellites character vector, if specified only the listed satellites will be retrieved,
 #'  if \code{NULL} (default value) the acquisition plans for all possible satellites will be retrieved.
 #'  For simplicity, the satellites names can be abbreviated to
-#'  "S-1A", "S-1B", "S-2A", "S-2B", "L-8" or "S1A", "S1B", "S2A", "S2B", "L8". Default: NULL
+#'  "S-1A", "S-1B", "S-2A", "S-2B", "L-8", "L-9" or "S1A", "S1B", "S2A", "S2B", "L8", "L9". Default: NULL
 #' @param days_before integer indicating the number of days before the current date for which
 #'  overpasses should be computed. Default: 0
 #' @param days_after integer indicating the number of days after the current date for which
@@ -60,29 +59,13 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     if (!inherits(aoi, "sf")) {
         stop("aoi argument must be a 'Spatial*' or 'sf' (simple feature) object")
     }
-    # days_before = 0
-    # days_after = 7 
-    # api_key = Sys.getenv("api_key")
-    # bbox <- "19.59,49.90,20.33,50.21"
-    
+
     endpoint <- "https://api.spectator.earth/overpass/"
     bbox <- paste(as.numeric(sf::st_bbox(aoi)), collapse = ",")
 
     qry <- list(api_key = api_key, bbox = bbox, days_before = days_before, days_after = days_after)
     
     if (!is.null(satellites)) {
-        # # allow shorthand spelling
-        # allowed.satellites <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
-        #                         "S-1A", "S-1B", "S-2A", "S-2B", "L-8",
-        #                         "S1A", "S1B", "S2A", "S2B", "L8")
-        # names(allowed.satellites) <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
-        #                                "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8",
-        #                                "Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8")
-        # satellites <- paste(unique(names(allowed.satellites)[grep(satellites, allowed.satellites)]), collapse = ",")
-        # if (length(satellites) == 0)  {
-        #     stop()
-        # }
-        # satellites <- c("Sentinel-2A,Sentinel-2B")
         satellites <- FindSatelliteName(satellites)
         qry <- c(qry, satellites = satellites)
     }
@@ -92,11 +75,9 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
 
     cnt <- httr::content(resp)
     overpasses <- cnt$overpasses
-    # saveRDS(overpasses, "misc/overpasses.rds")
-    
+
     # get attributes
     df <- data.frame(id = sapply(overpasses, "[[", "id"),
-                     # acquisition = sapply(overpasses, "[[", "acquisition"),
                      acquisition = sapply(overpasses, FUN = function(x) SafeNull(x$acquisition)),
                      date = sapply(overpasses, "[[", "date"),
                      satellite = sapply(overpasses, "[[", "satellite"),
@@ -104,30 +85,6 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     row.names(df) <- df$id
     # convert datetime strings to POSIX format
     df$date <- as.POSIXct(gsub("Z", "", gsub("T", " ", df$date)), tz = "GMT")
-    
-    # # get footprint / polygons
-    # koords <- sapply(overpasses, FUN = function(x) x$footprint$coordinates)
-    # koords2 <- lapply(koords, FUN = function(x)  t(sapply(x, unlist)))
-    # poly <- vector(mode = "list", length = length(koords2))
-    # for (i in 1:length(koords2)) {
-    #     poly[[i]] <- sp::Polygons(list(sp::Polygon(koords2[[i]], hole = FALSE)), ID = df$id[i])
-    # }
-    # # spoly <- sp::SpatialPolygons(poly, proj4string = sp::CRS("+proj=longlat +datum=WGS84"))
-    # spoly <- sp::SpatialPolygons(poly, proj4string = wgs84)
-    # 
-    # spolydf <- sp::SpatialPolygonsDataFrame(spoly, data = df)
-    # if (acquisitions) {
-    #     spolydf <- subset(spolydf, spolydf$acquisition == TRUE)
-    # }
-    # out <- sf::st_as_sf(spolydf)
-
-    # get geometry / centroids
-    # mat <- t(sapply(overpasses, FUN = function(x) x$geometry$coordinates))
-    # pts <- data.frame(long = unlist(mat[, 1]), lat = unlist(mat[, 2]))
-    # sp::coordinates(pts) <- ~ long + lat
-    # sp::proj4string(pts) <- sp::CRS("+proj=longlat +datum=WGS84")
-    # sptsdf <- sp::SpatialPointsDataFrame(pts, data = df)
-    # out <- list(footprint = spolydf, centroids = sptsdf)
     
     # get footprint / polygons
     koords <- lapply(overpasses, FUN = function(x) list(matrix(unlist(x$footprint$coordinates), ncol = 2, byrow = TRUE)))
@@ -137,12 +94,9 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     
     # get data acquisition overpasses only? 
     if (acquisitions) {
-        # out1 <- subset(out, acquisition == TRUE)
-        # out2 <- subset(out, is.na(acquisition))
-        # rbind(out1, out2)
-        # out3 <- rbind(subset(out, acquisition == TRUE), subset(out, is.na(acquisition)))
-        # out4 <- subset(out, (acquisition == TRUE) | is.na(acquisition))
-        out <- subset(out, (acquisition == TRUE) | is.na(acquisition))
+        # out <- subset(out, (acquisition == TRUE) | is.na(acquisition))
+        # The above statement is not accepted by CRAN, so must use the workaround
+        out <- out[(out$acquisition == TRUE) | is.na(out$acquisition), ]
     }
     row.names(out) <- NULL
     return(out)

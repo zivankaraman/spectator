@@ -17,8 +17,8 @@
 #' and the goal of the \code{spectator} package is to provide easy access to
 #' this functionality from R.
 #' 
-#' The main functions allow to retrieve the acquisition plans for Sentinel-1, Sentinel-2 
-#' and Landsat-8 satellites and to get the past or (near)future overpasses over 
+#' The main functions allow to retrieve the acquisition plans for Sentinel-1, Sentinel-2,
+#' Landsat-8 and Landsat-9 satellites and to get the past or (near)future overpasses over 
 #' an area of interest for these satellites. It is also possible to search the archive
 #' for available images over the area of interest for a given (past) period, get the URL 
 #' links to download the whole image tiles, or alternatively to download the image for 
