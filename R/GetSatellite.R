@@ -9,9 +9,11 @@
 #'   \item{\code{id}}{integer identifier}
 #'   \item{\code{name}}{character satellite name}
 #'   \item{\code{norad_id}}{integer satellite catalog number}
-#'   \item{\code{sensors}}{character type of sensors available on the satellite (SAR or Optical)}
 #'   \item{\code{open}}{logical whether the data produced by the satellite is freely accessible}
 #'   \item{\code{platform}}{character platform name}
+#'   \item{\code{sensor_name}}{character name of the sensor available on the satellite}
+#'   \item{\code{sensor_swath}}{integer swath width of the sensor available on the satellite}
+#'   \item{\code{sensor_type}}{character type of the sensor available on the satellite (SAR or Optical)}
 #'}
 #' If \code{positions} is \code{TRUE}, a single row object of class '\code{sf}' with '\code{POINT}' geometry type, 
 #' with the same attributes as above.
@@ -64,7 +66,7 @@ function(satellite, positions = TRUE)
         out$sensor_type <- tab$sensor_type
         # out <- out[, c("name", "norad_id", "open", "platform", "sensor_name", "sensor_swath", 
         #                "sensor_type", "modes", "geometry")]
-        out <- out[, c("name", "norad_id", "open", "platform", "sensor_name", "sensor_swath", "sensor_type", "geometry")]
+        out <- out[, c("id", "name", "norad_id", "open", "platform", "sensor_name", "sensor_swath", "sensor_type", "geometry")]
         row.names(out) <- NULL
     } else {
         out <- tab
