@@ -1,6 +1,4 @@
-SafeNull <-
-function(x)
-{
+SafeNull <- function(x) {
     # replace NULL elements in lists with NA, so they don't get dropped
     # sapply(lst, FUN = function(x) SafeNull(x$some_property))
     # lst <- list(list(id = 1, some_property = "abc"), list(id = 2, some_property = NULL), list(id = 3))
@@ -11,23 +9,19 @@ function(x)
     ifelse(is.null(x), NA, x)
 }
 
-FindSatelliteId <-
-function(x)
-{
+FindSatelliteId <- function(x) {
     # finds a satellite id from the internal satellite table
     idx <- charmatch(toupper(x), toupper(spectator::satellites_db$name), nomatch = NA_integer_)
     if (is.na(idx)) {
-     stop(sprintf("satellite named '%s' not found", x))
+        stop(sprintf("satellite named '%s' not found", x))
     }
     if (idx == 0) {
-     stop(sprintf("satellite name '%s' is ambigous, provide an unambigous name", x))
+        stop(sprintf("satellite name '%s' is ambigous, provide an unambigous name", x))
     }
     return(spectator::satellites_db$id[idx])
 }
 
-FindSatelliteName <-
-function(x)
-{
+FindSatelliteName <- function(x) {
     # allow shorthand spellings, return official full name
     allowed.satellites <- c("Sentinel-1A", "Sentinel-1B", "Sentinel-2A", "Sentinel-2B", "Landsat-8", "Landsat-9",
                             "S-1A", "S-1B", "S-2A", "S-2B", "L-8", "L-9",
@@ -44,9 +38,7 @@ function(x)
     return(satellite.names)    
 }
 
-CheckResponseSatus <- 
-function(resp)
-{
+CheckResponseSatus <- function(resp) {
     # check if httr request succeeded
     if (resp$status_code != 200) {
         cnt <- httr::content(resp)
