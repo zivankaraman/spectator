@@ -20,7 +20,7 @@ dsn <- system.file("extdata", "luxembourg.geojson", package = "spectator")
 boundary <- read_sf(dsn, as_tibble = FALSE)
 
 # look for Sentinel-2 A and B, use shorthand notation, default time frame
-pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = TRUE, api_key = key)
+pass <- GetOverpasses(aoi = boundary, satellites = "S-2", acquisitions = TRUE, api_key = key)
 
 # do some nice graphs
 library(maps)

@@ -78,7 +78,7 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
 
     # get attributes
     df <- data.frame(id = sapply(overpasses, "[[", "id"),
-                     acquisition = sapply(overpasses, FUN = function(x) SafeNull(x$acquisition)),
+                     acquisition = sapply(overpasses, FUN = function(x) SafeNull(x$footprints$features[[1]]$properties$acquisition)),
                      date = sapply(overpasses, "[[", "date"),
                      satellite = sapply(overpasses, "[[", "satellite"),
                      stringsAsFactors = FALSE)
@@ -87,7 +87,7 @@ function(aoi, satellites = NULL, days_before = 0, days_after = 7, acquisitions =
     df$date <- as.POSIXct(gsub("Z", "", gsub("T", " ", df$date)), tz = "GMT")
     
     # get footprint / polygons
-    koords <- lapply(overpasses, FUN = function(x) list(matrix(unlist(x$footprint$coordinates), ncol = 2, byrow = TRUE)))
+    koords <- lapply(overpasses, FUN = function(x) list(matrix(unlist(x$footprints$features[[1]]$geometry$coordinates), ncol = 2, byrow = TRUE)))
     poly <- lapply(koords, sf::st_polygon)
     geom <- sf::st_sfc(poly, crs = 4326)
     out <- sf::st_sf(cbind(df, geom))

@@ -64,6 +64,7 @@ function(satellite, positions = TRUE)
         out$sensor_name <- tab$sensor_name
         out$sensor_swath <- tab$sensor_swath
         out$sensor_type <- tab$sensor_type
+        out$id <- tab$id
         # out <- out[, c("name", "norad_id", "open", "platform", "sensor_name", "sensor_swath", 
         #                "sensor_type", "modes", "geometry")]
         out <- out[, c("id", "name", "norad_id", "open", "platform", "sensor_name", "sensor_swath", "sensor_type", "geometry")]
