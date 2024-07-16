@@ -1,0 +1,13 @@
+Changes in version 0.3.0 (2024-07-16)
+    - the satellite database is refreshed each time the package is loaded
+    - few bug fixes and minor improvements
+    
+Changes in version 0.2.0 (2023-07-04)
+    - modifications to be compliant with the new API
+
+Changes in version 0.1.1 (2022-03-29)
+    - added support for Landsat-9
+    - few minor improvements
+
+Changes in version 0.1.0 (2021-12-03)
+    - initial release on CRAN

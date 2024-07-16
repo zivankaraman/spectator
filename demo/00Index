@@ -1,0 +1,4 @@
+acquisition     script retrieving the acquisition plans (only for Sentinel-2, Landsat-8 and Sentinel-1)
+imagery         searching and retrieving satellite imagery (only for Sentinel-2, Landsat-8 and Sentinel-1)
+overpasses      shows getting overpasses over an area of interest (only for Sentinel-2, Landsat-8 and Sentinel-1)
+satellites      demonstrate use of satellites related functions for all referenced satellites

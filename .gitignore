@@ -4,7 +4,6 @@
 
 # Session Data files
 .RData
-.RDataTmp
 
 # User-specific files
 .Ruserdata
@@ -39,11 +38,17 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# pkgdown site
-docs/
+# documentation
+documentation/*
 
-# translation temp files
-po/*~
+# external documentation
+externaldoc/*
 
-# RStudio Connect folder
-rsconnect/
+# HelpDesk
+HelpDesk/*
+
+# /doc/
+# /Meta/
+
+# folder custom attributes on macOS
+.DS_Store

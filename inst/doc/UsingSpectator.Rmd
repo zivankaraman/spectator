@@ -1,0 +1,386 @@
+---
+title: "Using spectator - worked examples"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_float: yes
+    theme: flatly
+vignette: >
+  %\VignetteIndexEntry{Worked examples of using spectator}
+  %\VignetteEncoding{UTF-8}    
+  %\VignetteEngine{knitr::rmarkdown}
+params:
+  extra1: 'style="background-color: #ECF0F1; padding: 1px; display: inline-block;"'
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r label = "knitr options", include = FALSE}
+knitr::opts_chunk$set(
+    fig.width = 7, 
+    fig.height = 4,
+    out.width = "100%",
+    fig.align = "center",
+    collapse = TRUE,
+    comment = "#>"
+)
+knitr::opts_knit$set(global.device = FALSE)
+```
+
+<br>
+
+# Introduction
+
+The `spectator` package for R was developed to allow access to the '[Spectator Earth](https://spectator.earth/)' API from R.
+Spectator Earth offers a Web app providing Earth Observation imagery, mainly from open data satellites like the Sentinel and the Landsat family.
+These features are also exposed through an API, and the goal of the `spectator` package is to provide easy access to this functionality from R.
+
+The main functions allow to retrieve the acquisition plans for Sentinel-1, Sentinel-2, Landsat-8 and Landsat-9 satellites and to get the past or (near)future overpasses over an area of interest for these satellites.
+It is also possible to search the archive for available images over the area of interest for a given (past) period, get the URL links to download the whole image tiles, or alternatively to download the image for just the area of interest based on selected spectral bands.
+
+One can also get a current position and trajectory for a much larger set of satellites.
+
+Other functions might be added in subsequent releases of the package.
+<br><br>
+
+# API key
+
+Some of the functions (mainly those specific to Sentinel and Landsat satellites) require to pass an API key as a parameter to the function (because the underlying API endpoint requires it).
+The API key is automatically generated for every registered user at <https://app.spectator.earth>.
+You can find it under 'Your profile' (bottom left button) and copy it to the clipboard.
+The functions in the `spectator` package by default retrieve the API key from the environment variable "`spectator_earth_api_key`".
+You can choose any other way of providing it, but keep in mind that for security reasons it is **NOT** recommended to hard-code (include it as clear text) it in your scripts.
+
+```{r label = "setup", include = FALSE}
+# we need these packages
+library(sf)
+library(maps)
+library(spectator)
+```
+
+<br>
+
+# Satellites
+
+We can get the list of all the satellites referenced in the [Spectator Earth](https://spectator.earth/) database and their current positions.
+
+```{r label = "get satellites", out.extra = params$extra1}
+pos <- GetAllSatellites(positions = TRUE)
+head(pos, n = 20L)
+```
+
+We can now plot the current positions of all the satellites on the world map.
+We shall show the open data satellites in green, and all the others in red.
+We can also add satellite names as labels.
+In order to be able to read them, we will shift labels up a little bit.
+
+```{r label = "plot satellite positions", out.extra = params$extra1}
+# we need these packages
+library(sf)
+library(maps)
+maps::map("world", fill = TRUE, col = "lightgrey", mar = rep(0.0, 4L))
+plot(sf::st_geometry(subset(pos, open == TRUE)), add = TRUE, col = "green", pch = 15)
+plot(sf::st_geometry(subset(pos, open == FALSE)), add = TRUE, col = "red", pch = 16)
+xy <- sf::st_coordinates(pos)
+xy[, 2] <- xy[, 2] + 3 
+text(xy, labels = pos$name, cex = 0.5)
+```
+
+```{r label = "turn off global device", include = FALSE}
+knitr::opts_knit$set(global.device = FALSE)
+```
+
+<br>
+
+# Trajectories
+
+It is possible to get the current trajectory and the current position for a selected satellite (here *SPOT-7*).
+
+```{r label = "get trajectories"}
+sat <- "SPOT-7"
+traj <- GetTrajectory(satellite = sat)
+pos1 <- GetSatellite(satellite = sat, positions = TRUE)
+```
+
+These can be plotted on the world map, trajectory in red and the current position in green.
+
+```{r label = "plot trajectories", out.extra = params$extra1}
+maps::map("world", fill = TRUE, col = "lightgrey", mar = c(0.5, 0.5, 3, 0.5))
+plot(sf::st_geometry(traj), lwd = 2, col = "red", add = TRUE)
+plot(sf::st_geometry(pos1), pch = 15, col = "green", cex = 1.5, add = TRUE)
+title(main = sprintf("current %s trajectory & position", sat))
+```
+
+<br><br>
+
+# Acquisition plans
+
+This functionality is available only for Sentinel-1, Sentinel-2, Landsat-8 and Landsat-9 satellites.
+It is based on the files provided by ESA (Sentinel-1, Sentinel-2) and USGS (Landsat-8, Landsat-9), For Sentinels the acquisition plans usually have a range of 10-15 days, while for Landsat-8 and Landsat-9 it is 2-4 days.
+The time range that you can view is limited to 24 hours due to a large number of polygons.
+More information is available from the ESA and USGS web pages for [Sentinel-1](https://sentinel.esa.int/web/sentinel/missions/sentinel-1/observation-scenario/acquisition-segments), [Sentinel-2](https://sentinel.esa.int/web/sentinel/missions/sentinel-2/acquisition-plans), and [Landsat-8 and Landsat-9](https://landsat.usgs.gov/landsat_acq).
+
+To begin with, we shall retrieve the acquisition plans for all eligible satellites for today (default value).
+We shall limit the dataset to the first 100 records, because of the size of the full dataset (\> 1000 rows).
+
+```{r label = "acquisition plans"}
+plans <- head(GetAcquisitionPlan(), n = 100L)
+plans
+```
+
+You can explore the content of the data frame, you'll see that the attributes of the output will vary, depending on the satellite.
+For more information check out acquisition plan file descriptions at the above-mentioned web pages.
+<br><br> We can now focus on Sentinel 2 satellites, and look for the acquisition plans for the day after tomorrow.
+
+```{r label = "acquisition plans Sentinel 2"}
+sat <- c("Sentinel-2A", "Sentinel-2B")
+day <- Sys.Date() + 2
+plan <- GetAcquisitionPlan(satellites = sat, date = day)
+head(plan)
+```
+
+The acquisition plans can also be plotted on the world map.
+
+```{r label = "plot acquisition plans", out.extra = params$extra1}
+maps::map("world", fill = TRUE, col = "lightgrey", mar = c(0.5, 0.5, 4, 0.5))
+plot(sf::st_geometry(plan), border = "red", add = TRUE)
+title(main = sprintf("%s acquisition plan for %s", paste(sat, collapse = "/"), day), line = 1L)
+```
+
+<br><br>
+
+# Satellite overpasses
+
+It is possible to get past and planned overpasses over an area/region of interest.
+We shall use the Luxembourg country shape as area of interest in our examples.
+
+```{r label = "Luxembourg boundary"}
+roi <- system.file("extdata", "luxembourg.geojson", package = "spectator")
+boundary <- sf::read_sf(roi, as_tibble = FALSE)
+```
+
+This functionality requires a valid API key.
+So we shall first get the API key from an environment variable or set it in any other suitable way.
+
+```{r label = "API key"}
+my_key <- Sys.getenv("spectator_earth_api_key")
+```
+
+We shall now look for Sentinel-2A and Sentinel-2B overpasses of Luxembourg for the following week (default time frame).
+We can use the shorthand notation to specify satellites of interest (see the help page for the `GetOverpasses` function).
+
+```{r label = "get Sentinel 2 overpasses"}
+pass <- GetOverpasses(boundary, satellites = "S2", acquisitions = FALSE, api_key = my_key)
+head(pass)
+```
+
+The footprints of the overpasses can be plotted, here we use only the neighboring countries and show the region of interest in red.
+
+```{r label = "plot Sentinel 2 overpasses", out.extra = params$extra1}
+library(maps)
+days <- range(as.Date(pass$date))
+satellites <- sort(unique(pass$satellite))
+maps::map(database = "world", region = c("Belgium", "Netherlands", "Germany", "Luxembourg",
+            "France", "Switzerland"), col = "lightgrey", fill = TRUE, mar = c(0.5, 0.5, 4, 0.5))
+plot(sf::st_geometry(boundary), add = TRUE, col = "red", border = FALSE)
+plot(sf::st_geometry(pass), add = TRUE)
+title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse = "/"), 
+                     paste(days, collapse = ":")), line = 1L)
+```
+
+We shall now look for Sentinel-1A overpasses of Luxembourg for the previous week.
+We can use the use shorthand notation to specify satellites of interest (see the help page for the `GetOverpasses` function).
+
+```{r label = "get Sentinel 1 overpasses"}
+pass <- GetOverpasses(boundary, satellites = "S-1A",
+                      days_before = 7, days_after = 0, acquisitions = TRUE)
+head(pass)
+```
+
+Again, we can plot the footprints of the overpasses, using only the neighboring countries and showing the region of interest in red.
+
+```{r label = "plot Sentinel 1 overpasses", , out.extra = params$extra1}
+days <- range(as.Date(pass$date))
+satellites <- sort(unique(pass$satellite))
+maps::map(database = "world", region = c("Belgium", "Netherlands", "Germany", "Luxembourg",
+            "France", "Switzerland"), col = "lightgrey", fill = TRUE, mar = c(0.5, 0.5, 4, 0.5))
+plot(sf::st_geometry(boundary), add = TRUE, col = "red", border = FALSE)
+plot(sf::st_geometry(pass), add = TRUE)
+title(main = sprintf("%s overpasses for period %s", paste(satellites, collapse = "/"), 
+                     paste(days, collapse = ":")), line = 1L)
+```
+
+<br><br>
+
+# Plot overpasses calendar
+
+Let's try to get as much information as we can (past and future overpasses) about Sentinel-2A and Sentinel-2B overpasses of Luxembourg.
+
+```{r label = "get Sentinel 2 overpasses max time frame"}
+pass <- GetOverpasses(boundary, satellites = "S-2", acquisitions = FALSE, api_key = my_key,
+                      days_before = 99, days_after = 99)
+```
+
+As the acquisitions take place only in the middle of the day, we shall keep only the overpasses between 06:00 and 18:00.
+
+```{r label = "middle of the day overpasses only"}
+# we need these packages
+library(sf)
+library(lutz)
+library(lubridate)
+
+tz <- lutz::tz_lookup(sf::st_centroid(sf::st_geometry(boundary)), method = "accurate")
+localtime <- lubridate::local_time(pass$date, tz = tz, units = "hours")
+pass$acquisition <- localtime > 6 & localtime < 18
+pass <- subset(pass, acquisition == TRUE)
+```
+
+We can now plot the nice calendar using the `calendR` package.
+
+```{r label = "plot calendar"}
+# we need this package
+library(calendR)
+
+time_span <- range(as.Date(pass$date))
+satellites <- sort(unique(pass$satellite))
+first_date <- lubridate::floor_date(lubridate::ymd(time_span[1]), unit = "month") 
+last_date <- lubridate::ceiling_date(lubridate::ymd(time_span[2]), unit = "month") - 1
+days <- first_date:last_date
+passes <- as.Date(pass$date)
+events <- rep(NA, length(days))
+events[passes - first_date + 1] <- pass$satellite
+
+# will use English month and day of week labels 
+# ans <- Sys.setlocale(category = "LC_ALL", locale = "English") # Windows
+ans <- Sys.setlocale(category = "LC_ALL", locale = "en_US.UTF-8") # MacOS
+
+calendR::calendR(from = first_date, to = last_date, 
+                 title = "Sentinel 2 overpasses calendar",
+                 special.days = events,
+                 special.col = 2:(length(satellites) + 1),
+                 col = "grey",
+                 mbg.col = 4,               # Color of the background of the names of the months
+                 months.col = "white",      # Color text of the names of the months        
+                 bg.col = "#f4f4f4",        # Background color
+                 start = "M",               # Start the weeks on Monday
+                 legend.pos = "right")
+```
+
+<br>
+
+# Show overpasses in a calendar app
+
+We can also export the overpasses calendar as a calendar file (iCal or ICS file), which can be imported in any calendar management application.
+You could thus take the overpasses calendar with you in the calendar app of your smartphone, for example.
+We shall use the `calendar` package to generate the iCal file.
+
+```{r label = "export calendar"}
+# we need this package
+library(calendar)
+
+N <- nrow(pass)
+lst <- vector(mode = "list", length = N)
+for (i in 1:nrow(pass)) {
+    x <- pass[i, ]
+    lst[[i]] <- calendar::ic_event(uid = calendar::ic_guid(), start_time = x$date, end_time = x$date, summary = x$satellite)
+} 
+
+cal <- calendar::ical(do.call(rbind, lst))
+# cal[, "TZID"] <- tz
+koords <- sf::st_coordinates(sf::st_centroid(sf::st_geometry(boundary, of_largest_polygon = FALSE)))
+cal[, "LOCATION"] <- sprintf("(LAT:%f;LONG:%f)", koords[, "Y"], koords[, "X"])
+calFile <- "overpasses.ics"
+calendar::ic_write(cal, file = calFile)
+```
+<br><br>
+
+# Searching for images
+
+We can query the archived images catalog to find available images for an area of interest (AOI).
+It can be done for images captured by Sentinel-1, Sentinel-2, Landsat-8 and Landsat-9 satellites.
+This functionality requires a valid API key.
+So we shall first get the API key from an environment variable or set it in any other suitable way.
+
+```{r label = "API key 2"}
+my_key <- Sys.getenv("spectator_earth_api_key")
+```
+
+Let's say that our area of interest (AOI) is the New York City Central Park.
+We shall first read the contour from a GeoJSON file.
+
+```{r label = "Central Park boundary"}
+roi <- system.file("extdata", "centralpark.geojson", package = "spectator")
+boundary <- sf::read_sf(roi, as_tibble = FALSE)
+```
+
+Now we shall look for all Sentinel 2 images (both Sentinel-2A and Sentinel-2B) captured in May 2021.
+We shall use again the shorthand notation to specify satellites of interest (see the help page for the `GetOverpasses` function).
+
+```{r label = "serch Central Park images"}
+catalog <- SearchImages(aoi = boundary, satellites = "S2", 
+                        date_from = "2021-05-01", date_to = "2021-05-30", 
+                        footprint = FALSE, api_key = my_key)
+head(catalog, n = 20L)
+```
+
+<br>
+
+# Imagery files
+
+To access the imagery files we have to use their ids.
+We shall concentrate on the image with minimal cloud coverage and get the corresponding id.
+
+```{r label = "minimal cloud coverage"}
+best_id <- catalog[order(catalog$cloud_cover_percentage), ][1, "id"]
+best_date <- as.Date(catalog[order(catalog$cloud_cover_percentage), ][1, "end_position_date"])
+```
+
+We can now retrieve the list of all available (downloadable) files for this id (the image with minimal cloud coverage).
+
+```{r label = "list imagery files"}
+images <- GetImageryFilesList(best_id, api_key = my_key)
+head(images, n = 20L)
+```
+
+```{r label = "file size", include = FALSE}
+size <- as.integer(subset(images, path == "B04.jp2", "size"))
+```
+
+It should be noted that by default the function `GetImageryFilesList` lists only the full-sized images, not the other various auxiliary files such as image thumbnails, metadata, etc.
+You should set the argument `all` to `TRUE` to include them in the output.
+
+We could now download the whole band 4 image tile for the image with the minimal cloud coverage using the code below.
+*Warning*: this is a very **BIG** file (`r prettyNum(size, big.mark = " ")` bytes), so think twice before you start the download!
+
+```{r label = "download the big file", eval = FALSE}
+from <- paste0(catalog[order(catalog$cloud_cover_percentage), ][1, "download_url"], "B04.jp2")
+to <- "B04.jp2"
+library(httr)
+resp <- httr::GET(url = from, query = list(api_key = my_key))
+writeBin(httr::content(resp), con = to)
+```
+
+<br>
+
+# High-resolution images
+
+We can also get a get the high-resolution images of the AOI (here Central Park) using the image id from the catalog.
+We shall use once again the id that corresponds to the with the minimal cloud coverage.
+One can request one or three bands, to get the monochrome or color (RGB) image.
+The Sentinel-2 RGB bands are 4, 3, and 2, respectively (source: <https://en.wikipedia.org/wiki/Sentinel-2#Spectral_bands>).
+
+```{r label = "high resolution image", eval = FALSE}
+img <- GetHighResolutionImage(aoi = boundary, id = best_id, bands = c(4, 3, 2), 
+                              width = 600, height = 950,
+                              file = tempfile(pattern = "img", fileext = ".jpg"), 
+                              api_key = my_key)
+ras <- suppressWarnings(raster::stack(img))
+suppressWarnings(raster::plotRGB(ras))
+```
+::: {align="center"}
+*Sentinel-2 image of Central Park, New York City on `r format.Date(best_date, "%d %B %Y")`.*
+:::
+
+<br> <br> <br> <br>  _Compiled on `r format(Sys.time(), "%Y-%m-%d %H:%M:%S")`._ 
