@@ -1,3 +1,6 @@
+Changes in version 0.2.0 (2023-07-04)
+    - modifications to be compliant with the new API
+
 Changes in version 0.1.1 (2022-03-29)
     - added support for Landsat-9
     - few minor improvements

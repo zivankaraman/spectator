@@ -28,5 +28,6 @@ pos <- GetSatellite(satellite = sat, positions = TRUE)
 map("world", fill = TRUE, col = "lightgrey")
 plot(st_geometry(traj), lwd = 2, col = "red", add = TRUE)
 plot(st_geometry(pos), pch = 15, col = "green", cex = 1.5, add = TRUE)
-title(main = sprintf("current %s trajectory & position", sat))
+alt <- round(st_coordinates(pos)[, "Z"] / 1000.0)
+title(main = sprintf("current %s trajectory & position", sat), sub = sprintf("current altitude %.0f km", alt))
 

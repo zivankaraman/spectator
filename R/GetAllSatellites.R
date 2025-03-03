@@ -7,9 +7,11 @@
 #'   \item{\code{id}}{integer identifier}
 #'   \item{\code{name}}{character satellite name}
 #'   \item{\code{norad_id}}{integer satellite catalog number}
-#'   \item{\code{sensors}}{character type of sensors available on the satellite (SAR or Optical)}
 #'   \item{\code{open}}{logical whether the data produced by the satellite is freely accessible}
 #'   \item{\code{platform}}{character platform name}
+#'   \item{\code{sensor_name}}{character name of the sensor available on the satellite}
+#'   \item{\code{sensor_swath}}{integer swath width of the sensor available on the satellite}
+#'   \item{\code{sensor_type}}{character type of the sensor available on the satellite (SAR or Optical)}
 #'}
 #' If \code{positions} is \code{TRUE}, object of class '\code{sf}' with '\code{POINT}' geometry type, 
 #' with the same attributes as above.
@@ -52,7 +54,10 @@ function(positions = TRUE)
     tab <- data.frame(id = sapply(features, "[[", "id"),
                       name = unlist(prop[1, ]),
                       norad_id = unlist(prop[2, ]),
-                      sensors = sapply(prop[3, ], FUN = function(x) x[[1]]$type),
+                      # sensors = sapply(prop[3, ], FUN = function(x) x[[1]]$type),
+                      sensor_name = sapply(prop[3, ], FUN = function(x) ifelse(length(x) == 0L, NA, x[[1]]$name)),
+                      sensor_swath = sapply(prop[3, ], FUN = function(x) ifelse(length(x) == 0L, NA, x[[1]]$swath)),
+                      sensor_type = sapply(prop[3, ], FUN = function(x) ifelse(length(x) == 0L, NA, x[[1]]$sensor_type)),
                       open = unlist(prop[4, ]),
                       platform = sapply(prop[5, ], SafeNull),
                       stringsAsFactors = FALSE, row.names = NULL)
@@ -65,8 +70,13 @@ function(positions = TRUE)
         out$id <- tab$id[match(out$norad_id, tab$norad_id)]
         # open is not logical anymore, get it back
         out$open <- as.logical(as.integer(out$open))
-        out <- out[order(out$name), c("id", "name", "norad_id", "sensors", "open", "platform", "geometry")]
-        out$sensors <- tab$sensors
+        out$sensor_name <- tab$sensor_name
+        out$sensor_swath <- tab$sensor_swath
+        out$sensor_type <- tab$sensor_type
+        # out <- out[order(out$name), c("id", "name", "norad_id", "open", "platform", 
+        #                               "sensor_name", "sensor_swath", "sensor_type", "modes", "geometry")]
+        out <- out[order(out$name), c("id", "name", "norad_id", "open", "platform", "sensor_name", 
+                                      "sensor_swath", "sensor_type", "geometry")]
         row.names(out) <- NULL
     } else {
         out <- tab

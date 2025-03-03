@@ -9,9 +9,11 @@
 #'   \item{\code{id}}{integer identifier}
 #'   \item{\code{name}}{character satellite name}
 #'   \item{\code{norad_id}}{integer satellite catalog number}
-#'   \item{\code{sensors}}{character type of sensors available on the satellite (SAR or Optical)}
 #'   \item{\code{open}}{logical whether the data produced by the satellite is freely accessible}
 #'   \item{\code{platform}}{character platform name}
+#'   \item{\code{sensor_name}}{character name of the sensor available on the satellite}
+#'   \item{\code{sensor_swath}}{integer swath width of the sensor available on the satellite}
+#'   \item{\code{sensor_type}}{character type of the sensor available on the satellite (SAR or Optical)}
 #'}
 #' If \code{positions} is \code{TRUE}, a single row object of class '\code{sf}' with '\code{POINT}' geometry type, 
 #' with the same attributes as above.
@@ -50,15 +52,22 @@ function(satellite, positions = TRUE)
     tab <- data.frame(id = cnt$id,
                       name = prop$name,
                       norad_id = prop$norad_id,
-                      sensors = prop$sensors[[1]]$type,
+                      sensor_name = ifelse(length(prop$modes) == 0L, NA, prop$modes[[1]]$name),
+                      sensor_swath = ifelse(length(prop$modes) == 0L, NA, prop$modes[[1]]$swath),
+                      sensor_type = ifelse(length(prop$modes) == 0L, NA, prop$modes[[1]]$sensor_type),
                       open = prop$open,
                       platform = SafeNull(prop$platform),
                       stringsAsFactors = FALSE, row.names = NULL)
     if (positions) {
         cnt <- httr::content(resp, type = "text", encoding = "UTF-8")
         out <- geojsonsf::geojson_sf(cnt)
-        out$sensors <- tab$sensors
-        out <- out[order(out$name), ]
+        out$sensor_name <- tab$sensor_name
+        out$sensor_swath <- tab$sensor_swath
+        out$sensor_type <- tab$sensor_type
+        out$id <- tab$id
+        # out <- out[, c("name", "norad_id", "open", "platform", "sensor_name", "sensor_swath", 
+        #                "sensor_type", "modes", "geometry")]
+        out <- out[, c("id", "name", "norad_id", "open", "platform", "sensor_name", "sensor_swath", "sensor_type", "geometry")]
         row.names(out) <- NULL
     } else {
         out <- tab

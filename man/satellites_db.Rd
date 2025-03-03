@@ -5,14 +5,16 @@
 \alias{satellites_db}
 \title{Satellites database}
 \format{
-A data frame with 48 rows and 6 variables:
+A data frame with 48 rows and 8 variables:
 \describe{
 \item{\code{id}}{integer identifier}
 \item{\code{name}}{character satellite name}
 \item{\code{norad_id}}{integer satellite catalog number}
-\item{\code{sensors}}{character type of sensors available on the satellite (SAR or Optical)}
 \item{\code{open}}{logical whether the data produced by the satellite is freely accessible}
 \item{\code{platform}}{character platform name}
+\item{\code{sensor_name}}{character name of the sensor available on the satellite}
+\item{\code{sensor_swath}}{integer swath width of the sensor available on the satellite}
+\item{\code{sensor_type}}{character type of the sensor available on the satellite (SAR or Optical)}
 }
 }
 \source{
