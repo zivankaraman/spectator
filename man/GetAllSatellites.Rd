@@ -7,10 +7,15 @@
 \url{https://api.spectator.earth/#satellites}
 }
 \usage{
-GetAllSatellites(positions = TRUE)
+GetAllSatellites(
+  positions = TRUE,
+  api_key = Sys.getenv("spectator_earth_api_key")
+)
 }
 \arguments{
 \item{positions}{logical indicating if the current position should be included. Default: TRUE}
+
+\item{api_key}{character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}}
 }
 \value{
 If \code{positions} is \code{FALSE}, a data frame with following attributes:

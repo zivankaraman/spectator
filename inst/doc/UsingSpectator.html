@@ -2827,12 +2827,11 @@ set of satellites.</p>
 </div>
 <div id="api-key" class="section level1">
 <h1>API key</h1>
-<p>Some of the functions (mainly those specific to Sentinel and Landsat
-satellites) require to pass an API key as a parameter to the function
+<p>All the functions require to pass an API key as a parameter to the function
 (because the underlying API endpoint requires it). The API key is
-automatically generated for every registered user at <a href="https://app.spectator.earth" class="uri">https://app.spectator.earth</a>. You can find it under 'Your
-profile' (top right button) / 'Account info' / 'Your API key' and copy it to the clipboard. The
-functions in the <code>spectator</code> package by default retrieve the
+automatically generated for every registered user at <a href="https://obsearth.com/app" class="uri">https://obsearth.com/app</a>. 
+You can find it under 'API Key' of your profile (top right) and copy it to the clipboard. 
+The functions in the <code>spectator</code> package by default retrieve the
 API key from the environment variable
 “<code>spectator_earth_api_key</code>”. You can choose any other way of
 providing it, but keep in mind that for security reasons it is

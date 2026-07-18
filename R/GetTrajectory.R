@@ -3,6 +3,7 @@
 #' @param satellite character name of the satellite for which to retrieve the trajectory. 
 #' The satellite name is not case sensitive, and can be abbreviated as long as an unambiguous match can be obtained.
 #' Only one satellite can be queried at a time.
+#' @param api_key character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}
 #' @return Object of class '\code{sf}' with '\code{LINESTRING}' geometry type
 # @details DETAILS
 #' @examples 
@@ -27,12 +28,12 @@
 #' @importFrom httr GET content
 #' @importFrom geojsonsf geojson_sf
 GetTrajectory <- 
-function(satellite)
+function(satellite, api_key = Sys.getenv("spectator_earth_api_key"))
 {
     id <- FindSatelliteId(satellite)
     endpoint <- sprintf("https://api.spectator.earth/satellite/%d/trajectory/", id)
-    
-    resp <- httr::GET(url = endpoint)
+    qry <- list(api_key = api_key)
+    resp <- httr::GET(url = endpoint, query = qry)
     CheckResponseSatus(resp)
 
     cnt <- httr::content(resp, type = "text", encoding = "UTF-8")

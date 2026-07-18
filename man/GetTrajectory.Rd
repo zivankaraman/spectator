@@ -7,12 +7,14 @@
 \url{https://api.spectator.earth/#trajectories}
 }
 \usage{
-GetTrajectory(satellite)
+GetTrajectory(satellite, api_key = Sys.getenv("spectator_earth_api_key"))
 }
 \arguments{
 \item{satellite}{character name of the satellite for which to retrieve the trajectory.
 The satellite name is not case sensitive, and can be abbreviated as long as an unambiguous match can be obtained.
 Only one satellite can be queried at a time.}
+
+\item{api_key}{character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}}
 }
 \value{
 Object of class '\code{sf}' with '\code{LINESTRING}' geometry type

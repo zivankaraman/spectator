@@ -47,9 +47,9 @@ Other functions might be added in subsequent releases of the package.
 
 # API key
 
-Some of the functions (mainly those specific to Sentinel and Landsat satellites) require to pass an API key as a parameter to the function (because the underlying API endpoint requires it).
-The API key is automatically generated for every registered user at <https://app.spectator.earth>.
-You can find it under 'Your profile' (bottom left button) and copy it to the clipboard.
+All the functions require to pass an API key as a parameter to the function (because the underlying API endpoint requires it).
+The API key is automatically generated for every registered user at <https://obsearth.com/app>.
+You can find it under 'API Key' of your profile (top right) and copy it to the clipboard.
 The functions in the `spectator` package by default retrieve the API key from the environment variable "`spectator_earth_api_key`".
 You can choose any other way of providing it, but keep in mind that for security reasons it is **NOT** recommended to hard-code (include it as clear text) it in your scripts.
 

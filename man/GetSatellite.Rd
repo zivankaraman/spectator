@@ -7,7 +7,11 @@
 \url{https://api.spectator.earth/#satellites}
 }
 \usage{
-GetSatellite(satellite, positions = TRUE)
+GetSatellite(
+  satellite,
+  positions = TRUE,
+  api_key = Sys.getenv("spectator_earth_api_key")
+)
 }
 \arguments{
 \item{satellite}{character name of the satellite for which to retrieve the trajectory.
@@ -15,6 +19,8 @@ The satellite name is not case sensitive, and can be abbreviated as long as an u
 Only one satellite can be queried at a time.}
 
 \item{positions}{logical indicating if the current position should be included. Default: TRUE}
+
+\item{api_key}{character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}}
 }
 \value{
 If \code{positions} is \code{FALSE}, a single row data frame with following attributes:

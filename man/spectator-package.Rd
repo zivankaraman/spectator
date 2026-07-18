@@ -28,11 +28,11 @@ Demos: \code{demo(package = "spectator")}
 }
 \section{API key}{
 
-Some of the functions (mainly those specific to Sentinel and Landsat satellites)
+All the functions
 require to pass an API key as a parameter to the function
 (because the underlying API endpoint requires it).
 The API key is automatically generated for every registered user at
-\url{https://app.spectator.earth}. You can find it under 'Your profile' (bottom left button)
+\url{https://obsearth.com/app}. You can find it under 'API Key' of your profile (top right)
 and copy it to clipboard.
 The functions in the \code{spectator} package by default retrieve the API key
 from the environment variable "\code{spectator_earth_api_key}".

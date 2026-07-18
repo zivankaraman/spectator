@@ -1,5 +1,6 @@
-Changes in version 0.3.0 (2024-07-16)
+Changes in version 0.3.0 (2026-07-16)
     - the satellite database is refreshed each time the package is loaded
+    - all request are now authenticated
     - few bug fixes and minor improvements
     
 Changes in version 0.2.0 (2023-07-04)

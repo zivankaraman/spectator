@@ -9,6 +9,7 @@
 #'  If \code{NULL} (default value), today's date is used. 
 #'  If too far in the future, will return empty data set. 
 #'  Default: NULL
+#' @param api_key character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}
 #' @return Object of class '\code{sf}' with '\code{POLYGON}' geometry type.
 #'  The attributes of the output will vary, depending on the satellite. 
 #'  For more information check out acquisition plan file descriptions for 
@@ -46,7 +47,7 @@
 #' @importFrom httr GET content
 #' @importFrom geojsonsf geojson_sf
 GetAcquisitionPlan <- 
-function(satellites = NULL, date = NULL) 
+function(satellites = NULL, date = NULL, api_key = Sys.getenv("spectator_earth_api_key")) 
 {
     endpoint <- "https://api.spectator.earth/acquisition-plan/"
     
@@ -58,7 +59,7 @@ function(satellites = NULL, date = NULL)
         satellites <- FindSatelliteName(satellites)
     }
     
-    qry <- list(satellites = satellites, datetime = date)
+    qry <- list(api_key = api_key, satellites = satellites, datetime = date)
     
     resp <- httr::GET(url = endpoint, query = qry)
     CheckResponseSatus(resp)

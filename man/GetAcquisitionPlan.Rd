@@ -7,7 +7,11 @@
 \url{https://api.spectator.earth/#acquisition-plan}
 }
 \usage{
-GetAcquisitionPlan(satellites = NULL, date = NULL)
+GetAcquisitionPlan(
+  satellites = NULL,
+  date = NULL,
+  api_key = Sys.getenv("spectator_earth_api_key")
+)
 }
 \arguments{
 \item{satellites}{character vector, if specified only the listed satellites will be retrieved,
@@ -20,6 +24,8 @@ indicating the day for which the acquisition plans are requested.
 If \code{NULL} (default value), today's date is used.
 If too far in the future, will return empty data set.
 Default: NULL}
+
+\item{api_key}{character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}}
 }
 \value{
 Object of class '\code{sf}' with '\code{POLYGON}' geometry type.

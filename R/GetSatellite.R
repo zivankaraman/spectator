@@ -4,6 +4,7 @@
 #' The satellite name is not case sensitive, and can be abbreviated as long as an unambiguous match can be obtained.
 #' Only one satellite can be queried at a time.
 #' @param positions logical indicating if the current position should be included. Default: TRUE
+#' @param api_key character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}
 #' @return If \code{positions} is \code{FALSE}, a single row data frame with following attributes:
 #' \describe{
 #'   \item{\code{id}}{integer identifier}
@@ -39,12 +40,12 @@
 #' @importFrom httr GET content
 #' @importFrom geojsonsf geojson_sf
 GetSatellite <- 
-function(satellite, positions = TRUE) 
+function(satellite, positions = TRUE, api_key = Sys.getenv("spectator_earth_api_key")) 
 {
     id <- FindSatelliteId(satellite)
     endpoint <- sprintf("https://api.spectator.earth/satellite/%d/", id)
-    
-    resp <- httr::GET(url = endpoint)
+    qry <- list(api_key = api_key)
+    resp <- httr::GET(url = endpoint, query = qry)
     CheckResponseSatus(resp)
 
     cnt <- httr::content(resp)

@@ -5,7 +5,7 @@
 \alias{satellites_db}
 \title{Satellites database}
 \format{
-A data frame with 60 rows (as of July 2024) and 8 variables:
+A data frame with 56 rows (as of July 2026) and 8 variables:
 \describe{
 \item{\code{id}}{integer identifier}
 \item{\code{name}}{character satellite name}

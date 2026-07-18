@@ -1,7 +1,7 @@
 
 #' @title Satellites database
 #' @description List all the satellites available in the Spectator Earth database with main attributes
-#' @format A data frame with 60 rows (as of July 2024) and 8 variables:
+#' @format A data frame with 56 rows (as of July 2026) and 8 variables:
 #' \describe{
 #'   \item{\code{id}}{integer identifier}
 #'   \item{\code{name}}{character satellite name}

@@ -2,6 +2,7 @@
 #' @description Gets the information about all the satellites known in the Spectator Earth database, 
 #' and possibly their current positions.
 #' @param positions logical indicating if the current position should be included. Default: TRUE
+#' @param api_key character containing your API key. Default: \code{Sys.getenv("spectator_earth_api_key")}
 #' @return If \code{positions} is \code{FALSE}, a data frame with following attributes:
 #' \describe{
 #'   \item{\code{id}}{integer identifier}
@@ -41,11 +42,11 @@
 #' @importFrom httr GET content
 #' @importFrom geojsonsf geojson_sf
 GetAllSatellites <- 
-function(positions = TRUE) 
+function(positions = TRUE, api_key = Sys.getenv("spectator_earth_api_key"))
 {
     endpoint <- "https://api.spectator.earth/satellite/"
-    
-    resp <- httr::GET(url = endpoint)
+    qry <- list(api_key = api_key)
+    resp <- httr::GET(url = endpoint, query = qry)
     CheckResponseSatus(resp)
 
     cnt <- httr::content(resp)
